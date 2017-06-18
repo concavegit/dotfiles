@@ -1,0 +1,7 @@
+[user]
+	email = concavemail@gmail.com
+	name = Kawin Nikomborirak
+[core]
+	excludesfile = ~/dotfiles/nostow/global.gitignore
+[credential]
+	helper = /usr/lib/git-core/git-credential-gnome-keyring

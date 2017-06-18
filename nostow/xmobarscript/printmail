@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cnt=`mu find flag:unread maildir:/INBOX | wc -l`
+echo "<fc=#8abeb7></fc> $cnt"

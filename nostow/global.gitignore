@@ -1,0 +1,6 @@
+*.errors
+*.hi
+*.o
+*.pyc
+*_flymake.py
+\#*\#
