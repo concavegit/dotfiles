@@ -56,7 +56,6 @@
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
-      ielm-header ""
       inhibit-startup-screen t
       initial-scratch-message nil
       user-full-name "Kawin Nikomborirak"
@@ -73,8 +72,6 @@
 (recentf-mode 1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-
-(general-define-key :prefix leader-console "e" 'ielm)
 
 (general-define-key :keymaps 'image-mode-map
 		    "h" 'image-previous-frame
@@ -354,6 +351,12 @@
   (setq eshell-banner-message "")
   (general-define-key :keymaps 'eshell-mode-map
 		      "RET" 'eshell-send-input))
+
+(use-package ielm
+  :general
+  (:prefix leader-console
+	   "e" 'ielm)
+  :config (setq ielm-header ""))
 
 (use-package term
   :general
