@@ -45,7 +45,8 @@
 
   (general-define-key :prefix leader-buffer
 		      "SPC" 'switch-to-buffer
-		      "k" 'kill-buffer))
+		      "k" 'kill-buffer
+		      "r" 'revert-buffer))
 
 ;;; Orphans
 
@@ -57,6 +58,7 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
       inhibit-startup-screen t
+      initial-buffer-choice (lambda () (eshell))
       initial-scratch-message nil
       user-full-name "Kawin Nikomborirak"
       user-mail-address "concavemail@gmail.com"
