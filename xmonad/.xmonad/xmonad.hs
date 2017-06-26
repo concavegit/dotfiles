@@ -33,7 +33,7 @@ myAdditionalKeys :: [((KeyMask, KeySym), X ())]
 myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_n), spawn "networkmanager_dmenu")
                    , ((modm, xK_b), spawn "emacsclient -ca ''")
-                   , ((modm, xK_c), spawn "qutebrowser")
+                   , ((modm, xK_c), spawn "firefox")
                    , ((modm, xK_Return), spawn "urxvt")
                    , ((0, xF86XK_Display), spawn "slimlock")
                    , ((modm, xF86XK_AudioRaiseVolume), spawn "mpc next")

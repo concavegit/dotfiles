@@ -1,0 +1,63 @@
+set gui=none
+nmap gp :execute "silent !mpv '" + buffer.URL + "' &" <cr>
+set hintchars=setnriaodh\'fuplwygjq;[]c,vmbkx.z/3847562910-`=SETNRIAODH\"FUPLWYGJQ:{}C<VMBKX>Z?#*$&%^@(!)_~+|
+
+"StatusLine settings
+hi StatusLine           color: #ffffff; background: #1d1f21;
+
+"CmdLine settings excluding Gradient
+hi Normal               color: #969896; background: #1d1f21;
+hi CmdLine              background: #1d1f21; color: #969896; font-size: 9pt;
+hi CompDesc             color: #c6c6c6; width: 50%; font-size: 9pt;
+hi CompIcon             width: 16px; min-width: 16px; display: inline-block; margin-right: .5ex;
+hi CompItem[selected]   background: #969896; color: #969896; 
+" hi CompLess             text-align: center; height: 0; line-height: .5ex; padding-top: 1ex;
+" hi CompMore             text-align: center; height: .5ex; line-height: .5ex; margin-bottom: -.5ex;
+hi CompMsg              font-style: italic; margin-left: 16px;
+hi CompResult           width: 45%; overflow: hidden;font-size: 10pt; font-family: monospace; font-weight: normal;
+hi CompTitle            color: #969896; background: #1d1f21; font-weight: bold;
+hi CompTitle>*          padding: 0 .5ex;
+hi Filter               font-weight: bold;color: #969896;
+
+"When using tab complete in CmdLine, line separating Title from function and description
+" hi Gradient             height: 1px; margin-bottom: -1px; margin-top: -1px;
+" hi GradientLeft         background-color: #81a2be;
+" hi GradientRight        background-color: #1d1f21;
+
+"Used with ]f and [f
+hi FrameIndicator       background-color: #1d1f21; opacity: 0.5; z-index: 999; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+
+hi Bell                 border: 0 none; background-color: #1d1f21;
+hi ErrorMsg             color: #ffffff; background: #cc6666; font-weight: bold;
+
+
+"Hint section
+"hi Hint                 font-family: Sans; font-size: 10px; font-weight: bold; color: #c5c8c6; background-color: #cc6666; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding 0px 1px 0px 1px;
+hi Hint               	font-family: Sans; font-size: 10px; font-weight: bold; color: white; background-color: #1d1f21; border: solid 1px #c5c8c6;
+hi Hint::after          content: attr(number);
+hi HintActive           background: #81a2be; color: #c5c8c6;
+hi HintElem             background-color: #1d1f21; color: #c5c8c6;
+hi HintImage            opacity: .5;
+
+"Other important stuff
+hi InfoMsg              color: #969896; background: #1d1f21;
+hi Message              white-space: normal; min-width: 100%; padding-left: 2em; text-indent: -2em; display: block;
+hi WarningMsg           color: #cc6666; background: #1d1f21;
+hi ModeMsg              color: #969896; background: #1d1f21; "CmdLine when Not in Use
+hi MoreMsg              color: #969896; background: #1d1f21;
+hi NonText              color: #8abeb7; min-height: 16px; padding-left: 2px;
+hi Question             color: #ffffff; background: #1d1f21; font-weight: bold;
+" hi Search               font-size: inherit; padding: 0; color: #1d1f21; background-color: #f0c674; padding: 0;
+hi Function             color: #b5bd68; background: #1d1f21;
+hi Number               color: tan; background: #1d1f21
+hi String               color: #1d1f21; background: #969896;
+hi Tag                  color: #1d1f21; background: #969896;
+hi Title                color: #1d1f21; background: #969896; font-weight: bold;
+hi URL                  text-decoration: none; color: #8abeb7; background: inherit;
+hi URL:hover            text-decoration: underline; cursor: pointer;
+hi LineNr               color: #969896; background: #1d1f21;
+
+"style -name statusbar chrome://* <<EOM
+"#status-bar statusbarpanel { padding: 0 1px !important; }
+"statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
+"EOM
