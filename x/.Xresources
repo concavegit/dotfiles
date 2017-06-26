@@ -1,4 +1,4 @@
-*.font:			terminus 11
+*.font:			xos4 terminus 11
 urxvt.font:		xft:xos4 terminus:size=11,xft:noto sans mono cjk tc
 
 ! special

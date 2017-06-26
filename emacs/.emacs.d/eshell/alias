@@ -4,4 +4,3 @@ alias _ sudo $*
 alias l ls -Alth $*
 alias ll ls -lth $*
 alias md mkdir -p $*
-alias pac pacaur $*

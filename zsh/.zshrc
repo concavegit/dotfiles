@@ -8,7 +8,6 @@ antigen use oh-my-zsh
 
 antigen bundle autojump
 antigen bundle git
-antigen bundle virtualenvwrapper
 
 antigen bundle olivierverdier/zsh-git-prompt
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -34,4 +33,3 @@ alias _='sudo'
 alias l='ls -Ahlt'
 alias ll='ls -lht'
 alias md='mkdir -p'
-alias pac='pacaur'

@@ -12,12 +12,12 @@ main :: IO ()
 main = xmonad =<< statusBar myBar myPP myToggleStrutsKey myConfig
 
 myConfig = def
-  {modMask = modm
+  { modMask = modm
   , borderWidth = 1
   , focusedBorderColor = myColors !! 3
   , layoutHook = myLayout
-  , normalBorderColor = myColors !! 8}
-  `additionalKeys`
+  , normalBorderColor = myColors !! 8
+  } `additionalKeys`
   myAdditionalKeys
 
 altMask :: KeyMask
@@ -45,10 +45,10 @@ myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((0, xF86XK_AudioMicMute), spawn "amixer set Capture toggle")
                    , ((modm, xF86XK_AudioLowerVolume), spawn "mpc prev")
                    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
-                   , ((0, xF86XK_MonBrightnessDown), spawn "light -U 5")
-                   , ((0, xF86XK_MonBrightnessUp), spawn "light -A 5")
-                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "light -S 5")
-                   , ((shiftMask, xF86XK_MonBrightnessUp), spawn "light -S 100")
+                   , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -5")
+                   , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +5")
+                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight = 5")
+                   , ((shiftMask, xF86XK_MonBrightnessUp), spawn "xbacklight = 100")
 
                    , ((modm .|. altMask .|. ctrlMask , xK_h), sendMessage $ ShrinkFrom L)
                    , ((modm .|. altMask .|. ctrlMask , xK_j), sendMessage $ ShrinkFrom D)
@@ -73,7 +73,7 @@ myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_s), sendMessage Swap)
                    , ((modm .|. shiftMask, xK_Return), windows W.swapMaster) ]
 
-myBar :: [Char]
+myBar :: String
 myBar = "xmobar"
 
 myLayout = avoidStruts . smartBorders $
@@ -89,8 +89,8 @@ myPP = xmobarPP{ppCurrent = xmobarColor (myColors !! 4) ""
 myToggleStrutsKey :: XConfig t -> (KeyMask, KeySym)
 myToggleStrutsKey XConfig{} = (0, xF86XK_LaunchA)
 
-myColors :: [[Char]]
-myColors = [  "#1d1f21"
+myColors :: [String]
+myColors = [ "#1d1f21"
            , "#cc6666"
            , "#b5bd68"
            , "#f0c674"

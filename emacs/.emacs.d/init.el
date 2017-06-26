@@ -50,11 +50,6 @@
 
 ;;; Orphans
 
-(setenv "PATH"
-	(concat
-	 "$HOME/.local/bin:"
-	 (getenv "PATH")))
-
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
       inhibit-startup-screen t
@@ -607,14 +602,6 @@
 (use-package plantuml-mode
   :mode "\\.plantuml$"
   :config (setq plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"))
-
-(use-package racer
-  :after rust-mode
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode))
-
-(use-package rust-mode
-  :mode "\\.rs$")
 
 (use-package shakespeare-mode
   :mode (("\\.hamlet$" . shakespeare-hamlet-mode)
