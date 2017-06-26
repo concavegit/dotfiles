@@ -4,4 +4,4 @@
 [core]
 	excludesfile = ~/dotfiles/nostow/global.gitignore
 [credential]
-	helper = /usr/lib/git-core/git-credential-gnome-keyring
+	helper = git-credential-libsecret
