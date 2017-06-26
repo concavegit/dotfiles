@@ -172,11 +172,6 @@
 
 (use-package evil-magit :after magit)
 
-(use-package browse-url
-  :config
-  (setq browse-url-browser-function 'browse-url-generic
-	browse-url-generic-program "qutebrowser"))
-
 (use-package erc
   :general
   (:prefix leader-app
