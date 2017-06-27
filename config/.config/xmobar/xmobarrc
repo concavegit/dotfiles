@@ -14,7 +14,8 @@ Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:si
                     , Run Wireless "wlp4s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
                     , Run Volume "default" "Master" [ "-t", "<status> <volume>"
                                                     , "--", "-O", "<fc=#b5bd68></fc>", "-o", "<fc=#969896></fc>" ] 10
-                    , Run MPD [ "-t", "<fc=#cc6666></fc> <title> <lapsed>/<length>"] 10
+                    , Run MPD [ "-t", "<statei> <title> <lapsed>/<length>"
+                              , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"] 10
                     , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
                     ]
        , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp4s0wi% | %battery% | %date%"}

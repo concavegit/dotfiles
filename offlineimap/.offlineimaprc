@@ -16,6 +16,6 @@ localfolders = ~/Maildir
 [Repository ConcaveMailRemote]
 type = IMAP
 remotehost = imap.gmail.com
-# remoteusereval = get_username("ConcaveMail")
-# remotepasseval = get_password("ConcaveMail")
+remoteuser = concavemail@gmail.com
+remotepasseval = keyring.get_password("offlineimap","concavemail@gmail.com")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

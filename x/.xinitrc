@@ -1,8 +1,3 @@
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-
-fcitx &
 feh --bg-fill ~/dotfiles/nostow/rocket.png --no-fehbg &
 mpd &
 offlineimap &
