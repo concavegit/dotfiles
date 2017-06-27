@@ -17,4 +17,4 @@ Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:si
                     , Run MPD [ "-t", "<fc=#cc6666></fc> <title> <lapsed>/<length>"] 10
                     , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
                     ]
-       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%} %mail% | %wlp4s0wi% | %battery% | %date%"}
+       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp4s0wi% | %battery% | %date%"}
