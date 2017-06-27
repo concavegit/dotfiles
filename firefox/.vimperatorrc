@@ -48,3 +48,28 @@ hi Title                color: #1d1f21; background: #969896; font-weight: bold;
 hi URL                  text-decoration: none; color: #8abeb7; background: inherit;
 hi URL:hover            text-decoration: underline; cursor: pointer;
 hi LineNr               color: #969896; background: #1d1f21;
+
+:js << EOF
+
+function mpv(query) {
+    if(typeof query === "undefined") {
+        selection = content.getSelection().toString()
+
+        if(selection.length < 1) {
+            query = buffer.URL;
+        } else {
+            query = selection;
+        }
+    }
+
+    if(!query.match(/^https?/)) {
+        liberator.open(selection, liberator.NEW_TAB);
+        return;
+    }
+
+    liberator.execute("silent !mpv '" + query + "' &", null, true);
+}
+
+hints.addMode("p", "Open with MPV:", (elem, loc) => mpv(loc));
+
+EOF
