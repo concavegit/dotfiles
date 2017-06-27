@@ -1,7 +1,7 @@
 # -*-conf-*-
 [general]
 accounts = ConcaveMail
-pythonfile = ~/dotfiles/nostow/offlineimap.py
+# pythonfile = ~/dotfiles/nostow/offlineimap.py
 
 [Account ConcaveMail]
 localrepository = ConcaveMailLocal
@@ -15,6 +15,8 @@ localfolders = ~/Maildir
 [Repository ConcaveMailRemote]
 type = IMAP
 remotehost = imap.gmail.com
-remoteusereval = get_username("ConcaveMail")
-remotepasseval = get_password("ConcaveMail")
+# remoteusereval = get_username("ConcaveMail")
+# remotepasseval = get_password("ConcaveMail")
+remoteuser = concavemail@gmail.com
+remotepass = KNX3+56932542
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
