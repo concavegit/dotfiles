@@ -48,8 +48,3 @@ hi Title                color: #1d1f21; background: #969896; font-weight: bold;
 hi URL                  text-decoration: none; color: #8abeb7; background: inherit;
 hi URL:hover            text-decoration: underline; cursor: pointer;
 hi LineNr               color: #969896; background: #1d1f21;
-
-"style -name statusbar chrome://* <<EOM
-"#status-bar statusbarpanel { padding: 0 1px !important; }
-"statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
-"EOM
