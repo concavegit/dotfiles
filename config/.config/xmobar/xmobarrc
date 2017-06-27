@@ -11,8 +11,8 @@ Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:si
                     , Run BatteryP ["BAT0"] [ "-t", "<acstatus> <left>% (<timeleft>)"
                                       , "--", "-O", "<fc=#81a2be></fc>", "-i", "<fc=#b5bd68></fc>", "-o", "<fc=#f0c674></fc>"] 600
                     , Run Wireless "wlp4s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
-                    , Run Com "dotfiles/nostow/xmobarscript/printvolume" [] "vol" 10
-                    , Run Com "dotfiles/nostow/xmobarscript/printmpd" [] "mpd" 10
+                    , Run Volume "default" "Master" [] 10
+                    , Run MPD [ "-t", "<fc=#cc6666></fc> <title> <lapsed>/<length>"] 10
                     , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
                     ]
-       , template = "%vol% | %bright% | %mpd%{%StdinReader%} %mail% | %wlp4s0wi% | %battery% | %date%"}
+       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%} %mail% | %wlp4s0wi% | %battery% | %date%"}
