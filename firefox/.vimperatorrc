@@ -33,11 +33,10 @@ hi ErrorMsg             color: #ffffff; background: #cc6666; font-weight: bold;
 
 "Hint section
 "hi Hint                 font-family: Sans; font-size: 10px; font-weight: bold; color: #c5c8c6; background-color: #cc6666; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding 0px 1px 0px 1px;
-hi Hint               	font-family: monospace; font-size: 11px; font-weight: bold; color: #ffffff background-color: #1d1f21; border: solid 1px #c5c8c6;
+hi Hint               	font-family: monospace; font-size: 11px; font-weight: bold; color: #ffffff; background-color: #1d1f21; border: solid 1px #c5c8c6;
 hi Hint::after          content: attr(number);
 hi HintActive           background: #81a2be; color: #c5c8c6;
 hi HintElem             background-color: #1d1f21; color: #c5c8c6;
-hi HintImage            opacity: .5;
 
 "Other important stuff
 hi InfoMsg              color: #969896; background: #1d1f21;
