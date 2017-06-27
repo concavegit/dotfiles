@@ -18,6 +18,4 @@ type = IMAP
 remotehost = imap.gmail.com
 # remoteusereval = get_username("ConcaveMail")
 # remotepasseval = get_password("ConcaveMail")
-remoteuser = concavemail@gmail.com
-remotepass = KNX3+56932542
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
