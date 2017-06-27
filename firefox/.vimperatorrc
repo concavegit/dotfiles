@@ -1,6 +1,7 @@
 set gui=none
 nmap gp :execute "silent !mpv '" + buffer.URL + "' &" <cr>
 set hintchars=setnriaodh\'fuplwygjq;[]c,vmbkx.z/3847562910-`=SETNRIAODH\"FUPLWYGJQ:{}C<VMBKX>Z?#*$&%^@(!)_~+|
+set editor="emacsclient -ca ''"
 
 " StatusLine settings
 hi StatusLine           color: #ffffff; background: #1d1f21;
