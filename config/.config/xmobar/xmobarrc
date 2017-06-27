@@ -1,4 +1,5 @@
 -- -*-haskell-*-
+
 Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:size 11"
        , bgColor = "#1d1f21"
        , fgColor = "#c5c8c6"
