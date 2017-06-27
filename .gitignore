@@ -9,7 +9,6 @@
 !ncmpcpp/
 !mpd/
 !xmobar/
-!fcitx/
 
 /config/.config/fcitx/*
 !config
