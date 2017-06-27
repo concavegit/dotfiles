@@ -1,8 +1,0 @@
-#!/bin/sh
-
-VOL=`amixer | grep -o -m 1 '[0-9]\+%' | sed s/%//`
-if [ `amixer | grep -m 1 -o '\[[a-z]\+\]'` == '[on]' ]
-   then echo "<fc=#b5bd68></fc> $VOL"
-else
-    echo "<fc=#969896></fc> $VOL"
-fi
