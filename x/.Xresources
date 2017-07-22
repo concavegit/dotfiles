@@ -50,6 +50,6 @@ rofi.yoffset:		29
 rofi.font:		xos4 terminus 11
 rofi.color-enabled:	true
 rofi.color-window:	#1d1f21, #f0c674, #969896
-rofi.color-active:	#81a2be, #1d1f21, #81a2be, #G5bd68, #1d1f21
+rofi.color-active:	#81a2be, #1d1f21, #81a2be, #b5bd68, #1d1f21
 rofi.color-normal:	#1d1f21, #c5c8c6, #1d1f21, #f0c674, #1d1f21
 rofi.color-urgent:	#cc6666, #1d1f21, #cc6666, #b294bb, #1d1f21

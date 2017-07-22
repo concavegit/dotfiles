@@ -50,10 +50,15 @@
 
 ;;; Orphans
 
+(setenv "PATH"
+	(concat
+	 "~/.local/bin:"
+	 (getenv "PATH")))
+
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
+      exec-path (append exec-path '("~/.local/bin"))
       inhibit-startup-screen t
-      initial-buffer-choice (lambda () (eshell))
       initial-scratch-message nil
       user-full-name "Kawin Nikomborirak"
       user-mail-address "concavemail@gmail.com"
@@ -172,6 +177,11 @@
 
 (use-package evil-magit :after magit)
 
+(use-package browse-url
+  :config
+  (setq browse-url-browser-function 'browse-url-generic
+	browse-url-generic-program "qutebrowser"))
+
 (use-package erc
   :general
   (:prefix leader-app
@@ -197,10 +207,10 @@
 		      "2" 'mingus
 		      "RET" 'mingus-down-dir-or-play-song))
 
-  (general-define-key :keymaps 'mingus-playlist-map
-		      :states 'motion
-		      "3" 'mingus-browse
-		      "RET" 'mingus-play)
+(general-define-key :keymaps 'mingus-playlist-map
+		    :states 'motion
+		    "3" 'mingus-browse
+		    "RET" 'mingus-play)
 
 (use-package mu4e
   :ensure nil
@@ -296,6 +306,13 @@
   :diminish ""
   :after smartparens
   :config (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
+
+(use-package fcitx
+  :when (and (executable-find "fcitx-remote")
+	     (= (with-temp-buffer (call-process "fcitx-remote" nil t)) 0))
+  :config
+  ;; (setq fcitx-use-dbus t)
+  (fcitx-aggressive-setup))
 
 (use-package ivy
   :diminish ""

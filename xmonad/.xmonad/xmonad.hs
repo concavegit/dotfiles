@@ -1,4 +1,5 @@
 import           Graphics.X11.ExtraTypes.XF86
+import qualified Network.MPD                        as MPD
 import           XMonad
 import           XMonad.Actions.Navigation2D
 import           XMonad.Hooks.DynamicLog
@@ -32,23 +33,25 @@ modm = mod4Mask
 myAdditionalKeys :: [((KeyMask, KeySym), X ())]
 myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_n), spawn "networkmanager_dmenu")
+                   , ((modm, xK_f), spawn "dmenu_extended_run")
+                   , ((modm, xK_i), spawn "dmenu_extended_run \"-> Internet search: \"")
                    , ((modm, xK_b), spawn "emacsclient -ca ''")
-                   , ((modm, xK_c), spawn "firefox")
+                   , ((modm, xK_c), spawn "qutebrowser --backend webengine")
                    , ((modm, xK_Return), spawn "urxvt")
                    , ((0, xF86XK_Display), spawn "slimlock")
-                   , ((modm, xF86XK_AudioRaiseVolume), spawn "mpc next")
+                   , ((modm, xF86XK_AudioRaiseVolume), (liftIO . MPD.withMPD) MPD.next *> pure ())
                    , ((shiftMask, xF86XK_AudioLowerVolume), spawn "amixer set Master 0%")
                    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+")
                    , ((shiftMask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 100%")
                    , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
-                   , ((modm, xF86XK_AudioMute), spawn "mpc toggle")
+                   , ((modm, xF86XK_AudioMute), (liftIO . MPD.withMPD) togglePause *> pure ())
                    , ((0, xF86XK_AudioMicMute), spawn "amixer set Capture toggle")
-                   , ((modm, xF86XK_AudioLowerVolume), spawn "mpc prev")
+                   , ((modm, xF86XK_AudioLowerVolume), (liftIO . MPD.withMPD) MPD.previous *> pure ())
                    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
                    , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -5")
                    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +5")
-                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight = 5")
-                   , ((shiftMask, xF86XK_MonBrightnessUp), spawn "xbacklight = 100")
+                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -set 5")
+                   , ((shiftMask, xF86XK_MonBrightnessUp), spawn "xbacklight -set 100")
 
                    , ((modm .|. altMask .|. ctrlMask , xK_h), sendMessage $ ShrinkFrom L)
                    , ((modm .|. altMask .|. ctrlMask , xK_j), sendMessage $ ShrinkFrom D)
@@ -106,3 +109,11 @@ myColors = [ "#1d1f21"
            , "#b294bb"
            , "#8abeb7"
            , "#ffffff" ]
+
+
+togglePause :: MPD.MPD ()
+togglePause = MPD.stState <$> MPD.status
+  >>= \b -> case b of
+  MPD.Playing -> MPD.pause True
+  MPD.Paused  -> MPD.pause False
+  MPD.Stopped -> pure ()
