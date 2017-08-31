@@ -1,21 +1,37 @@
 # -*-conf-*-
 
 [general]
-accounts = ConcaveMail
+accounts = Primary,Work
 pythonfile = ~/dotfiles/nostow/offlineimap.py
 
-[Account ConcaveMail]
-localrepository = ConcaveMailLocal
-remoterepository = ConcaveMailRemote
+[Account Primary]
+localrepository = PrimaryLocal
+remoterepository = PrimaryRemote
 autorefresh=15
 
-[Repository ConcaveMailLocal]
-type = Maildir
-localfolders = ~/Maildir
+[Account Work]
+localrepository = WorkLocal
+remoterepository = WorkRemote
+autorefresh=15
 
-[Repository ConcaveMailRemote]
+[Repository PrimaryLocal]
+type = Maildir
+localfolders = ~/Maildir/Primary
+
+[Repository WorkLocal]
+type = Maildir
+localfolders = ~/Maildir/Work
+
+[Repository PrimaryRemote]
 type = IMAP
 remotehost = imap.gmail.com
 remoteuser = concavemail@gmail.com
 remotepasseval = keyring.get_password("offlineimap","concavemail@gmail.com")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository WorkRemote]
+type=IMAP
+remotehost = imaps.olin.edu
+remoteuser = knikomborirak
+remotepasseval = keyring.get_password("offlineimap","kawin.nikomborirak@students.olin.edu")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

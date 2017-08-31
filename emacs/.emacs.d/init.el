@@ -223,24 +223,32 @@
   (add-to-list 'evil-motion-state-modes 'mu4e-main-mode)
   (add-to-list 'evil-motion-state-modes 'mu4e-view-mode)
 
-  (setq mu4e-drafts-folder "/[Gmail].Drafts" 
+  (setq mu4e-contexts
+	`(,(make-mu4e-context
+	    :name "Primary"
+	    :match-func (lambda (msg)
+			  (when msg
+			    (mu4e-message-contact-field-matches msg
+								:to "concavemail@gmail.com")))
+	    :vars '((user-mail-address . "concavemail@gmail.com")))
+	  ,(make-mu4e-context
+	    :name "Work"
+	    :match-func (lambda (msg)
+			  (when msg
+			    (mu4e-message-contact-field-matches msg
+								:to "kawin.nikomborirak@students.olin.edu")))
+	    :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu"))))
+
+	mu4e-context-policy 'pick-first
 	mu4e-get-mail-command "offlineimap -o"
-	mu4e-sent-folder "/[Gmail].Sent Mail" 
-	mu4e-sent-messages-behavior 'delete
-	mu4e-trash-folder "/[Gmail].Trash" 
 	mu4e-view-prefer-html t
 	mu4e-view-show-addresses t
-	mu4e-view-show-images t
-
-	mu4e-maildir-shortcuts
-	'(("/INBOX"               . ?i)
-	  ("/[Gmail].Sent Mail"   . ?s)
-	  ("/[Gmail].Trash"       . ?t)
-	  ("/[Gmail].All Mail"    . ?a)))
+	mu4e-view-show-images t)
 
   (general-define-key :keymaps '(mu4e-headers-mode-map
 				 mu4e-main-mode-map
 				 mu4e-view-mode-map)
+		      "s" 'mu4e-context-switch
 		      "J" 'mu4e~headers-jump-to-maildir
 		      "b" 'mu4e-headers-search-bookmark)
 
@@ -461,6 +469,7 @@
   :after haskell-mode
   :config
   (add-hook 'haskell-mode-hook 'intero-mode)
+  (add-to-list 'evil-motion-state-modes 'intero-help-mode)
   (general-define-key :keymaps 'intero-mode-map
 		      :prefix leader-major
 		      "SPC" 'intero-goto-definition

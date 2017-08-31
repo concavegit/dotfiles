@@ -1,4 +1,5 @@
 #!/bin/sh
 
-cnt=`mu find flag:unread maildir:/INBOX | wc -l`
-echo "<fc=#8abeb7></fc> $cnt"
+cntPrim=`mu find flag:unread m:/Primary/INBOX | wc -l`
+cntWork=`mu find flag:unread m:/Work/INBOX | wc -l`
+echo "<fc=#8abeb7></fc> $cntPrim <fc=#969896></fc> $cntWork"
