@@ -1,5 +1,5 @@
-*.font:			xos4 terminus 11
-urxvt.font:		xft:xos4 terminus:size=11,xft:noto sans mono cjk tc
+*.font:			xos4 terminus 9
+urxvt.font:		xft:xos4 terminus:size=9,xft:noto sans mono cjk tc
 
 ! special
 *.foreground:   #c5c8c6
@@ -47,7 +47,7 @@ rofi.location:		3
 rofi.width:		20
 rofi.xoffset:		-1
 rofi.yoffset:		29
-rofi.font:		xos4 terminus 11
+rofi.font:		xos4 terminus 9
 rofi.color-enabled:	true
 rofi.color-window:	#1d1f21, #f0c674, #969896
 rofi.color-active:	#81a2be, #1d1f21, #81a2be, #b5bd68, #1d1f21

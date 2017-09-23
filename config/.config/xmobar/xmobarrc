@@ -1,6 +1,6 @@
 -- -*-haskell-*-
 
-Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:size 11"
+Config { font="xft:xos4 terminus:size=9,fontawesome:size=11,noto sans cjk tc:size 9"
        , bgColor = "#1d1f21"
        , fgColor = "#c5c8c6"
        , lowerOnStart = True
@@ -11,11 +11,11 @@ Config { font="xft:xos4 terminus:size=11,fontawesome:size=11,noto sans cjk tc:si
                                      , "--", "-D", "intel_backlight" ] 30
                     , Run BatteryP ["BAT0"] [ "-t", "<acstatus> <left>% (<timeleft>)"
                                       , "--", "-O", "<fc=#81a2be></fc>", "-i", "<fc=#b5bd68></fc>", "-o", "<fc=#f0c674></fc>"] 600
-                    , Run Wireless "wlp4s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
+                    , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
                     , Run Volume "default" "Master" [ "-t", "<status> <volume>"
                                                     , "--", "-O", "<fc=#b5bd68></fc>", "-o", "<fc=#969896></fc>" ] 10
                     , Run MPD [ "-t", "<statei> <title> <lapsed>/<length>"
                               , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"] 10
                     , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
                     ]
-       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp4s0wi% | %battery% | %date%"}
+       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp3s0wi% | %battery% | %date%"}

@@ -38,7 +38,7 @@ myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_b), spawn "emacsclient -ca ''")
                    , ((modm, xK_c), spawn "qutebrowser --backend webengine")
                    , ((modm, xK_Return), spawn "urxvt")
-                   , ((0, xF86XK_Display), spawn "slimlock")
+                   , ((0, xF86XK_Search), spawn "slimlock")
                    , ((modm, xF86XK_AudioRaiseVolume), (liftIO . MPD.withMPD) MPD.next *> pure ())
                    , ((shiftMask, xF86XK_AudioLowerVolume), spawn "amixer set Master 0%")
                    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+")
@@ -48,9 +48,9 @@ myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((0, xF86XK_AudioMicMute), spawn "amixer set Capture toggle")
                    , ((modm, xF86XK_AudioLowerVolume), (liftIO . MPD.withMPD) MPD.previous *> pure ())
                    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
-                   , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -5")
-                   , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +5")
-                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -set 5")
+                   , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -2")
+                   , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +2")
+                   , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -set 2")
                    , ((shiftMask, xF86XK_MonBrightnessUp), spawn "xbacklight -set 100")
 
                    , ((modm .|. altMask .|. ctrlMask , xK_h), sendMessage $ ShrinkFrom L)
@@ -90,7 +90,7 @@ myPP = xmobarPP{ppCurrent = xmobarColor (myColors !! 4) ""
                , ppTitle = xmobarColor (myColors !! 2) "" . shorten 100}
 
 myToggleStrutsKey :: XConfig t -> (KeyMask, KeySym)
-myToggleStrutsKey XConfig{} = (0, xF86XK_LaunchA)
+myToggleStrutsKey XConfig{} = (modm, xF86XK_Search)
 
 myColors :: [String]
 myColors = [ "#1d1f21"

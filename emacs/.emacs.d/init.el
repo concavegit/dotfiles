@@ -267,6 +267,15 @@
 				 mu4e-view-mode-map)
 		      "F" 'mu4e-compose-forward))
 
+(use-package nov
+  :mode ("\\.epub$" . nov-mode)
+  :config
+  (add-to-list 'evil-motion-state-modes 'nov-mode)
+  (general-define-key :keymaps 'nov-mode-map
+		      "o" 'nov-goto-toc
+		      "C-n" 'nov-next-document
+		      "C-p" 'nov-previous-document))
+
 (use-package org-mu4e
   :ensure nil
   :general
@@ -388,6 +397,9 @@
 (use-package qml-mode :mode "\\.qml$")
 (use-package yaml-mode :mode "\\.ya?ml$")
 
+(use-package arduino-mode
+  :mode "\\.\\(pde\\|ino\\)$")
+
 (use-package doc-view
   :mode ("\\.odt$" . doc-view-mode)
   :config
@@ -506,6 +518,11 @@
 		      "c" 'meghanada-compile-file
 		      "i" 'meghanada-import-all))
 
+(use-package ob-ipython
+  :after org
+  :config
+  (setq python-shell-prompt-detect-failure-warning nil))
+
 (use-package org
   :ensure org-plus-contrib
   :mode ("\\.org$" . org-mode)
@@ -530,11 +547,13 @@
 
   (when (executable-find "pygmentize")
     (add-to-list 'org-latex-packages-alist '("" "minted"))
-    (setq org-latex-listings 'minted))
+    (setq org-latex-listings 'minted
+	  org-latex-minted-options '(("frame" "single"))))
 
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((python . t)
 				 (haskell . t)
+				 (ipython . t)
 				 (latex . t)
 				 (plantuml . t)
 				 (sh . t)))
@@ -593,6 +612,7 @@
 		      "gg" 'pdf-view-first-page
 		      "j" 'my/pdf-view-scroll-up
 		      "k" 'my/pdf-view-scroll-down
+		      "o" 'pdf-outline
 
 		      "+" 'pdf-view-enlarge
 		      "-" 'pdf-view-shrink

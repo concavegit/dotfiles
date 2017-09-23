@@ -5,3 +5,5 @@
 	excludesfile = ~/dotfiles/nostow/global.gitignore
 [credential]
 	helper = /usr/bin/git-credential-libsecret
+[magit]
+	hideCampaign = true
