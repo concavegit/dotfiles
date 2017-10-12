@@ -61,7 +61,6 @@
       inhibit-startup-screen t
       initial-scratch-message nil
       user-full-name "Kawin Nikomborirak"
-      user-mail-address "concavemail@gmail.com"
 
       kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
@@ -125,15 +124,6 @@
   (add-hook 'LaTeX-mode-hook 'hs-minor-mode)
   (add-hook 'conf-mode-hook 'hs-minor-mode)
   (add-hook 'prog-mode-hook 'hs-minor-mode))
-
-(use-package nlinum-relative
-  :init
-  (add-hook 'conf-mode-hook 'nlinum-relative-mode)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
-  (add-hook 'text-mode-hook 'nlinum-relative-mode)
-  :config
-  (setq nlinum-relative-redisplay-delay 0)
-  (nlinum-relative-setup-evil))
 
 (use-package rainbow-delimiters
   :commands 'rainbow-delimiters-mode
@@ -230,14 +220,16 @@
 			  (when msg
 			    (mu4e-message-contact-field-matches msg
 								:to "concavemail@gmail.com")))
-	    :vars '((user-mail-address . "concavemail@gmail.com")))
+	    :vars '((user-mail-address . "concavemail@gmail.com")
+		    (smtpmail-smtp-server . "smtp.gmail.com")))
 	  ,(make-mu4e-context
 	    :name "Work"
 	    :match-func (lambda (msg)
 			  (when msg
 			    (mu4e-message-contact-field-matches msg
 								:to "kawin.nikomborirak@students.olin.edu")))
-	    :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu"))))
+	    :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu")
+		    (smtpmail-smtp-server . "smtps.olin.edu"))))
 
 	mu4e-context-policy 'pick-first
 	mu4e-get-mail-command "offlineimap -o"
@@ -310,7 +302,7 @@
 
 (use-package smtpmail
   :config
-  (setq smtpmail-smtp-server "smtp.gmail.com"
+  (setq 
 	smtpmail-smtp-service 587))
 
 ;;; Completion
@@ -518,11 +510,6 @@
 		      "c" 'meghanada-compile-file
 		      "i" 'meghanada-import-all))
 
-(use-package ob-ipython
-  :after org
-  :config
-  (setq python-shell-prompt-detect-failure-warning nil))
-
 (use-package org
   :ensure org-plus-contrib
   :mode ("\\.org$" . org-mode)
@@ -553,7 +540,6 @@
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((python . t)
 				 (haskell . t)
-				 (ipython . t)
 				 (latex . t)
 				 (plantuml . t)
 				 (sh . t)))
@@ -636,6 +622,30 @@
 (use-package plantuml-mode
   :mode "\\.plantuml$"
   :config (setq plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"))
+
+(use-package scad-mode
+  :mode "\\.scad$")
+
+(use-package scad-preview
+  :general (:keymaps 'scad-mode-map
+		     :prefix leader-major
+		     "SPC" 'scad-preview-mode)
+  :config
+  (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
+  (general-define-key :keymaps 'scad-preview--image-mode-map
+		      "C-h" 'scad-preview-roty+
+		      "C-j" 'scad-preview-rotx-
+		      "C-k" 'scad-preview-rotx+
+		      "C-l" 'scad-preview-roty-
+		      "M-h" 'scad-preview-trnsx+
+		      "M-j" 'scad-preview-trnsz+
+		      "M-k" 'scad-preview-trnsz-
+		      "M-l" 'scad-preview-trnsx-
+		      "h" 'scad-preview-rotz-
+		      "j" 'scad-preview-dist+
+		      "k" 'scad-preview-dist-
+		      "l" 'scad-preview-rotz+
+		      "r" 'scad-preview-reset-camera-parameters))
 
 (use-package shakespeare-mode
   :mode (("\\.hamlet$" . shakespeare-hamlet-mode)
