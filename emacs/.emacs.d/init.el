@@ -195,12 +195,12 @@
   (general-define-key :keymaps 'mingus-browse-map
 		      :states 'motion
 		      "2" 'mingus
-		      "RET" 'mingus-down-dir-or-play-song))
+		      "RET" 'mingus-down-dir-or-play-song)
 
-(general-define-key :keymaps 'mingus-playlist-map
-		    :states 'motion
-		    "3" 'mingus-browse
-		    "RET" 'mingus-play)
+  (general-define-key :keymaps 'mingus-playlist-map
+		      :states 'motion
+		      "3" 'mingus-browse
+		      "RET" 'mingus-play))
 
 (use-package mu4e
   :ensure nil
@@ -213,7 +213,8 @@
   (add-to-list 'evil-motion-state-modes 'mu4e-main-mode)
   (add-to-list 'evil-motion-state-modes 'mu4e-view-mode)
 
-  (setq mu4e-contexts
+  (setq mu4e-confirm-quit nil
+	mu4e-contexts
 	`(,(make-mu4e-context
 	    :name "Primary"
 	    :match-func (lambda (msg)
@@ -303,7 +304,7 @@
 (use-package smtpmail
   :config
   (setq 
-	smtpmail-smtp-service 587))
+   smtpmail-smtp-service 587))
 
 ;;; Completion
 

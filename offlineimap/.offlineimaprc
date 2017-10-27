@@ -1,8 +1,9 @@
 # -*-conf-*-
 
 [general]
-accounts = Primary,Work
+accounts = Primary, Work
 pythonfile = ~/dotfiles/nostow/offlineimap.py
+maxsyncaccounts=2
 
 [Account Primary]
 localrepository = PrimaryLocal
