@@ -33,3 +33,6 @@ alias _='sudo'
 alias l='ls -Ahlt'
 alias ll='ls -lht'
 alias md='mkdir -p'
+
+source /opt/ros/kinetic/setup.zsh
+source ~/project/catkin_ws/devel/setup.zsh

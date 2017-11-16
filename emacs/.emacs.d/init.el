@@ -482,7 +482,8 @@
 		      "r" 'intero-repl-load
 		      "s" 'intero-apply-suggestions
 		      "t" 'intero-type-at
-		      "x" 'intero-restart))
+		      "x" 'intero-restart)
+  (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
