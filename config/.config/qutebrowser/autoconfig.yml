@@ -54,6 +54,7 @@ global:
   colors.tabs.selected.even.fg: '#c5c8c6'
   colors.tabs.selected.odd.bg: '#1d1f21'
   colors.tabs.selected.odd.fg: '#c5c8c6'
+  content.headers.user_agent: null
   content.private_browsing: false
   content.proxy: system
   content.user_stylesheets: null
