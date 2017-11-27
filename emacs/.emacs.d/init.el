@@ -664,6 +664,8 @@
 
 ;;; General Text
 
+(setq require-final-newline t)
+
 (use-package evil-commentary :diminish "" :init (evil-commentary-mode 1))
 (use-package evil-surround :init (global-evil-surround-mode 1))
 (use-package sudo-edit :general (:prefix leader-file "s" 'sudo-edit))

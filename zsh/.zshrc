@@ -27,7 +27,7 @@ RPS1='$(git_super_status)'
 
 alias -g ...='../..'
 alias -g ....='../../..'
-alias -g A='| ag'
+alias -g G='| rg'
 alias -g L='| less'
 alias _='sudo'
 alias l='ls -Ahlt'
