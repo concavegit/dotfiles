@@ -718,7 +718,7 @@
   (counsel-projectile-on)
   (general-define-key :keymaps 'projectile-mode-map
 		      :prefix leader-project
-		      "a" 'counsel-ag))
+		      "s" 'counsel-rg))
 
 (use-package magit
   :general

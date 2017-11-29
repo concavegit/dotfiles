@@ -39,6 +39,7 @@ urxvt.font:		xft:xos4 terminus:size=8,xft:noto sans mono cjk tc
 *.color15:		#ffffff
 
 urxvt.scrollBar:	false
+urxvt*scrollTtyOutput:	false
 urxvt*scrollWithBuffer:	true
 urxvt*scrollTtyKeypress:true
 
