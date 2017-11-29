@@ -82,7 +82,7 @@
 
 ;;; Appearance
 
-(use-package org-bullets :after org :config (add-hook 'org-mode-hook 'org-bullets-mode))
+(use-package org-bullets :hook (org-mode . org-bullets-mode))
 (use-package powerline :init (setq powerline-default-separator nil))
 
 (use-package color-theme-sanityinc-tomorrow
@@ -120,25 +120,20 @@
 
 (use-package hideshow
   :diminish hs-minor-mode
-  :init
-  (add-hook 'LaTeX-mode-hook 'hs-minor-mode)
-  (add-hook 'conf-mode-hook 'hs-minor-mode)
-  (add-hook 'prog-mode-hook 'hs-minor-mode))
+  :hook ((LaTeX-mode . hs-minor-mode)
+	 (conf-mode . hs-minor-mode)
+	 (prog-mode . hs-minor-mode)))
 
 (use-package rainbow-delimiters
-  :commands 'rainbow-delimiters-mode
-  :init
-  (add-hook 'conf-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'text-mode-hook 'rainbow-delimiters-mode))
+  :hook ((conf-mode . rainbow-delimiters-mode)
+	 (prog-mode . rainbow-delimiters-mode)
+	 (text-mode . rainbow-delimiters-mode)))
 
 (use-package rainbow-mode
   :diminish rainbow-mode
-  :commands rainbow-mode
-  :init
-  (add-hook 'conf-mode-hook 'rainbow-mode)
-  (add-hook 'prog-mode-hook 'rainbow-mode)
-  (add-hook 'text-mode-hook 'rainbow-mode))
+  :hook (conf-mode
+	 prog-mode
+	 text-mode))
 
 (use-package spaceline
   :after powerline
@@ -314,8 +309,7 @@
 
 (use-package evil-smartparens
   :diminish ""
-  :after smartparens
-  :config (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
+  :hook (smartparens-enabled-hook . evil-smartparens-mode))
 
 (use-package fcitx
   :when (and (executable-find "fcitx-remote")
@@ -430,10 +424,8 @@
 		      "?" 'doc-view-search-backward))
 
 (use-package emmet-mode
-  :commands emmet-mode
-  :init
-  (add-hook 'html-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook 'emmet-mode)
+  :hook (html-mode
+	 css-mode)
   :config
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 
@@ -471,9 +463,8 @@
 		      "RET" 'haskell-interactive-mode-return))
 
 (use-package intero
-  :after haskell-mode
+  :hook (haskell-mode . intero-mode)
   :config
-  (add-hook 'haskell-mode-hook 'intero-mode)
   (add-to-list 'evil-motion-state-modes 'intero-help-mode)
   (general-define-key :keymaps 'intero-mode-map
 		      :prefix leader-major
@@ -501,9 +492,7 @@
 		      "n" 'markdown-cleanup-list-numbers))
 
 (use-package meghanada
-  :commands meghanada-mode
-  :init
-  (add-hook 'java-mode-hook 'meghanada-mode)
+  :hook (java-mode . meghanada-mode)
   :config
   (general-define-key :keymaps 'meghanada-mode-map
 		      :prefix leader-major
@@ -702,11 +691,9 @@
 
 (use-package flyspell
   :diminish ""
-  :commands (flyspell-mode flyspell-prog-mode)
-  :init
-  (add-hook 'conf-mode-hook 'flyspell-prog-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (add-hook 'text-mode-hook 'flyspell-mode))
+  :hook ((conf-mode . flyspell-prog-mode)
+	 (prog-mode . flyspell-prog-mode)
+	 (text-mode . flyspell-mode)))
 
 ;;; Projects
 

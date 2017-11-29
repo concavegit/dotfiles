@@ -67,4 +67,6 @@ global:
   fonts.web.family.fixed: null
   hints.border: '1px solid #1d1f21'
   hints.chars: tnseriaodhfuwygjq;[]c,x.vmbkz/3847562910`-=TNSERIAO"FUWYGJQ:{}C<X>VMBKZ?#*$&%^@(!)~_+
+  statusbar.hide: false
+  tabs.show: multiple
   zoom.default: 90%
