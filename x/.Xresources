@@ -1,5 +1,5 @@
 *.font:			xos4 terminus 8
-urxvt.font:		xft:xos4 terminus:size=8,xft:noto sans mono cjk tc
+urxvt.font:		xft:xos4 terminus:size=8,xft:noto sans mono cjk tc:size=8
 
 ! special
 *.foreground:		#c5c8c6

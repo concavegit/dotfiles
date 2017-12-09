@@ -82,6 +82,7 @@
 
 ;;; Appearance
 
+(use-package diminish)
 (use-package org-bullets :hook (org-mode . org-bullets-mode))
 (use-package powerline :init (setq powerline-default-separator nil))
 
@@ -309,7 +310,7 @@
 
 (use-package evil-smartparens
   :diminish ""
-  :hook (smartparens-enabled-hook . evil-smartparens-mode))
+  :hook (smartparens-enabled . evil-smartparens-mode))
 
 (use-package fcitx
   :when (and (executable-find "fcitx-remote")
@@ -466,6 +467,9 @@
   :hook (haskell-mode . intero-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'intero-help-mode)
+
+  (setq intero-stack-executable "~/.local/bin/stack")
+
   (general-define-key :keymaps 'intero-mode-map
 		      :prefix leader-major
 		      "SPC" 'intero-goto-definition
