@@ -7,7 +7,7 @@
 ;; have goodies such as email, org-mode, and other filetype tools
 ;; configured.
 
-;;; Prerequisites
+;;; Code:
 
 (require 'package)
 (package-initialize)
@@ -18,6 +18,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(require 'use-package)
 
 (setq use-package-always-ensure t)
 
