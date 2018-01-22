@@ -176,7 +176,11 @@
 	   "i" 'erc)
   :config
   (setq erc-prompt-for-password nil
-	erc-nick "concaveirc"))
+	erc-nick "concaveirc"
+	erc-autojoin-channels-alist '(("freenode.net" "#haskell"))
+	erc-track-position-in-mode-line t
+	erc-join-buffer 'bury)
+  (add-to-list 'erc-modules 'log))
 
 (use-package mingus
   :general
@@ -309,6 +313,7 @@
 (use-package company :diminish "" :init (global-company-mode 1))
 (use-package eshell-z :after eshell)
 (use-package yasnippet :init (yas-global-mode 1))
+(use-package yasnippet-snippets :after yasnippet)
 
 (use-package evil-smartparens
   :diminish ""
@@ -358,8 +363,7 @@
 	   "SPC" 'eshell)
   :config
   (setq eshell-banner-message "")
-  (general-define-key :keymaps 'eshell-mode-map
-		      "RET" 'eshell-send-input))
+  (evil-define-key 'normal eshell-mode-map (kbd "<return>") 'eshell-send-input))
 
 (use-package ielm
   :general
@@ -434,15 +438,14 @@
 
 (use-package elpy
   :mode ("\\.py$" . python-mode)
-  :init (elpy-enable)
   :general
   (:prefix leader-console
 	   "p" 'elpy-shell-switch-to-shell)
   :config
+  (elpy-enable)
   (when (executable-find "ipython")
-    (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-    (elpy-use-ipython))
-
+    (setq python-shell-interpreter "ipython"
+	  python-shell-interpreter-args "-i --simple-prompt"))
   (delete 'elpy-module-highlight-indentation elpy-modules)
 
   (general-define-key :keymaps 'elpy-mode-map
@@ -450,6 +453,9 @@
 		      "SPC" '(:keymap elpy-refactor-map :package elpy)
 		      "t SPC" 'elpy-test
 		      "tr" 'elpy-set-test-runner))
+
+(use-package groovy-mode
+  :mode "\\.gradle$")
 
 (use-package haskell-mode
   :mode "\\.hs$"
@@ -708,7 +714,7 @@
 (use-package counsel-projectile
   :after projectile
   :config
-  (counsel-projectile-on)
+  (counsel-projectile-mode 1)
   (general-define-key :keymaps 'projectile-mode-map
 		      :prefix leader-project
 		      "s" 'counsel-rg))

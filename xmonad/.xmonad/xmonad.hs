@@ -1,3 +1,4 @@
+{-# LANGUAGE LambdaCase #-}
 import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD                        as MPD
 import           XMonad
@@ -113,7 +114,7 @@ myColors = [ "#1d1f21"
 
 togglePause :: MPD.MPD ()
 togglePause = MPD.stState <$> MPD.status
-  >>= \b -> case b of
+  >>= \case
   MPD.Playing -> MPD.pause True
   MPD.Paused  -> MPD.pause False
   MPD.Stopped -> pure ()
