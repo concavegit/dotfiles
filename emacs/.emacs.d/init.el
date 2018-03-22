@@ -46,13 +46,13 @@
   :init (evil-mode 1)
   :config
   (general-mmap :prefix leader-file
-		"SPC" 'find-file
-		"w" 'save-buffer)
+    "SPC" 'find-file
+    "w" 'save-buffer)
 
   (general-mmap :prefix leader-buffer
-		"SPC" 'switch-to-buffer
-		"k" 'kill-buffer
-		"r" 'revert-buffer))
+    "SPC" 'switch-to-buffer
+    "k" 'kill-buffer
+    "r" 'revert-buffer))
 
 ;;; Orphans
 
@@ -81,10 +81,10 @@
 (tool-bar-mode -1)
 
 (general-mmap :keymaps 'image-mode-map
-	      "h" 'image-previous-frame
-	      "j" 'image-previous-file
-	      "k" 'image-next-file
-	      "l" 'image-next-frame)
+  "h" 'image-previous-frame
+  "j" 'image-previous-file
+  "k" 'image-next-file
+  "l" 'image-next-frame)
 
 ;;; Appearance
 
@@ -111,19 +111,19 @@
   :config
   (setq eyebrowse-wrap-around t)
   (general-mmap :keymaps 'eyebrowse-mode-map
-		"gt" 'eyebrowse-next-window-config
-		"gT" 'eyebrowse-prev-window-config
-		"gC" 'eyebrowse-close-window-config
-		"M-0" 'eyebrowse-switch-to-window-config-0
-		"M-1" 'eyebrowse-switch-to-window-config-1
-		"M-2" 'eyebrowse-switch-to-window-config-2
-		"M-3" 'eyebrowse-switch-to-window-config-3
-		"M-4" 'eyebrowse-switch-to-window-config-4
-		"M-5" 'eyebrowse-switch-to-window-config-5
-		"M-6" 'eyebrowse-switch-to-window-config-6
-		"M-7" 'eyebrowse-switch-to-window-config-7
-		"M-8" 'eyebrowse-switch-to-window-config-8
-		"M-9" 'eyebrowse-switch-to-window-config-9))
+    "gt" 'eyebrowse-next-window-config
+    "gT" 'eyebrowse-prev-window-config
+    "gC" 'eyebrowse-close-window-config
+    "M-0" 'eyebrowse-switch-to-window-config-0
+    "M-1" 'eyebrowse-switch-to-window-config-1
+    "M-2" 'eyebrowse-switch-to-window-config-2
+    "M-3" 'eyebrowse-switch-to-window-config-3
+    "M-4" 'eyebrowse-switch-to-window-config-4
+    "M-5" 'eyebrowse-switch-to-window-config-5
+    "M-6" 'eyebrowse-switch-to-window-config-6
+    "M-7" 'eyebrowse-switch-to-window-config-7
+    "M-8" 'eyebrowse-switch-to-window-config-8
+    "M-9" 'eyebrowse-switch-to-window-config-9))
 
 (use-package hideshow
   :diminish hs-minor-mode
@@ -159,9 +159,9 @@
   :init (winner-mode 1)
   :config
   (general-mmap :keymaps 'winner-mode-map
-		:prefix leader
-		"u" 'winner-undo
-		"U" 'winner-redo))
+    :prefix leader
+    "u" 'winner-undo
+    "U" 'winner-redo))
 
 ;;; Applications
 
@@ -197,16 +197,16 @@
   (add-hook 'mingus-browse-hook 'evil-motion-state)
   (add-hook 'mingus-make-playlist-hook 'evil-motion-state)
   (general-mmap :keymaps '(mingus-playlist-map mingus-browse-map)
-		"l" 'mingus-load-playlist
-		"z" 'mingus-random)
+    "l" 'mingus-load-playlist
+    "z" 'mingus-random)
 
   (general-mmap :keymaps 'mingus-browse-map
-		"2" 'mingus
-		"RET" 'mingus-down-dir-or-play-song)
+    "2" 'mingus
+    "RET" 'mingus-down-dir-or-play-song)
 
   (general-mmap :keymaps 'mingus-playlist-map
-		"3" 'mingus-browse
-		"RET" 'mingus-play))
+    "3" 'mingus-browse
+    "RET" 'mingus-play))
 
 (use-package mu4e
   :ensure nil
@@ -248,33 +248,33 @@
   (general-mmap :keymaps '(mu4e-headers-mode-map
 			   mu4e-main-mode-map
 			   mu4e-view-mode-map)
-		"s" 'mu4e-context-switch
-		"J" 'mu4e~headers-jump-to-maildir
-		"b" 'mu4e-headers-search-bookmark)
+    "s" 'mu4e-context-switch
+    "J" 'mu4e~headers-jump-to-maildir
+    "b" 'mu4e-headers-search-bookmark)
 
   (general-mmap :keymaps 'mu4e-view-mode-map
-		"C-n" 'mu4e-view-headers-next
-		"C-p" 'mu4e-view-headers-prev
-		"TAB" 'shr-next-link)
+    "C-n" 'mu4e-view-headers-next
+    "C-p" 'mu4e-view-headers-prev
+    "TAB" 'shr-next-link)
 
   (general-mmap :keymaps 'mu4e-headers-mode-map
-		"RET" 'mu4e-headers-view-message)
+    "RET" 'mu4e-headers-view-message)
 
   (general-mmap :keymaps 'mu4e-main-mode-map
-		"u" 'mu4e-update-mail-and-index)
+    "u" 'mu4e-update-mail-and-index)
 
   (general-mmap :keymaps '(mu4e-headers-mode-map
 			   mu4e-view-mode-map)
-		"F" 'mu4e-compose-forward))
+    "F" 'mu4e-compose-forward))
 
 (use-package nov
   :mode ("\\.epub$" . nov-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'nov-mode)
   (general-mmap :keymaps 'nov-mode-map
-		"o" 'nov-goto-toc
-		"C-n" 'nov-next-document
-		"C-p" 'nov-previous-document))
+    "o" 'nov-goto-toc
+    "C-n" 'nov-next-document
+    "C-p" 'nov-previous-document))
 
 (use-package org-mu4e
   :ensure nil
@@ -300,15 +300,15 @@
   :config
   (add-to-list 'evil-motion-state-modes 'proced-mode)
   (general-mmap :keymaps 'proced-mode-map
-		"TAB" 'proced-mark
-		"d" 'proced-send-signal))
+    "TAB" 'proced-mark
+    "d" 'proced-send-signal))
 
 (use-package pyvenv
   :init (pyvenv-mode 1)
   :config
   (general-mmap :keymaps 'pyvenv-mode-map
-		:prefix leader-app
-		"v" 'pyvenv-workon))
+    :prefix leader-app
+    "v" 'pyvenv-workon))
 
 (use-package smtpmail
   :config
@@ -349,18 +349,18 @@
   (require 'smartparens-config)
   (smartparens-global-strict-mode 1)
   (general-mmap :keymaps 'smartparens-mode-map
-		"C-M-$" 'sp-end-of-sexp
-		"C-M-S-h" 'sp-backward-sexp
-		"C-M-S-l" 'sp-forward-sexp
-		"C-M-^" 'sp-beginning-of-sexp
+    "C-M-$" 'sp-end-of-sexp
+    "C-M-S-h" 'sp-backward-sexp
+    "C-M-S-l" 'sp-forward-sexp
+    "C-M-^" 'sp-beginning-of-sexp
 
-		"C-S-h" 'sp-backward-barf-sexp
-		"C-S-l" 'sp-backward-slurp-sexp
-		"C-h" 'sp-forward-barf-sexp
-		"C-l" 'sp-forward-slurp-sexp
+    "C-S-h" 'sp-backward-barf-sexp
+    "C-S-l" 'sp-backward-slurp-sexp
+    "C-h" 'sp-forward-barf-sexp
+    "C-l" 'sp-forward-slurp-sexp
 
-		"C-M-S-k" 'sp-split-sexp
-		"C-M-t" 'sp-transpose-sexp))
+    "C-M-S-k" 'sp-split-sexp
+    "C-M-t" 'sp-transpose-sexp))
 
 ;;; Consoles
 
@@ -427,17 +427,17 @@
   (add-to-list 'evil-motion-state-modes 'doc-view-mode)
 
   (general-mmap :keymaps 'doc-view-mode-map
-		"G" 'my/doc-view-goto-page
-		"gg" 'doc-view-first-page
-		"j" 'my/doc-view-next-page
-		"k" 'my/doc-view-previous-page
+    "G" 'my/doc-view-goto-page
+    "gg" 'doc-view-first-page
+    "j" 'my/doc-view-next-page
+    "k" 'my/doc-view-previous-page
 
-		"s" 'doc-view-fit-height-to-window
-		"a" 'doc-view-fit-page-to-window
-		"S" 'doc-view-fit-width-to-window
+    "s" 'doc-view-fit-height-to-window
+    "a" 'doc-view-fit-page-to-window
+    "S" 'doc-view-fit-width-to-window
 
-		"/" 'doc-view-search
-		"?" 'doc-view-search-backward))
+    "/" 'doc-view-search
+    "?" 'doc-view-search-backward))
 
 (use-package emmet-mode
   :hook (html-mode
@@ -459,10 +459,10 @@
   (delete 'elpy-module-highlight-indentation elpy-modules)
 
   (general-mmap :keymaps 'elpy-mode-map
-		:prefix leader-major
-		"SPC" 'elpy-refactor-options
-		"t SPC" 'elpy-test
-		"tr" 'elpy-set-test-runner))
+    :prefix leader-major
+    "SPC" 'elpy-refactor-options
+    "t SPC" 'elpy-test
+    "tr" 'elpy-set-test-runner))
 
 (use-package groovy-mode
   :mode "\\.gradle$")
@@ -480,7 +480,7 @@
   (add-to-list 'evil-motion-state-modes 'haskell-error-mode)
 
   (general-mmap :keymaps 'haskell-interactive-mode-map
-		"RET" 'haskell-interactive-mode-return))
+    "RET" 'haskell-interactive-mode-return))
 
 (use-package intero
   :hook (haskell-mode . intero-mode)
@@ -490,13 +490,13 @@
   (setq intero-stack-executable "~/.local/bin/stack")
 
   (general-mmap :keymaps 'intero-mode-map
-		:prefix leader-major
-		"SPC" 'intero-goto-definition
-		"i" 'intero-info
-		"r" 'intero-repl-load
-		"s" 'intero-apply-suggestions
-		"t" 'intero-type-at
-		"x" 'intero-restart)
+    :prefix leader-major
+    "SPC" 'intero-goto-definition
+    "i" 'intero-info
+    "r" 'intero-repl-load
+    "s" 'intero-apply-suggestions
+    "t" 'intero-type-at
+    "x" 'intero-restart)
   (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 
 (use-package markdown-mode
@@ -506,23 +506,23 @@
   (setq markdown-command "pandoc -f markdown_github")
 
   (general-mmap :keymaps 'markdown-mode-map
-		"M-l" 'markdown-demote
-		"M-h" 'markdown-promote)
+    "M-l" 'markdown-demote
+    "M-h" 'markdown-promote)
 
   (general-mmap :keymaps 'markdown-mode-map
-		:prefix leader-major
-		"s" 'markdown-insert-gfm-code-block
-		"n" 'markdown-cleanup-list-numbers))
+    :prefix leader-major
+    "s" 'markdown-insert-gfm-code-block
+    "n" 'markdown-cleanup-list-numbers))
 
 (use-package meghanada
   :hook (java-mode . meghanada-mode)
   :config
   (general-mmap :keymaps 'meghanada-mode-map
-		:prefix leader-major
-		"C" 'meghanada-compile-project
-		"SPC" 'meghanada-jump-declaration
-		"c" 'meghanada-compile-file
-		"i" 'meghanada-import-all))
+    :prefix leader-major
+    "C" 'meghanada-compile-project
+    "SPC" 'meghanada-jump-declaration
+    "c" 'meghanada-compile-file
+    "i" 'meghanada-import-all))
 
 (use-package org
   :ensure org-plus-contrib
@@ -559,26 +559,26 @@
 				 (sh . t)))
 
   (general-mmap :keymaps 'org-mode-map
-		:prefix leader-major
-		"SPC" 'org-export-dispatch
-		"b SPC" 'org-babel-execute-buffer
-		"bj" 'org-babel-next-src-block
-		"bk" 'org-babel-previous-src-block
-		"bs" 'org-babel-execute-subtree
-		"t SPC" 'org-table-recalculate-buffer-tables)
+    :prefix leader-major
+    "SPC" 'org-export-dispatch
+    "b SPC" 'org-babel-execute-buffer
+    "bj" 'org-babel-next-src-block
+    "bk" 'org-babel-previous-src-block
+    "bs" 'org-babel-execute-subtree
+    "t SPC" 'org-table-recalculate-buffer-tables)
 
   (general-mmap :keymaps 'org-mode-map
-		"<M-return>" 'my/org-meta-return
-		"M-h" 'org-metaleft
-		"M-l" 'org-metaright)
+    "<M-return>" 'my/org-meta-return
+    "M-h" 'org-metaleft
+    "M-l" 'org-metaright)
 
   (general-mmap :keymaps 'org-mode-map
-		:prefix "g"
-		"h" 'org-previous-visible-heading
-		"j" 'org-forward-heading-same-level
-		"k" 'org-backward-heading-same-level
-		"l" 'org-next-visible-heading
-		"o" 'outline-up-heading))
+    :prefix "g"
+    "h" 'org-previous-visible-heading
+    "j" 'org-forward-heading-same-level
+    "k" 'org-backward-heading-same-level
+    "l" 'org-next-visible-heading
+    "o" 'outline-up-heading))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
@@ -608,28 +608,28 @@
   (add-to-list 'evil-motion-state-modes 'pdf-outline-buffer-mode)
 
   (general-mmap :keymaps 'pdf-view-mode-map
-		"G" 'my/pdf-view-goto-page
-		"gg" 'pdf-view-first-page
-		"j" 'my/pdf-view-scroll-up
-		"k" 'my/pdf-view-scroll-down
-		"o" 'pdf-outline
+    "G" 'my/pdf-view-goto-page
+    "gg" 'pdf-view-first-page
+    "j" 'my/pdf-view-scroll-up
+    "k" 'my/pdf-view-scroll-down
+    "o" 'pdf-outline
 
-		"+" 'pdf-view-enlarge
-		"-" 'pdf-view-shrink
-		"0" 'pdf-view-scale-reset
-		"H" 'pdf-view-fit-height-to-window
-		"P" 'pdf-view-fit-page-to-window
-		"W" 'pdf-view-fit-width-to-window
+    "+" 'pdf-view-enlarge
+    "-" 'pdf-view-shrink
+    "0" 'pdf-view-scale-reset
+    "H" 'pdf-view-fit-height-to-window
+    "P" 'pdf-view-fit-page-to-window
+    "W" 'pdf-view-fit-width-to-window
 
-		"zr" 'pdf-view-reset-slice
-		"zs" 'pdf-view-set-slice-from-bounding-box
+    "zr" 'pdf-view-reset-slice
+    "zs" 'pdf-view-set-slice-from-bounding-box
 
-		"/" 'isearch-forward-regexp
-		"?" 'isearch-backward-regexp)
+    "/" 'isearch-forward-regexp
+    "?" 'isearch-backward-regexp)
 
   (general-mmap :keymaps 'pdf-outline-buffer-mode-map
-		"RET" 'pdf-outline-follow-link-and-quit
-		"TAB" 'outline-toggle-children)
+    "RET" 'pdf-outline-follow-link-and-quit
+    "TAB" 'outline-toggle-children)
 
   (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode))
 
@@ -649,19 +649,19 @@
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
   (general-mmap :keymaps 'scad-preview--image-mode-map
-		"C-h" 'scad-preview-roty+
-		"C-j" 'scad-preview-rotx-
-		"C-k" 'scad-preview-rotx+
-		"C-l" 'scad-preview-roty-
-		"M-h" 'scad-preview-trnsx+
-		"M-j" 'scad-preview-trnsz+
-		"M-k" 'scad-preview-trnsz-
-		"M-l" 'scad-preview-trnsx-
-		"h" 'scad-preview-rotz-
-		"j" 'scad-preview-dist+
-		"k" 'scad-preview-dist-
-		"l" 'scad-preview-rotz+
-		"r" 'scad-preview-reset-camera-parameters))
+    "C-h" 'scad-preview-roty+
+    "C-j" 'scad-preview-rotx-
+    "C-k" 'scad-preview-rotx+
+    "C-l" 'scad-preview-roty-
+    "M-h" 'scad-preview-trnsx+
+    "M-j" 'scad-preview-trnsz+
+    "M-k" 'scad-preview-trnsz-
+    "M-l" 'scad-preview-trnsx-
+    "h" 'scad-preview-rotz-
+    "j" 'scad-preview-dist+
+    "k" 'scad-preview-dist-
+    "l" 'scad-preview-rotz+
+    "r" 'scad-preview-reset-camera-parameters))
 
 (use-package shakespeare-mode
   :mode (("\\.hamlet$" . shakespeare-hamlet-mode)
@@ -703,7 +703,7 @@
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree"))
 	undo-tree-auto-save-history t)
   (general-mmap :keymaps 'undo-tree-map
-		"U" 'undo-tree-visualize))
+    "U" 'undo-tree-visualize))
 
 ;;; Linters
 
@@ -712,9 +712,9 @@
   :diminish ""
   :config
   (general-mmap :keymaps 'flycheck-mode-map
-		:prefix leader-lint
-		"j" 'next-error
-		"k" 'previous-error))
+    :prefix leader-lint
+    "j" 'next-error
+    "k" 'previous-error))
 
 (use-package flyspell
   :diminish ""
@@ -731,8 +731,8 @@
   :config
   (counsel-projectile-mode 1)
   (general-mmap :keymaps 'projectile-mode-map
-		:prefix leader-project
-		"s" 'counsel-rg))
+    :prefix leader-project
+    "s" 'counsel-rg))
 
 (use-package magit
   :general
@@ -744,8 +744,8 @@
   :init (projectile-mode 1)
   :config
   (general-mmap :keymaps 'projectile-mode-map
-		:prefix leader-project
-		"f" 'projectile-find-file
-		"SPC" 'projectile-switch-project))
+    :prefix leader-project
+    "f" 'projectile-find-file
+    "SPC" 'projectile-switch-project))
 
 ;;; init.el ends here

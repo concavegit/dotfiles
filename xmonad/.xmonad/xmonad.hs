@@ -1,5 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 import           Graphics.X11.ExtraTypes.XF86
+import Sound.ALSA.Mixer
+import Control.Monad
 import qualified Network.MPD                        as MPD
 import           XMonad
 import           XMonad.Actions.Navigation2D
@@ -41,14 +43,14 @@ myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_Return), spawn "urxvt")
                    , ((0, xF86XK_Search), spawn "slimlock")
                    , ((modm, xF86XK_AudioRaiseVolume), (liftIO . MPD.withMPD) MPD.next *> pure ())
-                   , ((shiftMask, xF86XK_AudioLowerVolume), spawn "amixer set Master 0%")
-                   , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+")
-                   , ((shiftMask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 100%")
+                   , ((shiftMask, xF86XK_AudioLowerVolume), spawn "amixer set Master 0")
+                   , ((0, xF86XK_AudioRaiseVolume), liftIO $ changeVolumeBy 5)
+                   , ((shiftMask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 100")
                    , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
                    , ((modm, xF86XK_AudioMute), (liftIO . MPD.withMPD) togglePause *> pure ())
                    , ((0, xF86XK_AudioMicMute), spawn "amixer set Capture toggle")
                    , ((modm, xF86XK_AudioLowerVolume), (liftIO . MPD.withMPD) MPD.previous *> pure ())
-                   , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
+                   , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5-")
                    , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -5")
                    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +5")
                    , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -set 2")
@@ -118,3 +120,13 @@ togglePause = MPD.stState <$> MPD.status
   MPD.Playing -> MPD.pause True
   MPD.Paused  -> MPD.pause False
   MPD.Stopped -> pure ()
+
+changeVolumeBy :: Integer -> IO ()
+changeVolumeBy i =
+    withMixer "default" $ \mixer ->
+      do Just control <- getControlByName mixer "Master"
+         let Just playbackVolume = playback $ volume control
+         (min, max) <- getRange playbackVolume
+         Just vol <- getChannel FrontLeft $ value $ playbackVolume
+         when ((i > 0 && vol < max) || (i < 0 && vol > min))
+           $ setChannel FrontLeft (value $ playbackVolume) $ vol + i
