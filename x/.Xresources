@@ -49,7 +49,7 @@ rofi.separator-style:	solid
 rofi.location:		3
 rofi.width:		20
 rofi.xoffset:		0
-rofi.yoffset:		22
+rofi.yoffset:		21
 rofi.font:		xos4 terminus 8
 rofi.color-enabled:	true
 rofi.color-window:	#1d1f21, #f0c674, #969896
