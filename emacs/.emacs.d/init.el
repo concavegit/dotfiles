@@ -286,6 +286,9 @@
   :config
   (setq org-mu4e-convert-to-html t))
 
+(use-package org-ref
+  :after org)
+
 (use-package ox-reveal
   :after org
   :config
