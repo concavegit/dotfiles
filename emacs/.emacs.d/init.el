@@ -405,7 +405,9 @@
 (use-package yaml-mode :mode "\\.ya?ml$")
 
 (use-package arduino-mode
-  :mode "\\.\\(pde\\|ino\\)$")
+  :mode "\\.\\(pde\\|ino\\)$"
+  :config
+  (setq arduino-executable "teensyduino"))
 
 (use-package doc-view
   :mode ("\\.odt$" . doc-view-mode)
@@ -449,13 +451,14 @@
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 
 (use-package elpy
-  :mode ("\\.py$" . python-mode)
+  :hook (python-mode)
   :general
   (:prefix leader-console
 	   :states 'motion
 	   "p" 'elpy-shell-switch-to-shell)
   :config
   (elpy-enable)
+
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"
 	  python-shell-interpreter-args "-i --simple-prompt"))
@@ -690,8 +693,8 @@
 (use-package evil-exchange
   :general
   (:states 'motion
-	   "gx" 'evil-exchange
-	   "gX" 'evil-exchange-cancel))
+	   "gs" 'evil-exchange
+	   "gS" 'evil-exchange-cancel))
 
 (use-package evil-numbers
   :general
