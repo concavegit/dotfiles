@@ -385,7 +385,7 @@
 
 (use-package term
   :general
-  (:prefix leader-console 
+  (:prefix leader-console
 	   :states 'motion
 	   "t" 'my/ansi-term-zsh)
   :config
@@ -542,9 +542,8 @@
 	org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
 
 	org-latex-pdf-process
-	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	'("pdflatex -shell-escape-interaction nonstopmode -output-directory %o %f"
 	  "bibtex %b"
-	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	  "pdflatex -shell-escape -interaction nonstopmode --synctex=1 -output-directory %o %f"))
 
   (defun my/org-meta-return ()
