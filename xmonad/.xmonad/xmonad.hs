@@ -1,4 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
+
 import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD                        as MPD
 import           XMonad
