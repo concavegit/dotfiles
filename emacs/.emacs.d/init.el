@@ -451,14 +451,13 @@
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 
 (use-package elpy
-  :hook (python-mode)
+  :hook (python-mode . elpy-enable)
   :general
   (:prefix leader-console
 	   :states 'motion
 	   "p" 'elpy-shell-switch-to-shell)
-  :config
-  (elpy-enable)
 
+  :config
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"
 	  python-shell-interpreter-args "-i --simple-prompt"))
