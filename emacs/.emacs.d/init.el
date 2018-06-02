@@ -680,6 +680,11 @@
 (use-package toml-mode
   :mode "\\.toml$")
 
+(use-package verilog-mode
+  :mode "\\.\\(v\\|vs\\)$"
+  :config
+  (setq flycheck-verilog-verilator-executable "verilator_bin"))
+
 ;;; General Text
 
 (setq require-final-newline t)
