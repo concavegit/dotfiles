@@ -25,12 +25,10 @@
 
 (use-package general
   :config
-  (general-evil-setup)
-  (general-define-key
-   :states 'motion
-   :prefix "SPC"
-   "" nil)
-  (setq leader "SPC"
+  (setq general-override-states '(motion
+				  normal)
+
+	leader "SPC"
 
 	leader-app (concat leader " a")
 	leader-buffer (concat leader " b")
@@ -40,16 +38,27 @@
 	leader-major (concat leader " x")
 	leader-media (concat leader " m")
 	leader-project (concat leader " p")
-	leader-toggle (concat leader " \\")))
+	leader-toggle (concat leader " \\"))
+
+  (general-override-mode)
+  (general-create-definer my-key-def
+    :states '(motion normal)
+    :keymaps 'override)
+
+  (my-key-def
+    :prefix "SPC"
+    "" nil))
 
 (use-package evil
-  :init (evil-mode 1)
+  :init
+  (setq evil-want-integration nil)
   :config
-  (general-mmap :prefix leader-file
+  (evil-mode 1)
+  (my-key-def :prefix leader-file
     "SPC" 'find-file
     "w" 'save-buffer)
 
-  (general-mmap :prefix leader-buffer
+  (my-key-def :prefix leader-buffer
     "SPC" 'switch-to-buffer
     "k" 'kill-buffer
     "r" 'revert-buffer))
@@ -80,13 +89,15 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(general-mmap :keymaps 'image-mode-map
+(my-key-def :keymaps 'image-mode-map
   "h" 'image-previous-frame
   "j" 'image-previous-file
   "k" 'image-next-file
   "l" 'image-next-frame)
 
 ;;; Appearance
+
+(setq-default indent-tabs-mode nil)
 
 (use-package diminish)
 (use-package org-bullets :hook (org-mode . org-bullets-mode))
@@ -110,7 +121,7 @@
   :init (eyebrowse-mode 1)
   :config
   (setq eyebrowse-wrap-around t)
-  (general-mmap :keymaps 'eyebrowse-mode-map
+  (my-key-def :keymaps 'eyebrowse-mode-map
     "gt" 'eyebrowse-next-window-config
     "gT" 'eyebrowse-prev-window-config
     "gC" 'eyebrowse-close-window-config
@@ -151,24 +162,25 @@
 
 (use-package whitespace
   :general
-  (:prefix leader-toggle
-	   :states 'motion
-	   "w" 'whitespace-mode))
+  (:keymaps 'override
+	    :prefix leader-toggle
+	    :states 'motion
+	    "w" 'whitespace-mode))
 
 (use-package winner
   :init (winner-mode 1)
   :config
-  (general-mmap :keymaps 'winner-mode-map
+  (my-key-def :keymaps 'winner-mode-map
     :prefix leader
     "u" 'winner-undo
     "U" 'winner-redo))
 
 ;;; Applications
 
+(use-package evil-collection :after evil :config (evil-collection-init))
 (use-package htmlize)
+(use-package nov :mode ("\\.epub$" . nov-mode))
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
-
-(use-package evil-magit :after magit)
 
 (use-package browse-url
   :config
@@ -177,9 +189,10 @@
 
 (use-package erc
   :general
-  (:prefix leader-app
-	   :states 'motion
-	   "i" 'erc)
+  (:keymaps 'override
+	    :prefix leader-app
+	    :states 'motion
+	    "i" 'erc)
   :config
   (setq erc-prompt-for-password nil
 	erc-nick "concaveirc"
@@ -188,33 +201,37 @@
 	erc-join-buffer 'bury)
   (add-to-list 'erc-modules 'log))
 
+(use-package evil-magit :after magit)
+
 (use-package mingus
   :general
-  (:states 'motion
-	   :prefix leader-app
-	   "a" 'mingus)
+  (:keymaps 'override
+	    :states 'motion
+	    :prefix leader-app
+	    "a" 'mingus)
   :config
   (add-hook 'mingus-browse-hook 'evil-motion-state)
   (add-hook 'mingus-make-playlist-hook 'evil-motion-state)
-  (general-mmap :keymaps '(mingus-playlist-map mingus-browse-map)
+  (my-key-def :keymaps '(mingus-playlist-map mingus-browse-map)
     "l" 'mingus-load-playlist
     "z" 'mingus-random)
 
-  (general-mmap :keymaps 'mingus-browse-map
+  (my-key-def :keymaps 'mingus-browse-map
     "2" 'mingus
     "RET" 'mingus-down-dir-or-play-song)
 
-  (general-mmap :keymaps 'mingus-playlist-map
+  (my-key-def :keymaps 'mingus-playlist-map
     "3" 'mingus-browse
     "RET" 'mingus-play))
 
 (use-package mu4e
   :ensure nil
   :general
-  (:prefix leader-app
-	   :states 'motion
-	   "e" 'mu4e
-	   "s" 'mu4e-compose-new)
+  (:keymaps 'override
+	    :prefix leader-app
+	    :states 'motion
+	    "e" 'mu4e
+	    "s" 'mu4e-compose-new)
   :config
   (add-to-list 'evil-motion-state-modes 'mu4e-headers-mode)
   (add-to-list 'evil-motion-state-modes 'mu4e-main-mode)
@@ -245,41 +262,32 @@
 	mu4e-view-show-addresses t
 	mu4e-view-show-images t)
 
-  (general-mmap :keymaps '(mu4e-headers-mode-map
-			   mu4e-main-mode-map
-			   mu4e-view-mode-map)
+  (my-key-def :keymaps '(mu4e-headers-mode-map
+			 mu4e-main-mode-map
+			 mu4e-view-mode-map)
     "s" 'mu4e-context-switch
     "J" 'mu4e~headers-jump-to-maildir
     "b" 'mu4e-headers-search-bookmark)
 
-  (general-mmap :keymaps 'mu4e-view-mode-map
+  (my-key-def :keymaps 'mu4e-view-mode-map
     "C-n" 'mu4e-view-headers-next
     "C-p" 'mu4e-view-headers-prev
     "TAB" 'shr-next-link)
 
-  (general-mmap :keymaps 'mu4e-headers-mode-map
+  (my-key-def :keymaps 'mu4e-headers-mode-map
     "RET" 'mu4e-headers-view-message)
 
-  (general-mmap :keymaps 'mu4e-main-mode-map
+  (my-key-def :keymaps 'mu4e-main-mode-map
     "u" 'mu4e-update-mail-and-index)
 
-  (general-mmap :keymaps '(mu4e-headers-mode-map
-			   mu4e-view-mode-map)
+  (my-key-def :keymaps '(mu4e-headers-mode-map
+			 mu4e-view-mode-map)
     "F" 'mu4e-compose-forward))
-
-(use-package nov
-  :mode ("\\.epub$" . nov-mode)
-  :config
-  (add-to-list 'evil-motion-state-modes 'nov-mode)
-  (general-mmap :keymaps 'nov-mode-map
-    "o" 'nov-goto-toc
-    "C-n" 'nov-next-document
-    "C-p" 'nov-previous-document))
 
 (use-package org-mu4e
   :ensure nil
   :general
-  (:keymaps 'mu4e-compose-mode-map
+  (:keymaps '(mu4e-compose-mode-map override)
 	    :prefix leader-major
 	    :states 'motion
 	    "o" 'org-mu4e-compose-org-mode)
@@ -297,19 +305,15 @@
 
 (use-package proced
   :general
-  (:prefix leader-app
-	   :states 'motion
-	   "p" 'proced)
-  :config
-  (add-to-list 'evil-motion-state-modes 'proced-mode)
-  (general-mmap :keymaps 'proced-mode-map
-    "TAB" 'proced-mark
-    "d" 'proced-send-signal))
+  (:keymaps 'override
+	    :prefix leader-app
+	    :states 'motion
+	    "p" 'proced))
 
 (use-package pyvenv
   :init (pyvenv-mode 1)
   :config
-  (general-mmap :keymaps 'pyvenv-mode-map
+  (my-key-def :keymaps 'pyvenv-mode-map
     :prefix leader-app
     "v" 'pyvenv-workon))
 
@@ -340,10 +344,7 @@
   :diminish ""
   :init (ivy-mode 1)
   :config
-  (setq ivy-use-virtual-buffers t)
-  (general-define-key :keymaps 'ivy-mode-map
-		      :states nil
-		      [escape] 'minibuffer-keyboard-quit))
+  (setq ivy-use-virtual-buffers t))
 
 (use-package smartparens
   :diminish ""
@@ -351,7 +352,7 @@
   :config
   (require 'smartparens-config)
   (smartparens-global-strict-mode 1)
-  (general-mmap :keymaps 'smartparens-mode-map
+  (my-key-def :keymaps 'smartparens-mode-map
     "C-M-$" 'sp-end-of-sexp
     "C-M-S-h" 'sp-backward-sexp
     "C-M-S-l" 'sp-forward-sexp
@@ -369,34 +370,35 @@
 
 (use-package eshell
   :general
-  (:prefix leader-console
-	   :states 'motion
-	   "SPC" 'eshell)
-  :config
-  (setq eshell-banner-message "")
-  (evil-define-key 'normal eshell-mode-map (kbd "<return>") 'eshell-send-input))
+  (:keymaps 'override
+	    :prefix leader-console
+	    :states 'motion
+	    "SPC" 'eshell)
+  :config (setq eshell-banner-message ""))
 
 (use-package ielm
   :general
-  (:prefix leader-console
-	   :states 'motion
-	   "e" 'ielm)
+  (:keymaps 'override
+	    :prefix leader-console
+	    :states 'motion
+	    "e" 'ielm)
   :config (setq ielm-header ""))
 
 (use-package term
   :general
-  (:prefix leader-console
-	   :states 'motion
-	   "t" 'my/ansi-term-zsh)
+  (:keymaps 'override
+	    :prefix leader-console
+	    :states 'motion
+	    "t" 'my/ansi-term-zsh)
   :config
   (defun my/ansi-term-zsh ()
     (interactive)
     (ansi-term "/bin/zsh"))
-  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
-  (evil-set-initial-state 'term-mode 'normal))
+  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
 
 ;;; Extension Specific
 
+(use-package doc-view :mode ("\\.odt$" . doc-view-mode))
 (use-package evil-matchit :init (global-evil-matchit-mode 1))
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
@@ -409,41 +411,6 @@
   :config
   (setq arduino-executable "teensyduino"))
 
-(use-package doc-view
-  :mode ("\\.odt$" . doc-view-mode)
-  :config
-  (evil-define-motion my/doc-view-goto-page (count)
-    (if count
-	(doc-view-goto-page count)
-      (doc-view-last-page)))
-
-  (evil-define-motion my/doc-view-next-page (count)
-    (if count
-	(dotimes (number count nil)
-	  (doc-view-next-page))
-      (doc-view-next-page)))
-
-  (evil-define-motion my/doc-view-previous-page (count)
-    (if count
-	(dotimes (number count nil)
-	  (doc-view-previous-page))
-      (doc-view-previous-page)))
-
-  (add-to-list 'evil-motion-state-modes 'doc-view-mode)
-
-  (general-mmap :keymaps 'doc-view-mode-map
-    "G" 'my/doc-view-goto-page
-    "gg" 'doc-view-first-page
-    "j" 'my/doc-view-next-page
-    "k" 'my/doc-view-previous-page
-
-    "s" 'doc-view-fit-height-to-window
-    "a" 'doc-view-fit-page-to-window
-    "S" 'doc-view-fit-width-to-window
-
-    "/" 'doc-view-search
-    "?" 'doc-view-search-backward))
-
 (use-package emmet-mode
   :hook (html-mode
 	 css-mode)
@@ -453,9 +420,10 @@
 (use-package elpy
   :hook (python-mode . elpy-enable)
   :general
-  (:prefix leader-console
-	   :states 'motion
-	   "p" 'elpy-shell-switch-to-shell)
+  (:keymaps 'override
+	    :prefix leader-console
+	    :states 'motion
+	    "p" 'elpy-shell-switch-to-shell)
 
   :config
   (when (executable-find "ipython")
@@ -463,7 +431,7 @@
 	  python-shell-interpreter-args "-i --simple-prompt"))
   (delete 'elpy-module-highlight-indentation elpy-modules)
 
-  (general-mmap :keymaps 'elpy-mode-map
+  (my-key-def :keymaps 'elpy-mode-map
     :prefix leader-major
     "SPC" 'elpy-refactor-options
     "t SPC" 'elpy-test
@@ -475,16 +443,17 @@
 (use-package haskell-mode
   :mode "\\.hs$"
   :general
-  (:prefix leader-console
-	   :states 'motion
-	   "h" 'haskell-interactive-bring)
+  (:keymaps 'override
+	    :prefix leader-console
+	    :states 'motion
+	    "h" 'haskell-interactive-bring)
   :config
   (setq haskell-font-lock-symbols t
 	haskell-stylish-on-save t)
 
   (add-to-list 'evil-motion-state-modes 'haskell-error-mode)
 
-  (general-mmap :keymaps 'haskell-interactive-mode-map
+  (my-key-def :keymaps 'haskell-interactive-mode-map
     "RET" 'haskell-interactive-mode-return))
 
 (use-package intero
@@ -494,7 +463,7 @@
 
   (setq intero-stack-executable "~/.local/bin/stack")
 
-  (general-mmap :keymaps 'intero-mode-map
+  (my-key-def :keymaps 'intero-mode-map
     :prefix leader-major
     "SPC" 'intero-goto-definition
     "i" 'intero-info
@@ -510,11 +479,11 @@
   :config
   (setq markdown-command "pandoc -f markdown_github")
 
-  (general-mmap :keymaps 'markdown-mode-map
+  (my-key-def :keymaps 'markdown-mode-map
     "M-l" 'markdown-demote
     "M-h" 'markdown-promote)
 
-  (general-mmap :keymaps 'markdown-mode-map
+  (my-key-def :keymaps 'markdown-mode-map
     :prefix leader-major
     "s" 'markdown-insert-gfm-code-block
     "n" 'markdown-cleanup-list-numbers))
@@ -522,7 +491,7 @@
 (use-package meghanada
   :hook (java-mode . meghanada-mode)
   :config
-  (general-mmap :keymaps 'meghanada-mode-map
+  (my-key-def :keymaps 'meghanada-mode-map
     :prefix leader-major
     "C" 'meghanada-compile-project
     "SPC" 'meghanada-jump-declaration
@@ -559,10 +528,9 @@
 			       '((python . t)
 				 (haskell . t)
 				 (latex . t)
-				 (plantuml . t)
-				 (sh . t)))
+				 (plantuml . t)))
 
-  (general-mmap :keymaps 'org-mode-map
+  (my-key-def :keymaps 'org-mode-map
     :prefix leader-major
     "SPC" 'org-export-dispatch
     "b SPC" 'org-babel-execute-buffer
@@ -571,12 +539,12 @@
     "bs" 'org-babel-execute-subtree
     "t SPC" 'org-table-recalculate-buffer-tables)
 
-  (general-mmap :keymaps 'org-mode-map
+  (my-key-def :keymaps 'org-mode-map
     "<M-return>" 'my/org-meta-return
     "M-h" 'org-metaleft
     "M-l" 'org-metaright)
 
-  (general-mmap :keymaps 'org-mode-map
+  (my-key-def :keymaps 'org-mode-map
     :prefix "g"
     "h" 'org-previous-visible-heading
     "j" 'org-forward-heading-same-level
@@ -588,54 +556,7 @@
   :mode ("\\.pdf$" . pdf-view-mode)
   :config
   (pdf-tools-install)
-
-  (evil-define-motion my/pdf-view-goto-page (count)
-    (if count
-	(pdf-view-goto-page count)
-      (pdf-view-last-page)))
-
-  (evil-define-motion my/pdf-view-scroll-down (count)
-    (if count
-	(dotimes (number count nil)
-	  (pdf-view-scroll-down-or-previous-page))
-      (pdf-view-scroll-down-or-previous-page)))
-
-  (evil-define-motion my/pdf-view-scroll-up (count)
-    (if count
-	(dotimes (number count nil)
-	  (pdf-view-scroll-up-or-next-page))
-      (pdf-view-scroll-up-or-next-page)))
-
-  (setq pdf-misc-print-programm "gtklp")
-
-  (add-to-list 'evil-motion-state-modes 'pdf-view-mode)
-  (add-to-list 'evil-motion-state-modes 'pdf-outline-buffer-mode)
-
-  (general-mmap :keymaps 'pdf-view-mode-map
-    "G" 'my/pdf-view-goto-page
-    "gg" 'pdf-view-first-page
-    "j" 'my/pdf-view-scroll-up
-    "k" 'my/pdf-view-scroll-down
-    "o" 'pdf-outline
-
-    "+" 'pdf-view-enlarge
-    "-" 'pdf-view-shrink
-    "0" 'pdf-view-scale-reset
-    "H" 'pdf-view-fit-height-to-window
-    "P" 'pdf-view-fit-page-to-window
-    "W" 'pdf-view-fit-width-to-window
-
-    "zr" 'pdf-view-reset-slice
-    "zs" 'pdf-view-set-slice-from-bounding-box
-
-    "/" 'isearch-forward-regexp
-    "?" 'isearch-backward-regexp)
-
-  (general-mmap :keymaps 'pdf-outline-buffer-mode-map
-    "RET" 'pdf-outline-follow-link-and-quit
-    "TAB" 'outline-toggle-children)
-
-  (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode))
+  (setq pdf-misc-print-programm "gtklp"))
 
 (use-package plantuml-mode
   :mode "\\.plantuml$"
@@ -646,13 +567,13 @@
 
 (use-package scad-preview
   :general
-  (:keymaps 'scad-mode-map
+  (:keymaps '(override scad-mode-map)
 	    :prefix leader-major
 	    :states 'motion
 	    "SPC" 'scad-preview-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
-  (general-mmap :keymaps 'scad-preview--image-mode-map
+  (my-key-def :keymaps 'scad-preview--image-mode-map
     "C-h" 'scad-preview-roty+
     "C-j" 'scad-preview-rotx-
     "C-k" 'scad-preview-rotx+
@@ -691,27 +612,29 @@
 
 (use-package evil-commentary :diminish "" :init (evil-commentary-mode 1))
 (use-package evil-surround :init (global-evil-surround-mode 1))
-(use-package sudo-edit :general (:prefix leader-file :states 'motion "s" 'sudo-edit))
+(use-package sudo-edit :general (:keymaps 'override :prefix leader-file :states 'motion "s" 'sudo-edit))
 
 (use-package evil-exchange
   :general
-  (:states 'motion
-	   "gs" 'evil-exchange
-	   "gS" 'evil-exchange-cancel))
+  (:keymaps 'override
+	    :states 'motion
+	    "gs" 'evil-exchange
+	    "gS" 'evil-exchange-cancel))
 
 (use-package evil-numbers
   :general
-  (:prefix leader
-	   :states 'motion
-	   "+" 'evil-numbers/inc-at-pt
-	   "-" 'evil-numbers/dec-at-pt))
+  (:keymaps 'override
+	    :prefix leader
+	    :states 'motion
+	    "+" 'evil-numbers/inc-at-pt
+	    "-" 'evil-numbers/dec-at-pt))
 
 (use-package undo-tree
   :diminish ""
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree"))
 	undo-tree-auto-save-history t)
-  (general-mmap :keymaps 'undo-tree-map
+  (my-key-def :keymaps 'undo-tree-map
     "U" 'undo-tree-visualize))
 
 ;;; Linters
@@ -720,7 +643,7 @@
   :init (global-flycheck-mode 1)
   :diminish ""
   :config
-  (general-mmap :keymaps 'flycheck-mode-map
+  (my-key-def :keymaps 'flycheck-mode-map
     :prefix leader-lint
     "j" 'next-error
     "k" 'previous-error))
@@ -739,20 +662,21 @@
   :after projectile
   :config
   (counsel-projectile-mode 1)
-  (general-mmap :keymaps 'projectile-mode-map
+  (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
     "s" 'counsel-rg))
 
 (use-package magit
   :general
-  (:prefix leader-project
-	   :states 'motion
-	   "g" 'magit-status))
+  (:keymaps 'override
+	    :prefix leader-project
+	    :states 'motion
+	    "g" 'magit-status))
 
 (use-package projectile
   :init (projectile-mode 1)
   :config
-  (general-mmap :keymaps 'projectile-mode-map
+  (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
     "f" 'projectile-find-file
     "SPC" 'projectile-switch-project))
