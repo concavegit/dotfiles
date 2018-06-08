@@ -178,6 +178,7 @@
 ;;; Applications
 
 (use-package evil-collection :after evil :config (evil-collection-init))
+(use-package evil-mu4e :after mu4e)
 (use-package htmlize)
 (use-package nov :mode ("\\.epub$" . nov-mode))
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
@@ -233,10 +234,6 @@
 	    "e" 'mu4e
 	    "s" 'mu4e-compose-new)
   :config
-  (add-to-list 'evil-motion-state-modes 'mu4e-headers-mode)
-  (add-to-list 'evil-motion-state-modes 'mu4e-main-mode)
-  (add-to-list 'evil-motion-state-modes 'mu4e-view-mode)
-
   (setq mu4e-confirm-quit nil
 	mu4e-contexts
 	`(,(make-mu4e-context
@@ -260,29 +257,7 @@
 	mu4e-get-mail-command "offlineimap -o"
 	mu4e-view-prefer-html t
 	mu4e-view-show-addresses t
-	mu4e-view-show-images t)
-
-  (my-key-def :keymaps '(mu4e-headers-mode-map
-			 mu4e-main-mode-map
-			 mu4e-view-mode-map)
-    "s" 'mu4e-context-switch
-    "J" 'mu4e~headers-jump-to-maildir
-    "b" 'mu4e-headers-search-bookmark)
-
-  (my-key-def :keymaps 'mu4e-view-mode-map
-    "C-n" 'mu4e-view-headers-next
-    "C-p" 'mu4e-view-headers-prev
-    "TAB" 'shr-next-link)
-
-  (my-key-def :keymaps 'mu4e-headers-mode-map
-    "RET" 'mu4e-headers-view-message)
-
-  (my-key-def :keymaps 'mu4e-main-mode-map
-    "u" 'mu4e-update-mail-and-index)
-
-  (my-key-def :keymaps '(mu4e-headers-mode-map
-			 mu4e-view-mode-map)
-    "F" 'mu4e-compose-forward))
+	mu4e-view-show-images t))
 
 (use-package org-mu4e
   :ensure nil
@@ -417,6 +392,14 @@
   :config
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 
+(use-package evil-org
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 (use-package elpy
   :hook (python-mode . elpy-enable)
   :general
@@ -505,52 +488,25 @@
   (require 'ox-beamer)
 
   (setq org-confirm-babel-evaluate nil
-	org-pretty-entities t
-	org-startup-indented t
-	org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
+        org-pretty-entities t
+        org-startup-indented t
+        org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
 
-	org-latex-pdf-process
-	'("pdflatex -shell-escape-interaction nonstopmode -output-directory %o %f"
-	  "bibtex %b"
-	  "pdflatex -shell-escape -interaction nonstopmode --synctex=1 -output-directory %o %f"))
-
-  (defun my/org-meta-return ()
-    (interactive)
-    (end-of-line)
-    (org-meta-return))
+        org-latex-pdf-process
+        '("pdflatex -shell-escape-interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
+          "pdflatex -shell-escape -interaction nonstopmode --synctex=1 -output-directory %o %f"))
 
   (when (executable-find "pygmentize")
     (add-to-list 'org-latex-packages-alist '("" "minted"))
     (setq org-latex-listings 'minted
-	  org-latex-minted-options '(("frame" "single"))))
+          org-latex-minted-options '(("frame" "single"))))
 
   (org-babel-do-load-languages 'org-babel-load-languages
-			       '((python . t)
-				 (haskell . t)
-				 (latex . t)
-				 (plantuml . t)))
-
-  (my-key-def :keymaps 'org-mode-map
-    :prefix leader-major
-    "SPC" 'org-export-dispatch
-    "b SPC" 'org-babel-execute-buffer
-    "bj" 'org-babel-next-src-block
-    "bk" 'org-babel-previous-src-block
-    "bs" 'org-babel-execute-subtree
-    "t SPC" 'org-table-recalculate-buffer-tables)
-
-  (my-key-def :keymaps 'org-mode-map
-    "<M-return>" 'my/org-meta-return
-    "M-h" 'org-metaleft
-    "M-l" 'org-metaright)
-
-  (my-key-def :keymaps 'org-mode-map
-    :prefix "g"
-    "h" 'org-previous-visible-heading
-    "j" 'org-forward-heading-same-level
-    "k" 'org-backward-heading-same-level
-    "l" 'org-next-visible-heading
-    "o" 'outline-up-heading))
+                               '((python . t)
+                                 (haskell . t)
+                                 (latex . t)
+                                 (plantuml . t))))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
@@ -568,9 +524,9 @@
 (use-package scad-preview
   :general
   (:keymaps '(override scad-mode-map)
-	    :prefix leader-major
-	    :states 'motion
-	    "SPC" 'scad-preview-mode)
+            :prefix leader-major
+            :states 'motion
+            "SPC" 'scad-preview-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
   (my-key-def :keymaps 'scad-preview--image-mode-map
@@ -590,8 +546,8 @@
 
 (use-package shakespeare-mode
   :mode (("\\.hamlet$" . shakespeare-hamlet-mode)
-	 ("\\.julius" . shakespeare-julius-mode)
-	 ("\\.lucius$" . shakespeare-lucius-mode)))
+         ("\\.julius" . shakespeare-julius-mode)
+         ("\\.lucius$" . shakespeare-lucius-mode)))
 
 (use-package tex-site
   :ensure auctex
@@ -617,23 +573,23 @@
 (use-package evil-exchange
   :general
   (:keymaps 'override
-	    :states 'motion
-	    "gs" 'evil-exchange
-	    "gS" 'evil-exchange-cancel))
+            :states 'motion
+            "gs" 'evil-exchange
+            "gS" 'evil-exchange-cancel))
 
 (use-package evil-numbers
   :general
   (:keymaps 'override
-	    :prefix leader
-	    :states 'motion
-	    "+" 'evil-numbers/inc-at-pt
-	    "-" 'evil-numbers/dec-at-pt))
+            :prefix leader
+            :states 'motion
+            "+" 'evil-numbers/inc-at-pt
+            "-" 'evil-numbers/dec-at-pt))
 
 (use-package undo-tree
   :diminish ""
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree"))
-	undo-tree-auto-save-history t)
+        undo-tree-auto-save-history t)
   (my-key-def :keymaps 'undo-tree-map
     "U" 'undo-tree-visualize))
 
@@ -651,8 +607,8 @@
 (use-package flyspell
   :diminish ""
   :hook ((conf-mode . flyspell-prog-mode)
-	 (prog-mode . flyspell-prog-mode)
-	 (text-mode . flyspell-mode)))
+         (prog-mode . flyspell-prog-mode)
+         (text-mode . flyspell-mode)))
 
 ;;; Projects
 
@@ -669,9 +625,9 @@
 (use-package magit
   :general
   (:keymaps 'override
-	    :prefix leader-project
-	    :states 'motion
-	    "g" 'magit-status))
+            :prefix leader-project
+            :states 'motion
+            "g" 'magit-status))
 
 (use-package projectile
   :init (projectile-mode 1)
