@@ -1,0 +1,3 @@
+cross-avr
+cross-arm-unknown-linux-gnueabi
+cross-armv7a-hardfloat-linux-gnueabi
