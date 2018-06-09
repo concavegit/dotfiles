@@ -33,6 +33,7 @@
 	leader-app (concat leader " a")
 	leader-buffer (concat leader " b")
 	leader-console (concat leader " t")
+        leader-dir (concat leader " d")
 	leader-file (concat leader " f")
 	leader-lint (concat leader " e")
 	leader-major (concat leader " x")
@@ -319,6 +320,8 @@
   :diminish ""
   :init (ivy-mode 1)
   :config
+  (my-key-def :prefix leader-dir
+    "s" 'counsel-rg)
   (setq ivy-use-virtual-buffers t))
 
 (use-package smartparens
@@ -620,7 +623,7 @@
   (counsel-projectile-mode 1)
   (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
-    "s" 'counsel-rg))
+    "s" 'counsel-projectile-rg))
 
 (use-package magit
   :general

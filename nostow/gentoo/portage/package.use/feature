@@ -1,0 +1,31 @@
+# -*-conf-*-
+
+# urxvt
+x11-terms/rxvt-unicode	256-color
+
+# xmobar
+x11-misc/xmobar		wifi mpd
+
+# emacs
+app-editors/emacs	libxml2
+
+# sdl2
+media-libs/libsdl2	haptic
+
+# opencv
+media-libs/opencv	v4l
+
+# mpv
+media-video/ffmpeg	openssl
+
+# ncmpcpp
+media-sound/ncmpcpp	taglib visualizer
+
+# matplotlib
+dev-python/matplotlib	latex
+
+# ipython
+dev-python/ipython	matplotlib
+
+# sympy
+dev-python/sympy	latex ipython

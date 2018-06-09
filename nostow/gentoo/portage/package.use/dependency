@@ -1,0 +1,42 @@
+# -*-conf-*-
+
+# genkernel
+sys-apps/util-linux	static-libs
+
+# misc
+app-text/asciidoc	python_single_target_python2_7
+
+# neofetch
+www-client/w3m		imlib
+
+# qutebrowser
+dev-python/PyQt5	declarative sql webengine webchannel
+dev-qt/qtwebengine	widgets
+dev-qt/qtwebchannel	qml
+sys-libs/zlib		minizip
+dev-libs/libxml2	icu
+
+# libreoffice
+dev-libs/xmlsec		nss
+media-libs/harfbuzz	icu
+dev-libs/boost		context python
+
+# blender
+media-gfx/blender	cycles openimageio
+
+# pandas
+dev-python/numpy	lapack
+
+# ipython
+dev-lang/python		sqlite
+app-text/texlive-core	xetex
+
+# android-studio
+sys-libs/ncurses	tinfo
+
+# metasploit
+dev-ruby/activerecord	postgres
+
+# ros
+media-libs/gd		fontconfig
+media-libs/opencv	contrib
