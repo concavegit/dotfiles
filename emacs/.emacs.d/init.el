@@ -26,7 +26,8 @@
 (use-package general
   :config
   (setq general-override-states '(motion
-				  normal)
+				  normal
+                                  operator)
 
 	leader "SPC"
 
@@ -43,7 +44,7 @@
 
   (general-override-mode)
   (general-create-definer my-key-def
-    :states '(motion normal)
+    :states '(motion normal operator)
     :keymaps 'override)
 
   (my-key-def
@@ -178,7 +179,10 @@
 
 ;;; Applications
 
-(use-package evil-collection :after evil :config (evil-collection-init))
+(use-package evil-collection :after evil
+  :config
+  (setq evil-collection-mode-list (remove 'helm evil-collection-mode-list))
+  (evil-collection-init))
 (use-package evil-mu4e :after mu4e)
 (use-package htmlize)
 (use-package nov :mode ("\\.epub$" . nov-mode))
@@ -604,8 +608,9 @@
   :config
   (my-key-def :keymaps 'flycheck-mode-map
     :prefix leader-lint
-    "j" 'next-error
-    "k" 'previous-error))
+    "j" 'flycheck-next-error
+    "k" 'flycheck-previous-error
+    "SPC" 'flycheck-list-errors))
 
 (use-package flyspell
   :diminish ""
