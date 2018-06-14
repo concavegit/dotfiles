@@ -201,8 +201,7 @@
 	erc-nick "concaveirc"
 	erc-autojoin-channels-alist '(("freenode.net" "#haskell"))
 	erc-track-position-in-mode-line t
-	erc-join-buffer 'bury)
-  (add-to-list 'erc-modules 'log))
+	erc-join-buffer 'bury))
 
 (use-package evil-magit :after magit)
 
