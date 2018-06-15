@@ -185,11 +185,6 @@
 (use-package nov :mode ("\\.epub$" . nov-mode))
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
 
-(use-package browse-url
-  :config
-  (setq browse-url-browser-function 'browse-url-generic
-	browse-url-generic-program "qutebrowser"))
-
 (use-package erc
   :general
   (:keymaps 'override
@@ -258,7 +253,8 @@
 	mu4e-get-mail-command "offlineimap -o"
 	mu4e-view-prefer-html t
 	mu4e-view-show-addresses t
-	mu4e-view-show-images t))
+	mu4e-view-show-images t)
+  (add-to-list 'mu4e-view-actions '("open in browser" . mu4e-action-view-in-browser) t))
 
 (use-package org-mu4e
   :ensure nil
