@@ -35,5 +35,3 @@ alias ll='ls -lht'
 alias md='mkdir -p'
 
 source /usr/bin/virtualenvwrapper_lazy.sh
-# source ~/project/catkin-ws/devel/setup.zsh
-# export ROS_PACKAGE_PATH=/usr/share/ros_packages:~/project/catkin-ws/src
