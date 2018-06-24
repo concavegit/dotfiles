@@ -180,7 +180,6 @@
 ;;; Applications
 
 (use-package evil-collection :after evil :config (evil-collection-init))
-(use-package evil-mu4e :after mu4e)
 (use-package htmlize)
 (use-package nov :mode ("\\.epub$" . nov-mode))
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
