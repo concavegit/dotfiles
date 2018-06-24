@@ -36,7 +36,3 @@ sys-libs/ncurses	tinfo
 
 # metasploit
 dev-ruby/activerecord	postgres
-
-# ros
-media-libs/gd		fontconfig
-media-libs/opencv	contrib

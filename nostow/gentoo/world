@@ -24,6 +24,7 @@ cross-avr/avr-libc
 cross-avr/binutils
 cross-avr/gcc
 dev-embedded/teensyduino-bin
+dev-haskell/hlint
 dev-haskell/stack
 dev-haskell/stylish-haskell
 dev-libs/beignet
@@ -33,9 +34,6 @@ dev-python/keyring
 dev-python/pandas
 dev-python/sympy
 dev-python/virtualenvwrapper
-dev-ros/nmea_msgs
-dev-ros/pcl_ros
-dev-ros/rosbash
 dev-util/android-studio
 dev-util/glade
 dev-util/threadscope
@@ -54,6 +52,7 @@ media-gfx/gimp
 media-gfx/inkscape
 media-gfx/plantuml
 media-gfx/scrot
+media-libs/sdl2-ttf
 media-sound/alsa-utils
 media-sound/mpd
 media-sound/ncmpcpp
@@ -70,10 +69,6 @@ net-p2p/rtorrent
 net-print/gtklp
 net-print/hplip
 net-vpn/tor
-ros-meta/desktop
-ros-meta/image_common
-ros-meta/mavros
-ros-meta/rosserial
 sci-electronics/gtkwave
 sci-electronics/kicad
 sci-electronics/verilator
