@@ -166,7 +166,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-toggle
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "w" 'whitespace-mode))
 
 (use-package winner
@@ -188,7 +188,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-app
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "i" 'erc)
   :config
   (setq erc-prompt-for-password nil
@@ -202,7 +202,7 @@
 (use-package mingus
   :general
   (:keymaps 'override
-	    :states 'motion
+	    :states '(motion normal operator)
 	    :prefix leader-app
 	    "a" 'mingus)
   :config
@@ -225,7 +225,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-app
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "e" 'mu4e
 	    "s" 'mu4e-compose-new)
   :config
@@ -260,7 +260,7 @@
   :general
   (:keymaps '(mu4e-compose-mode-map override)
 	    :prefix leader-major
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "o" 'org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-convert-to-html t))
@@ -278,7 +278,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-app
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "p" 'proced))
 
 (use-package pyvenv
@@ -345,7 +345,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-console
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "SPC" 'eshell)
   :config (setq eshell-banner-message ""))
 
@@ -353,7 +353,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-console
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "e" 'ielm)
   :config (setq ielm-header ""))
 
@@ -361,7 +361,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-console
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "t" 'my/ansi-term-zsh)
   :config
   (defun my/ansi-term-zsh ()
@@ -403,7 +403,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-console
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "p" 'elpy-shell-switch-to-shell)
 
   :config
@@ -426,7 +426,7 @@
   :general
   (:keymaps 'override
 	    :prefix leader-console
-	    :states 'motion
+	    :states '(motion normal operator)
 	    "h" 'haskell-interactive-bring)
   :config
   (setq haskell-font-lock-symbols t
@@ -523,7 +523,7 @@
   :general
   (:keymaps '(override scad-mode-map)
             :prefix leader-major
-            :states 'motion
+            :states '(motion normal operator)
             "SPC" 'scad-preview-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
@@ -566,12 +566,12 @@
 
 (use-package evil-commentary :diminish "" :init (evil-commentary-mode 1))
 (use-package evil-surround :init (global-evil-surround-mode 1))
-(use-package sudo-edit :general (:keymaps 'override :prefix leader-file :states 'motion "s" 'sudo-edit))
+(use-package sudo-edit :general (:keymaps 'override :prefix leader-file :states '(motion normal operator) "s" 'sudo-edit))
 
 (use-package evil-exchange
   :general
   (:keymaps 'override
-            :states 'motion
+            :states '(motion normal operator)
             "gs" 'evil-exchange
             "gS" 'evil-exchange-cancel))
 
@@ -579,7 +579,7 @@
   :general
   (:keymaps 'override
             :prefix leader
-            :states 'motion
+            :states '(motion normal operator)
             "+" 'evil-numbers/inc-at-pt
             "-" 'evil-numbers/dec-at-pt))
 
@@ -625,7 +625,7 @@
   :general
   (:keymaps 'override
             :prefix leader-project
-            :states 'motion
+            :states '(motion normal operator)
             "g" 'magit-status))
 
 (use-package projectile
