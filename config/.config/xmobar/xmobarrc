@@ -1,21 +1,35 @@
 -- -*-haskell-*-
 
-Config { font="xft:xos4 terminus:size=8,fontawesome:size=8,noto sans cjk tc:size=8"
-       , bgColor = "#1d1f21"
-       , fgColor = "#c5c8c6"
-       , lowerOnStart = True
-       , alignSep = "{}"
-       , commands = [ Run StdinReader
-                    , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 10
-                    , Run Brightness [ "-t", "<fc=#81a2be></fc> <percent>"
-                                     , "--", "-D", "intel_backlight" ] 30
-                    , Run BatteryP ["BAT0"] [ "-t", "<acstatus> <left>% (<timeleft>)"
-                                      , "--", "-O", "<fc=#81a2be></fc>", "-i", "<fc=#b5bd68></fc>", "-o", "<fc=#f0c674></fc>"] 600
-                    , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
-                    , Run Volume "default" "Master" [ "-t", "<status> <volume>"
-                                                    , "--", "-O", "<fc=#b5bd68></fc>", "-o", "<fc=#969896></fc>" ] 10
-                    , Run MPD [ "-t", "<statei> <title> <lapsed>/<length>"
-                              , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"] 10
-                    , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
-                    ]
-       , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp3s0wi% | %battery% | %date%"}
+Config
+  { font="xft:xos4 terminus:size=8,font awesome 5 free solid:size=8,noto sans cjk tc:size=8"
+  , bgColor = "#1d1f21"
+  , fgColor = "#c5c8c6"
+  , lowerOnStart = True
+  , alignSep = "{}"
+  , commands =
+    [ Run StdinReader
+    , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 10
+    , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
+
+    , Run Brightness
+      [ "-t", "<fc=#81a2be></fc> <percent>"
+      , "--", "-D", "intel_backlight"
+      ] 30
+
+    , Run BatteryP ["BAT0"]
+      [ "-t", "<acstatus> <left>% (<timeleft>)"
+      , "--", "-O", "<fc=#81a2be></fc>", "-i", "<fc=#b5bd68></fc>", "-o", "<fc=#f0c674></fc>"
+      ] 600
+    , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
+
+    , Run Volume "default" "Master"
+      [ "-t", "<status> <volume>"
+      , "--", "-O", "<fc=#b5bd68></fc>", "-o", "<fc=#969896></fc>"
+      ] 10
+
+    , Run MPD
+      [ "-t", "<statei> <title> <lapsed>/<length>"
+      , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"
+      ] 10
+    ]
+  , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp3s0wi% | %battery% | %date%"}
