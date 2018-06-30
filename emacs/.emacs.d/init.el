@@ -372,6 +372,7 @@
 ;;; Extension Specific
 
 (use-package doc-view :mode ("\\.odt$" . doc-view-mode))
+(use-package dockerfile-mode :mode "Dockerfile$")
 (use-package evil-matchit :init (global-evil-matchit-mode 1))
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
@@ -384,9 +385,13 @@
   :config
   (setq arduino-executable "teensyduino"))
 
+(use-package irony
+  :hook (c++-mode-hook c-mode-hook)
+  :config
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
 (use-package emmet-mode
-  :hook (html-mode
-	 css-mode)
+  :hook (html-mode css-mode)
   :config
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 
