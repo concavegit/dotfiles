@@ -49,7 +49,7 @@
 
   (my-key-def
     :prefix "SPC"
-    "" nil))
+    ))
 
 (use-package evil
   :init
@@ -140,20 +140,14 @@
 
 (use-package hideshow
   :diminish hs-minor-mode
-  :hook ((LaTeX-mode . hs-minor-mode)
-	 (conf-mode . hs-minor-mode)
-	 (prog-mode . hs-minor-mode)))
+  :hook ((LaTeX-mode conf-mode prog-mode) . hs-minor-mode))
 
 (use-package rainbow-delimiters
-  :hook ((conf-mode . rainbow-delimiters-mode)
-	 (prog-mode . rainbow-delimiters-mode)
-	 (text-mode . rainbow-delimiters-mode)))
+  :hook ((conf-mode prog-mode text-mode) . rainbow-delimiters-mode))
 
 (use-package rainbow-mode
   :diminish rainbow-mode
-  :hook (conf-mode
-	 prog-mode
-	 text-mode))
+  :hook (conf-mode prog-mode text-mode))
 
 (use-package spaceline
   :after powerline
@@ -290,8 +284,7 @@
 
 (use-package smtpmail
   :config
-  (setq 
-   smtpmail-smtp-service 587))
+  (setq smtpmail-smtp-service 587))
 
 ;;; Completion
 
@@ -377,6 +370,7 @@
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
+(use-package irony-eldoc :hook irony-mode)
 (use-package qml-mode :mode "\\.qml$")
 (use-package yaml-mode :mode "\\.ya?ml$")
 
@@ -385,10 +379,10 @@
   :config
   (setq arduino-executable "teensyduino"))
 
-(use-package irony
-  :hook (c++-mode-hook c-mode-hook)
+(use-package company-irony
+  :after company
   :config
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+  (add-to-list 'company-backends 'company-irony))
 
 (use-package emmet-mode
   :hook (html-mode css-mode)
@@ -404,12 +398,14 @@
   (evil-org-agenda-set-keys))
 
 (use-package elpy
-  :hook (python-mode . elpy-enable)
   :general
   (:keymaps 'override
 	    :prefix leader-console
 	    :states '(motion normal operator)
 	    "p" 'elpy-shell-switch-to-shell)
+
+  :init
+  (elpy-enable)
 
   :config
   (when (executable-find "ipython")
@@ -422,6 +418,9 @@
     "SPC" 'elpy-refactor-options
     "t SPC" 'elpy-test
     "tr" 'elpy-set-test-runner))
+
+(use-package flycheck-irony
+  :hook (flycheck-mode . flycheck-irony-setup))
 
 (use-package groovy-mode
   :mode "\\.gradle$")
@@ -458,6 +457,11 @@
     "t" 'intero-type-at
     "x" 'intero-restart)
   (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
+
+(use-package irony
+  :hook ((c++-mode c-mode) . irony-mode)
+  :config
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
@@ -610,8 +614,7 @@
 
 (use-package flyspell
   :diminish ""
-  :hook ((conf-mode . flyspell-prog-mode)
-         (prog-mode . flyspell-prog-mode)
+  :hook (((conf-mode prog-mode) . flyspell-prog-mode)
          (text-mode . flyspell-mode)))
 
 ;;; Projects
@@ -638,7 +641,8 @@
   :config
   (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
-    "f" 'projectile-find-file
-    "SPC" 'projectile-switch-project))
+    "SPC" 'projectile-switch-project
+    "c" 'projectile-compile-project
+    "f" 'projectile-find-file))
 
 ;;; init.el ends here
