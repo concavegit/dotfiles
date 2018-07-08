@@ -187,9 +187,12 @@
   :config
   (setq erc-prompt-for-password nil
 	erc-nick "concaveirc"
-	erc-autojoin-channels-alist '(("freenode.net" "#haskell"))
-	erc-track-position-in-mode-line t
-	erc-join-buffer 'bury))
+
+	erc-autojoin-channels-alist
+        '(("freenode.net" "#haskell")
+          ("freenode.net" "#cpp"))
+
+	erc-track-position-in-mode-line t))
 
 (use-package evil-magit :after magit)
 
