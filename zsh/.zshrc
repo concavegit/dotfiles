@@ -35,4 +35,3 @@ alias ll='ls -lht'
 alias md='mkdir -p'
 
 source /usr/bin/virtualenvwrapper_lazy.sh
-# source ~/project/catkin_ws/devel/setup.zsh
