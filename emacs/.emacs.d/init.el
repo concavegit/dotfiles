@@ -374,8 +374,9 @@
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
 (use-package irony-eldoc :hook irony-mode)
+(use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
-(use-package yaml-mode :mode "\\.ya?ml$")
+(use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
 (use-package arduino-mode
   :mode "\\.\\(pde\\|ino\\)$"
@@ -528,6 +529,9 @@
   :mode "\\.plantuml$"
   :config (setq plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"))
 
+(use-package platformio-mode
+  :hook (c++-mode . platformio-conditionally-enable))
+
 (use-package scad-mode
   :mode "\\.scad$")
 
@@ -554,6 +558,10 @@
     "l" 'scad-preview-rotz+
     "r" 'scad-preview-reset-camera-parameters))
 
+(use-package sh-script
+  :mode ("\\.sh$\\|\\.ebuild" . sh-mode)
+  :interpreter ("sh" . sh-mode))
+
 (use-package shakespeare-mode
   :mode (("\\.hamlet$" . shakespeare-hamlet-mode)
          ("\\.julius" . shakespeare-julius-mode)
@@ -578,7 +586,6 @@
 
 (use-package evil-commentary :diminish "" :init (evil-commentary-mode 1))
 (use-package evil-surround :init (global-evil-surround-mode 1))
-(use-package sudo-edit :general (:keymaps 'override :prefix leader-file :states '(motion normal operator) "s" 'sudo-edit))
 
 (use-package evil-exchange
   :general
@@ -594,6 +601,13 @@
             :states '(motion normal operator)
             "+" 'evil-numbers/inc-at-pt
             "-" 'evil-numbers/dec-at-pt))
+
+(use-package sudo-edit
+  :general
+  (:keymaps 'override
+            :prefix leader-file
+            :states '(motion normal operator)
+            "s" 'sudo-edit))
 
 (use-package undo-tree
   :diminish ""
