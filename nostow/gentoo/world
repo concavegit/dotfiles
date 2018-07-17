@@ -25,7 +25,6 @@ cross-armv7a-hardfloat-linux-gnueabi/linux-headers
 cross-avr/avr-libc
 cross-avr/binutils
 cross-avr/gcc
-dev-embedded/arduino-mk
 dev-embedded/platformio
 dev-embedded/teensyduino-bin
 dev-haskell/hlint
