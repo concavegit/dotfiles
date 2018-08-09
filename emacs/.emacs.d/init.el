@@ -578,7 +578,8 @@
 (use-package verilog-mode
   :mode "\\.\\(v\\|vs\\)$"
   :config
-  (setq flycheck-verilog-verilator-executable "verilator_bin"))
+  (setq flycheck-verilog-verilator-executable "verilator_bin"
+        verilog-linter "verilator --lint-only"))
 
 ;;; General Text
 
