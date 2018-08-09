@@ -301,8 +301,8 @@
   :hook (smartparens-enabled . evil-smartparens-mode))
 
 (use-package fcitx
-  :when (and (executable-find "fcitx-remote")
-	     (= (with-temp-buffer (call-process "fcitx-remote" nil t)) 0))
+  :if (and (executable-find "fcitx-remote")
+           (= (with-temp-buffer (call-process "fcitx-remote" nil t)) 0))
   :config
   ;; (setq fcitx-use-dbus t)
   (fcitx-aggressive-setup))
@@ -340,25 +340,25 @@
 (use-package eshell
   :general
   (:keymaps 'override
-	    :prefix leader-console
-	    :states '(motion normal operator)
-	    "SPC" 'eshell)
+            :prefix leader-console
+            :states '(motion normal operator)
+            "SPC" 'eshell)
   :config (setq eshell-banner-message ""))
 
 (use-package ielm
   :general
   (:keymaps 'override
-	    :prefix leader-console
-	    :states '(motion normal operator)
-	    "e" 'ielm)
+            :prefix leader-console
+            :states '(motion normal operator)
+            "e" 'ielm)
   :config (setq ielm-header ""))
 
 (use-package term
   :general
   (:keymaps 'override
-	    :prefix leader-console
-	    :states '(motion normal operator)
-	    "t" 'my/ansi-term-zsh)
+            :prefix leader-console
+            :states '(motion normal operator)
+            "t" 'my/ansi-term-zsh)
   :config
   (defun my/ansi-term-zsh ()
     (interactive)
@@ -404,9 +404,9 @@
 (use-package elpy
   :general
   (:keymaps 'override
-	    :prefix leader-console
-	    :states '(motion normal operator)
-	    "p" 'elpy-shell-switch-to-shell)
+            :prefix leader-console
+            :states '(motion normal operator)
+            "p" 'elpy-shell-switch-to-shell)
 
   :init
   (elpy-enable)
@@ -414,7 +414,7 @@
   :config
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"
-	  python-shell-interpreter-args "-i --simple-prompt"))
+          python-shell-interpreter-args "-i --simple-prompt"))
   (delete 'elpy-module-highlight-indentation elpy-modules)
 
   (my-key-def :keymaps 'elpy-mode-map
@@ -433,12 +433,12 @@
   :mode "\\.hs$"
   :general
   (:keymaps 'override
-	    :prefix leader-console
-	    :states '(motion normal operator)
-	    "h" 'haskell-interactive-bring)
+            :prefix leader-console
+            :states '(motion normal operator)
+            "h" 'haskell-interactive-bring)
   :config
   (setq haskell-font-lock-symbols t
-	haskell-stylish-on-save t)
+        haskell-stylish-on-save t)
 
   (add-to-list 'evil-motion-state-modes 'haskell-error-mode)
 
