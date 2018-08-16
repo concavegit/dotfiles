@@ -579,7 +579,7 @@
   :mode "\\.\\(v\\|vs\\)$"
   :config
   (setq flycheck-verilog-verilator-executable "verilator_bin"
-        verilog-linter "verilator --lint-only"))
+        verilog-linter "verilator -lint-only"))
 
 ;;; General Text
 
@@ -655,7 +655,8 @@
             "g" 'magit-status))
 
 (use-package projectile
-  :init (projectile-mode 1)
+  :init
+  (projectile-mode 1)
   :config
   (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
