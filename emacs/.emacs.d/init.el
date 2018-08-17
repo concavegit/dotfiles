@@ -26,21 +26,21 @@
 (use-package general
   :config
   (setq general-override-states '(motion
-				  normal
+                                  normal
                                   operator)
 
-	leader "SPC"
+        leader "SPC"
 
-	leader-app (concat leader " a")
-	leader-buffer (concat leader " b")
-	leader-console (concat leader " t")
+        leader-app (concat leader " a")
+        leader-buffer (concat leader " b")
+        leader-console (concat leader " t")
         leader-dir (concat leader " d")
-	leader-file (concat leader " f")
-	leader-lint (concat leader " e")
-	leader-major (concat leader " x")
-	leader-media (concat leader " m")
-	leader-project (concat leader " p")
-	leader-toggle (concat leader " \\"))
+        leader-file (concat leader " f")
+        leader-lint (concat leader " e")
+        leader-major (concat leader " x")
+        leader-media (concat leader " m")
+        leader-project (concat leader " p")
+        leader-toggle (concat leader " \\"))
 
   (general-override-mode)
   (general-create-definer my-key-def
@@ -68,9 +68,9 @@
 ;;; Orphans
 
 (setenv "PATH"
-	(concat
-	 "~/.local/bin:"
-	 (getenv "PATH")))
+        (concat
+         "~/.local/bin:"
+         (getenv "PATH")))
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
@@ -159,9 +159,9 @@
 (use-package whitespace
   :general
   (:keymaps 'override
-	    :prefix leader-toggle
-	    :states '(motion normal operator)
-	    "w" 'whitespace-mode))
+            :prefix leader-toggle
+            :states '(motion normal operator)
+            "w" 'whitespace-mode))
 
 (use-package winner
   :init (winner-mode 1)
@@ -181,27 +181,27 @@
 (use-package erc
   :general
   (:keymaps 'override
-	    :prefix leader-app
-	    :states '(motion normal operator)
-	    "i" 'erc)
+            :prefix leader-app
+            :states '(motion normal operator)
+            "i" 'erc)
   :config
   (setq erc-prompt-for-password nil
-	erc-nick "concaveirc"
+        erc-nick "concaveirc"
 
-	erc-autojoin-channels-alist
+        erc-autojoin-channels-alist
         '(("freenode.net" "#haskell")
           ("freenode.net" "#cpp"))
 
-	erc-track-position-in-mode-line t))
+        erc-track-position-in-mode-line t))
 
 (use-package evil-magit :after magit)
 
 (use-package mingus
   :general
   (:keymaps 'override
-	    :states '(motion normal operator)
-	    :prefix leader-app
-	    "a" 'mingus)
+            :states '(motion normal operator)
+            :prefix leader-app
+            "a" 'mingus)
   :config
   (add-hook 'mingus-browse-hook 'evil-motion-state)
   (add-hook 'mingus-make-playlist-hook 'evil-motion-state)
@@ -221,44 +221,44 @@
   :ensure nil
   :general
   (:keymaps 'override
-	    :prefix leader-app
-	    :states '(motion normal operator)
-	    "e" 'mu4e
-	    "s" 'mu4e-compose-new)
+            :prefix leader-app
+            :states '(motion normal operator)
+            "e" 'mu4e
+            "s" 'mu4e-compose-new)
   :config
   (setq mu4e-confirm-quit nil
-	mu4e-contexts
-	`(,(make-mu4e-context
-	    :name "Primary"
-	    :match-func (lambda (msg)
-			  (when msg
-			    (mu4e-message-contact-field-matches msg
-								:to "concavemail@gmail.com")))
-	    :vars '((user-mail-address . "concavemail@gmail.com")
-		    (smtpmail-smtp-server . "smtp.gmail.com")))
-	  ,(make-mu4e-context
-	    :name "Work"
-	    :match-func (lambda (msg)
-			  (when msg
-			    (mu4e-message-contact-field-matches msg
-								:to "kawin.nikomborirak@students.olin.edu")))
-	    :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu")
-		    (smtpmail-smtp-server . "smtps.olin.edu"))))
+        mu4e-contexts
+        `(,(make-mu4e-context
+            :name "Primary"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches msg
+                                                                :to "concavemail@gmail.com")))
+            :vars '((user-mail-address . "concavemail@gmail.com")
+                    (smtpmail-smtp-server . "smtp.gmail.com")))
+          ,(make-mu4e-context
+            :name "Work"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches msg
+                                                                :to "kawin.nikomborirak@students.olin.edu")))
+            :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu")
+                    (smtpmail-smtp-server . "smtps.olin.edu"))))
 
-	mu4e-context-policy 'pick-first
-	mu4e-get-mail-command "offlineimap -o"
-	mu4e-view-prefer-html t
-	mu4e-view-show-addresses t
-	mu4e-view-show-images t)
+        mu4e-context-policy 'pick-first
+        mu4e-get-mail-command "offlineimap -o"
+        mu4e-view-prefer-html t
+        mu4e-view-show-addresses t
+        mu4e-view-show-images t)
   (add-to-list 'mu4e-view-actions '("open in browser" . mu4e-action-view-in-browser) t))
 
 (use-package org-mu4e
   :ensure nil
   :general
   (:keymaps '(mu4e-compose-mode-map override)
-	    :prefix leader-major
-	    :states '(motion normal operator)
-	    "o" 'org-mu4e-compose-org-mode)
+            :prefix leader-major
+            :states '(motion normal operator)
+            "o" 'org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-convert-to-html t))
 
@@ -269,14 +269,14 @@
   :after org
   :config
   (setq org-reveal-root "https://cdn.rawgit.com/hakimel/reveal.js/master"
-	org-reveal-theme "black"))
+        org-reveal-theme "black"))
 
 (use-package proced
   :general
   (:keymaps 'override
-	    :prefix leader-app
-	    :states '(motion normal operator)
-	    "p" 'proced))
+            :prefix leader-app
+            :states '(motion normal operator)
+            "p" 'proced))
 
 (use-package pyvenv
   :init (pyvenv-mode 1)
