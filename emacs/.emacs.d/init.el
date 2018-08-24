@@ -246,7 +246,9 @@
                     (smtpmail-smtp-server . "smtps.olin.edu"))))
 
         mu4e-context-policy 'pick-first
+        mu4e-headers-date-format "%F"
         mu4e-get-mail-command "offlineimap -o"
+        mu4e-headers-time-format "%T"
         mu4e-view-prefer-html t
         mu4e-view-show-addresses t
         mu4e-view-show-images t)
