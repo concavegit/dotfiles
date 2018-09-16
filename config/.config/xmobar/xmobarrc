@@ -9,7 +9,7 @@ Config
   , commands =
     [ Run StdinReader
     , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 10
-    , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 9000
+    , Run Com "dotfiles/nostow/xmobarscript/printmail" [] "mail" 3000
 
     , Run Brightness
       [ "-t", "<fc=#81a2be></fc> <percent>"
