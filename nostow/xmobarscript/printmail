@@ -2,4 +2,6 @@
 
 cntPrim=`mu find flag:unread m:/Primary/INBOX | wc -l`
 cntWork=`mu find flag:unread m:/Work/INBOX | wc -l`
-echo "<fc=#8abeb7></fc> $cntPrim <fc=#969896></fc> $cntWork"
+cntWell=`mu find flag:unread m:/Wellesley/Inbox | wc -l`
+
+echo "<fc=#8abeb7></fc> $cntPrim <fc=#969896></fc> $cntWork <fc=#c5c8c6></fc> $cntWell"

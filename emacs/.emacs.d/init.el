@@ -175,9 +175,12 @@
 ;;; Applications
 
 (use-package evil-collection :after evil :config (evil-collection-init))
+(use-package evil-magit :after magit)
 (use-package htmlize)
 (use-package nov :mode ("\\.epub$" . nov-mode))
+(use-package org-ref :after org)
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
+(use-package smtpmail :config (setq smtpmail-smtp-service 587))
 
 (use-package erc
   :general
@@ -194,8 +197,6 @@
           ("freenode.net" "#cpp"))
 
         erc-track-position-in-mode-line t))
-
-(use-package evil-magit :after magit)
 
 (use-package mingus
   :general
@@ -244,7 +245,15 @@
                             (mu4e-message-contact-field-matches msg
                                                                 :to "kawin.nikomborirak@students.olin.edu")))
             :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu")
-                    (smtpmail-smtp-server . "smtps.olin.edu"))))
+                    (smtpmail-smtp-server . "smtps.olin.edu")))
+          ,(make-mu4e-context
+            :name "Wellesley"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches msg
+                                                                :to "knikombo@wellesley.edu")))
+            :vars '((user-email-address . "knikombo@wellesley.edu")
+                    (smtpmail-smtp-server . "smtp.gmail.com"))))
 
         mu4e-context-policy 'pick-first
         mu4e-headers-date-format "%F"
@@ -255,6 +264,11 @@
         mu4e-view-show-images t)
   (add-to-list 'mu4e-view-actions '("open in browser" . mu4e-action-view-in-browser) t))
 
+(use-package ob-ipython
+  :after org
+  :config
+  (add-to-list 'org-latex-minted-langs '(ipython "python")))
+
 (use-package org-mu4e
   :ensure nil
   :general
@@ -264,9 +278,6 @@
             "o" 'org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-convert-to-html t))
-
-(use-package org-ref
-  :after org)
 
 (use-package ox-reveal
   :after org
@@ -287,10 +298,6 @@
   (my-key-def :keymaps 'pyvenv-mode-map
     :prefix leader-app
     "v" 'pyvenv-workon))
-
-(use-package smtpmail
-  :config
-  (setq smtpmail-smtp-service 587))
 
 ;;; Completion
 
@@ -519,6 +526,7 @@
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((python . t)
                                  (haskell . t)
+                                 (ipython . t)
                                  (latex . t)
                                  (plantuml . t))))
 
