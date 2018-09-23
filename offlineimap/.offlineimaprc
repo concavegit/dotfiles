@@ -1,7 +1,7 @@
 # -*-conf-*-
 
 [general]
-accounts = Primary, Work, Wellesley
+accounts = Primary, Olin, Wellesley
 pythonfile = ~/dotfiles/nostow/offlineimap.py
 maxsyncaccounts=3
 
@@ -10,9 +10,9 @@ localrepository = PrimaryLocal
 remoterepository = PrimaryRemote
 autorefresh=5
 
-[Account Work]
-localrepository = WorkLocal
-remoterepository = WorkRemote
+[Account Olin]
+localrepository = OlinLocal
+remoterepository = OlinRemote
 autorefresh=5
 
 [Account Wellesley]
@@ -24,9 +24,9 @@ autorefresh=5
 type = Maildir
 localfolders = ~/Maildir/Primary
 
-[Repository WorkLocal]
+[Repository OlinLocal]
 type = Maildir
-localfolders = ~/Maildir/Work
+localfolders = ~/Maildir/Olin
 
 [Repository WellesleyLocal]
 type = Maildir
@@ -39,11 +39,11 @@ remoteuser = concavemail@gmail.com
 remotepasseval = get_pw_from_desc("Password for concavemail@gmail.com")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Repository WorkRemote]
+[Repository OlinRemote]
 type=IMAP
-remotehost = imaps.olin.edu
-remoteuser = knikomborirak
-remotepasseval = get_pw_from_desc("Password for kawin.nikomborirak@students.olin.edu")
+remotehost = outlook.office365.com
+remoteuser = knikomborirak@olin.edu
+remotepasseval = get_pw_from_desc("Password for knikomborirak@olin.edu")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Repository WellesleyRemote]

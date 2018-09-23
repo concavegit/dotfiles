@@ -239,20 +239,20 @@
             :vars '((user-mail-address . "concavemail@gmail.com")
                     (smtpmail-smtp-server . "smtp.gmail.com")))
           ,(make-mu4e-context
-            :name "Work"
+            :name "Olin"
             :match-func (lambda (msg)
                           (when msg
                             (mu4e-message-contact-field-matches msg
-                                                                :to "kawin.nikomborirak@students.olin.edu")))
-            :vars '((user-mail-address . "kawin.nikomborirak@students.olin.edu")
-                    (smtpmail-smtp-server . "smtps.olin.edu")))
+                                                                :to "knikomborirak@olin.edu")))
+            :vars '((user-mail-address . "knikomborirak@olin.edu")
+                    (smtpmail-smtp-server . "smtp.office365.com")))
           ,(make-mu4e-context
             :name "Wellesley"
             :match-func (lambda (msg)
                           (when msg
                             (mu4e-message-contact-field-matches msg
                                                                 :to "knikombo@wellesley.edu")))
-            :vars '((user-email-address . "knikombo@wellesley.edu")
+            :vars '((user-mail-address . "knikombo@wellesley.edu")
                     (smtpmail-smtp-server . "smtp.gmail.com"))))
 
         mu4e-context-policy 'pick-first
@@ -508,6 +508,8 @@
   :config
   (require 'ox-beamer)
 
+  (add-to-list 'org-latex-minted-langs '(conf "ini"))
+
   (setq org-confirm-babel-evaluate nil
         org-pretty-entities t
         org-startup-indented t
@@ -544,7 +546,9 @@
   :hook (c++-mode . platformio-conditionally-enable))
 
 (use-package scad-mode
-  :mode "\\.scad$")
+  :mode "\\.scad$"
+  :config
+  (add-to-list 'org-latex-minted-langs '(scad "text")))
 
 (use-package scad-preview
   :general
