@@ -31,7 +31,6 @@ alias -g G='| rg'
 alias -g L='| less'
 alias _='sudo'
 alias l='ls -Ahlt'
-alias ll='ls -lht'
 alias md='mkdir -p'
 
 source /usr/bin/virtualenvwrapper_lazy.sh
