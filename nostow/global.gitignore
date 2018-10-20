@@ -18,3 +18,4 @@
 /.stack-work/
 ltximg/
 obj_dir/
+.cquery_cached_index/
