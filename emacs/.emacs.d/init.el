@@ -377,6 +377,7 @@
 
 ;;; Extension Specific
 
+(use-package cquery :hook ((c++-mode c-mode) . lsp-cquery-enable))
 (use-package doc-view :mode ("\\.odt$" . doc-view-mode))
 (use-package dockerfile-mode :mode "Dockerfile$")
 (use-package evil-matchit :init (global-evil-matchit-mode 1))
@@ -386,11 +387,6 @@
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
-
-(use-package cquery
-  :hook ((c++-mode c-mode) . lsp-cquery-enable)
-  :config
-  (setq cquery-executable "/usr/bin/cquery"))
 
 (use-package arduino-mode
   :mode "\\.\\(pde\\|ino\\)$"
