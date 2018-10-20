@@ -383,20 +383,19 @@
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
-(use-package irony-eldoc :hook irony-mode)
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
+
+(use-package cquery
+  :hook ((c++-mode c-mode) . lsp-cquery-enable)
+  :config
+  (setq cquery-executable "/usr/bin/cquery"))
 
 (use-package arduino-mode
   :mode "\\.\\(pde\\|ino\\)$"
   :config
   (setq arduino-executable "teensyduino"))
-
-(use-package company-irony
-  :after company
-  :config
-  (add-to-list 'company-backends 'company-irony))
 
 (use-package emmet-mode
   :hook (html-mode css-mode)
@@ -433,9 +432,6 @@
     "t SPC" 'elpy-test
     "tr" 'elpy-set-test-runner))
 
-(use-package flycheck-irony
-  :hook (flycheck-mode . flycheck-irony-setup))
-
 (use-package groovy-mode
   :mode "\\.gradle$")
 
@@ -471,11 +467,6 @@
     "t" 'intero-type-at
     "x" 'intero-restart)
   (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
-
-(use-package irony
-  :hook ((c++-mode c-mode) . irony-mode)
-  :config
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
@@ -632,6 +623,13 @@
         undo-tree-auto-save-history t)
   (my-key-def :keymaps 'undo-tree-map
     "U" 'undo-tree-visualize))
+
+(use-package xref
+  :general
+  (:keymaps 'override
+            :prefix leader-lint
+            :states '(motion normal operator)
+            "TAB" 'xref-find-definitions))
 
 ;;; Linters
 
