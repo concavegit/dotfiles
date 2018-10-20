@@ -1,0 +1,20 @@
+#+title: Dotfiles
+
+These are my dotfiles.
+
+* Configuration Summary
+There are a lot of configuration files here, but the most crucial ones pertain to:
+
+- OS: Gentoo Linux
+- Text Editor: Emacs
+- WM: XMonad
+- Languages Most Accommodated For: C/C++, Haskell, Python
+- Shell: Zsh
+
+* Instructions
+These instructions assume you have [[https://www.gnu.org/software/stow/][=stow=]] to handle the symbolic links.
+Otherwise, copy/symbolic link the files manually.
+
+- Clone to =$HOME$: ==git clone https://gitlab.com/concavegit/dotfiles ~/dotfiles=
+- =stow= the desired onfigs: =stow zsh x emacs <other_configs_of_interst>s=
+- For Gentoo kernel/portage configurations, copy them from =nostow= to the appropriate locations.
