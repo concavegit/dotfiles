@@ -29,3 +29,14 @@ dev-python/ipython      matplotlib
 
 # sympy
 dev-python/sympy        latex ipython
+
+# emacs
+app-editors/emacs       imagemagick
+gnome-base/gvfs         fuse google
+
+# networkmanager
+net-misc/networkmanager connection-sharing
+
+# pcl
+sci-libs/pcl            vtk
+sci-libs/vtk            rendering imaging

@@ -10,11 +10,12 @@ app-text/asciidoc       python_single_target_python2_7
 www-client/w3m          imlib
 
 # qutebrowser
-dev-python/PyQt5        declarative sql webengine webchannel
-dev-qt/qtwebengine      widgets
-dev-qt/qtwebchannel     qml
-sys-libs/zlib           minizip
 dev-libs/libxml2        icu
+dev-python/PyQt5        declarative sql webengine webchannel multimedia
+dev-qt/qtmultimedia     widgets
+dev-qt/qtwebchannel     qml
+dev-qt/qtwebengine      widgets
+sys-libs/zlib           minizip
 
 # libreoffice
 dev-libs/xmlsec         nss
@@ -30,6 +31,7 @@ dev-python/numpy        lapack
 # ipython
 dev-lang/python         sqlite
 app-text/texlive-core   xetex
+net-libs/zeromq         drafts
 
 # android-studio
 sys-libs/ncurses        tinfo
@@ -45,3 +47,13 @@ media-libs/opencv       contrib
 
 # arduino-mk
 dev-util/astyle         java
+
+# kicad
+sci-electronics/ngspice shared
+
+# cura
+dev-libs/libarcus       python
+
+# emacs
+dev-libs/libgdata       gnome-online-accounts
+gnome-base/gvfs         gnome-online-accounts 
