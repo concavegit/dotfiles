@@ -578,10 +578,12 @@
   :mode "\\.toml$")
 
 (use-package verilog-mode
+  :hook (verilog-mode . (lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :mode "\\.\\(v\\|vs\\)$"
   :config
   (setq flycheck-verilog-verilator-executable "verilator_bin"
-        verilog-linter "verilator -lint-only"))
+        verilog-linter "verilator -lint-only"
+        verilog-auto-newline nil))
 
 ;;; General Text
 
