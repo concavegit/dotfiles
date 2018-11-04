@@ -1,4 +1,4 @@
-path=(~/.local/bin ~/Android/Sdk/platform-tools $path[@])
+path=(~/.local/bin ~/Android/Sdk/platform-tools ~/.gem/ruby/*/bin $path[@])
 EDITOR="emacsclient -ca ''"
 
 export ARDUINO_DIR=/opt/teensyduino-bin
