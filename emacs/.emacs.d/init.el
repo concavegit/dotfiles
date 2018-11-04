@@ -139,6 +139,18 @@
     "M-8" 'eyebrowse-switch-to-window-config-8
     "M-9" 'eyebrowse-switch-to-window-config-9))
 
+(use-package heaven-and-hell
+  :general
+  (:keymaps 'override
+            :prefix leader-toggle
+            :states '(motion normal operator)
+            "t" 'heaven-and-hell-toggle-theme)
+  :config
+  (setq heaven-and-hell-theme-type 'dark
+        heaven-and-hell-themes
+        '((light . leuven)
+          (dark . sanityinc-tomorrow-night))))
+
 (use-package hideshow
   :diminish hs-minor-mode
   :hook ((LaTeX-mode conf-mode prog-mode) . hs-minor-mode))
@@ -377,13 +389,13 @@
 
 ;;; Extension Specific
 
-(use-package cquery :hook ((c++-mode c-mode) . lsp-cquery-enable))
 (use-package doc-view :mode ("\\.odt$" . doc-view-mode))
 (use-package dockerfile-mode :mode "Dockerfile$")
 (use-package evil-matchit :init (global-evil-matchit-mode 1))
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
+(use-package lsp-ui :hook ((c++-mode c-mode) . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
@@ -392,6 +404,12 @@
   :mode "\\.\\(pde\\|ino\\)$"
   :config
   (setq arduino-executable "teensyduino"))
+
+(use-package cquery
+  :hook ((c++-mode c-mode) . lsp-cquery-enable)
+  :config
+  (setq cquery-sem-highlight-method 'font-lock)
+  (cquery-use-default-rainbow-sem-highlight))
 
 (use-package emmet-mode
   :hook (html-mode css-mode)
