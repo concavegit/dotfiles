@@ -1,6 +1,7 @@
 [user]
 	email = concavemail@gmail.com
 	name = Kawin Nikomborirak
+	signkey = 960DBDE49BA7BDCA5CF25651C0F28FD556721CD4
 [core]
 	excludesfile = ~/dotfiles/nostow/global.gitignore
 [credential]
