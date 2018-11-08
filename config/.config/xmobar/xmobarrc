@@ -22,7 +22,7 @@ Config
       ] 600
     , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
 
-    , Run Volume "default" "Master"
+    , Run Volume "pulse" "Master"
       [ "-t", "<status> <volume>"
       , "--", "-O", "<fc=#b5bd68></fc>", "-o", "<fc=#969896></fc>"
       ] 10
@@ -32,4 +32,4 @@ Config
       , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"
       ] 10
     ]
-  , template = "%default:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp3s0wi% | %battery% | %date%"}
+  , template = "%pulse:Master% | %bright% | %mpd%{%StdinReader%}%mail% | %wlp3s0wi% | %battery% | %date%"}
