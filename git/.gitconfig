@@ -8,3 +8,5 @@
 	helper = /usr/bin/git-credential-libsecret
 [magit]
 	hideCampaign = true
+[commit]
+	gpgsign = true
