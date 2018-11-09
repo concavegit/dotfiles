@@ -21,3 +21,4 @@ obj_dir/
 .cquery_cached_index/
 *.vcd
 compile_commands.json
+.cquery
