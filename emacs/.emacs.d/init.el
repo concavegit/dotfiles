@@ -395,9 +395,11 @@
 (use-package gitattributes-mode :mode "\\.gitattributes$")
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
+(use-package graphviz-dot-mode :mode "\\.dot$\\|\\.gv$")
 (use-package lsp-ui :hook ((c++-mode c-mode) . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
+(use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
 (use-package arduino-mode
@@ -535,7 +537,9 @@
                                  (haskell . t)
                                  (ipython . t)
                                  (latex . t)
-                                 (plantuml . t))))
+                                 (plantuml . t)
+                                 (dot . t)
+                                 )))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
@@ -591,9 +595,6 @@
   :ensure auctex
   :mode ("\\.tex$" . LaTeX-mode)
   :config (setq TeX-newline-function 'newline-and-indent))
-
-(use-package toml-mode
-  :mode "\\.toml$")
 
 (use-package verilog-mode
   :hook (verilog-mode . (lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
