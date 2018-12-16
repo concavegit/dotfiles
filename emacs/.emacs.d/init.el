@@ -399,6 +399,8 @@
 (use-package lsp-ui :hook ((c++-mode c-mode) . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
+(use-package rust-mode :mode "\\.rs$")
+(use-package spice-mode :mode "\\.sp$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
@@ -447,6 +449,10 @@
     "SPC" 'elpy-refactor-options
     "t SPC" 'elpy-test
     "tr" 'elpy-set-test-runner))
+
+(use-package flycheck-rust
+  :after rust-mode
+  :hook (flycheck-mode . flycheck-rust-setup))
 
 (use-package groovy-mode
   :mode "\\.gradle$")
@@ -553,6 +559,9 @@
 
 (use-package platformio-mode
   :hook (c++-mode . platformio-conditionally-enable))
+
+(use-package racer
+  :hook (rust-mode . racer-mode))
 
 (use-package scad-mode
   :mode "\\.scad$"

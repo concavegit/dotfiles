@@ -117,8 +117,8 @@ settings:
   editor.command:
     global:
     - emacsclient
-    - -ca
-    - '{}'
+    - '-ca '
+    - '{file}'
   fonts.completion.category:
     global: bold 8pt monospace
   fonts.completion.entry:
