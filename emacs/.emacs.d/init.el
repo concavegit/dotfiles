@@ -408,7 +408,9 @@
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
 (use-package cquery
-  :init (add-hook 'c++-mode-hook `lsp)
+  :init
+  (add-hook 'c++-mode-hook `lsp)
+  (add-hook 'c-mode-hook `lsp)
   :config
   (setq cquery-sem-highlight-method 'font-lock)
   (cquery-use-default-rainbow-sem-highlight))
