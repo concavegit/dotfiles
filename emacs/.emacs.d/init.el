@@ -396,7 +396,7 @@
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
 (use-package graphviz-dot-mode :mode "\\.dot$\\|\\.gv$")
-(use-package lsp-ui :hook ((c++-mode c-mode) . lsp-ui-mode))
+(use-package lsp-ui :hook (lsp-mode . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package racer :hook (rust-mode . racer-mode))
@@ -406,13 +406,8 @@
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
-(use-package arduino-mode
-  :mode "\\.\\(pde\\|ino\\)$"
-  :config
-  (setq arduino-executable "teensyduino"))
-
 (use-package cquery
-  :hook ((c++-mode c-mode) . lsp-cquery-enable)
+  :init (add-hook 'c++-mode-hook `lsp)
   :config
   (setq cquery-sem-highlight-method 'font-lock)
   (cquery-use-default-rainbow-sem-highlight))
@@ -492,6 +487,10 @@
     "t" 'intero-type-at
     "x" 'intero-restart)
   (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
+
+(use-package lsp-mode
+  :commands lsp
+  :config (setq lsp-prefer-flymake nil))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
