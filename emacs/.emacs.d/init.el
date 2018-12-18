@@ -314,6 +314,7 @@
 ;;; Completion
 
 (use-package company :diminish "" :init (global-company-mode 1))
+(use-package company-lsp :after company :config (push 'company-lsp company-backends))
 (use-package eshell-z :after eshell)
 (use-package yasnippet :init (yas-global-mode 1))
 (use-package yasnippet-snippets :after yasnippet)
@@ -490,7 +491,9 @@
 
 (use-package lsp-mode
   :commands lsp
-  :config (setq lsp-prefer-flymake nil))
+  :config
+  (setq lsp-prefer-flymake nil
+        lsp-auto-guess-root t))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
