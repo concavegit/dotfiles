@@ -399,7 +399,9 @@
 (use-package lsp-ui :hook ((c++-mode c-mode) . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
+(use-package racer :hook (rust-mode . racer-mode))
 (use-package rust-mode :mode "\\.rs$")
+(use-package scad-mode :mode "\\.scad$")
 (use-package spice-mode :mode "\\.sp$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
@@ -443,6 +445,7 @@
     (setq python-shell-interpreter "ipython"
           python-shell-interpreter-args "-i --simple-prompt"))
   (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules)
 
   (my-key-def :keymaps 'elpy-mode-map
     :prefix leader-major
@@ -559,14 +562,6 @@
 
 (use-package platformio-mode
   :hook (c++-mode . platformio-conditionally-enable))
-
-(use-package racer
-  :hook (rust-mode . racer-mode))
-
-(use-package scad-mode
-  :mode "\\.scad$"
-  :config
-  (add-to-list 'org-latex-minted-langs '(scad "text")))
 
 (use-package scad-preview
   :general
