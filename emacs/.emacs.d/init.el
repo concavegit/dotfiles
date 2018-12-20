@@ -403,7 +403,7 @@
 (use-package racer :hook (rust-mode . racer-mode))
 (use-package rust-mode :mode "\\.rs$")
 (use-package scad-mode :mode "\\.scad$")
-(use-package spice-mode :mode "\\.sp$")
+(use-package spice-mode :mode "\\.cir$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
@@ -551,8 +551,7 @@
                                  (ipython . t)
                                  (latex . t)
                                  (plantuml . t)
-                                 (dot . t)
-                                 )))
+                                 (dot . t))))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
