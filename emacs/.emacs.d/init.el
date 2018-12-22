@@ -23,6 +23,10 @@
 
 (setq use-package-always-ensure t)
 
+;; (use-package quelpa-use-package)
+
+;; (setq use-package-ensure-function 'quelpa)
+
 (use-package general
   :config
   (setq general-override-states '(motion
@@ -45,11 +49,7 @@
   (general-override-mode)
   (general-create-definer my-key-def
     :states '(motion normal operator)
-    :keymaps 'override)
-
-  (my-key-def
-    :prefix "SPC"
-    ))
+    :keymaps 'override))
 
 (use-package evil
   :init
@@ -141,10 +141,9 @@
 
 (use-package heaven-and-hell
   :general
-  (:keymaps 'override
-            :prefix leader-toggle
-            :states '(motion normal operator)
-            "t" 'heaven-and-hell-toggle-theme)
+  (my-key-def
+    :prefix leader-toggle
+    "t" 'heaven-and-hell-toggle-theme)
   :config
   (setq heaven-and-hell-theme-type 'dark
         heaven-and-hell-themes
@@ -171,10 +170,9 @@
 
 (use-package whitespace
   :general
-  (:keymaps 'override
-            :prefix leader-toggle
-            :states '(motion normal operator)
-            "w" 'whitespace-mode))
+  (my-key-def
+    :prefix leader-toggle
+    "w" 'whitespace-mode))
 
 (use-package winner
   :init (winner-mode 1)
@@ -185,7 +183,6 @@
     "U" 'winner-redo))
 
 ;;; Applications
-
 (use-package evil-collection :after evil :config (evil-collection-init))
 (use-package evil-magit :after magit)
 (use-package htmlize)
@@ -196,10 +193,9 @@
 
 (use-package erc
   :general
-  (:keymaps 'override
-            :prefix leader-app
-            :states '(motion normal operator)
-            "i" 'erc)
+  (my-key-def
+    :prefix leader-app
+    "i" 'erc)
   :config
   (setq erc-prompt-for-password nil
         erc-nick "concaveirc"
@@ -212,10 +208,9 @@
 
 (use-package mingus
   :general
-  (:keymaps 'override
-            :states '(motion normal operator)
-            :prefix leader-app
-            "a" 'mingus)
+  (my-key-def
+    :prefix leader-app
+    "a" 'mingus)
   :config
   (add-hook 'mingus-browse-hook 'evil-motion-state)
   (add-hook 'mingus-make-playlist-hook 'evil-motion-state)
@@ -234,11 +229,10 @@
 (use-package mu4e
   :ensure nil
   :general
-  (:keymaps 'override
-            :prefix leader-app
-            :states '(motion normal operator)
-            "e" 'mu4e
-            "s" 'mu4e-compose-new)
+  (my-key-def
+    :prefix leader-app
+    "e" 'mu4e
+    "s" 'mu4e-compose-new)
   :config
   (setq mu4e-confirm-quit nil
         mu4e-contexts
@@ -274,7 +268,8 @@
         mu4e-view-prefer-html t
         mu4e-view-show-addresses t
         mu4e-view-show-images t)
-  (add-to-list 'mu4e-view-actions '("open in browser" . mu4e-action-view-in-browser) t))
+  (add-to-list 'mu4e-view-actions
+               '("open in browser" . mu4e-action-view-in-browser) t))
 
 (use-package ob-ipython
   :after org
@@ -284,10 +279,9 @@
 (use-package org-mu4e
   :ensure nil
   :general
-  (:keymaps '(mu4e-compose-mode-map override)
-            :prefix leader-major
-            :states '(motion normal operator)
-            "o" 'org-mu4e-compose-org-mode)
+  (my-key-def
+    :prefix leader-major
+    "o" 'org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-convert-to-html t))
 
@@ -299,10 +293,9 @@
 
 (use-package proced
   :general
-  (:keymaps 'override
-            :prefix leader-app
-            :states '(motion normal operator)
-            "p" 'proced))
+  (my-key-def
+    :prefix leader-app
+    "p" 'proced))
 
 (use-package pyvenv
   :init (pyvenv-mode 1)
@@ -314,10 +307,13 @@
 ;;; Completion
 
 (use-package company :diminish "" :init (global-company-mode 1))
-(use-package company-lsp :after company :config (push 'company-lsp company-backends))
 (use-package eshell-z :after eshell)
 (use-package yasnippet :init (yas-global-mode 1))
 (use-package yasnippet-snippets :after yasnippet)
+
+(use-package company-lsp
+  :after company
+  config (push 'company-lsp company-backends))
 
 (use-package evil-smartparens
   :diminish ""
@@ -362,26 +358,23 @@
 
 (use-package eshell
   :general
-  (:keymaps 'override
-            :prefix leader-console
-            :states '(motion normal operator)
-            "SPC" 'eshell)
+  (my-key-def
+    :prefix leader-console
+    "SPC" 'eshell)
   :config (setq eshell-banner-message ""))
 
 (use-package ielm
   :general
-  (:keymaps 'override
-            :prefix leader-console
-            :states '(motion normal operator)
-            "e" 'ielm)
+  (my-key-def
+    :prefix leader-console
+    "e" 'ielm)
   :config (setq ielm-header ""))
 
 (use-package term
   :general
-  (:keymaps 'override
-            :prefix leader-console
-            :states '(motion normal operator)
-            "t" 'my/ansi-term-zsh)
+  (my-key-def
+    :prefix leader-console
+    "t" 'my/ansi-term-zsh)
   :config
   (defun my/ansi-term-zsh ()
     (interactive)
@@ -397,7 +390,6 @@
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
 (use-package graphviz-dot-mode :mode "\\.dot$\\|\\.gv$")
-(use-package lsp-ui :hook (lsp-mode . lsp-ui-mode))
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package racer :hook (rust-mode . racer-mode))
@@ -428,29 +420,6 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-(use-package elpy
-  :general
-  (:keymaps 'override
-            :prefix leader-console
-            :states '(motion normal operator)
-            "p" 'elpy-shell-switch-to-shell)
-
-  :init
-  (elpy-enable)
-
-  :config
-  (when (executable-find "ipython")
-    (setq python-shell-interpreter "ipython"
-          python-shell-interpreter-args "-i --simple-prompt"))
-  (delete 'elpy-module-highlight-indentation elpy-modules)
-  (delete 'elpy-module-flymake elpy-modules)
-
-  (my-key-def :keymaps 'elpy-mode-map
-    :prefix leader-major
-    "SPC" 'elpy-refactor-options
-    "t SPC" 'elpy-test
-    "tr" 'elpy-set-test-runner))
-
 (use-package flycheck-rust
   :after rust-mode
   :hook (flycheck-mode . flycheck-rust-setup))
@@ -461,14 +430,15 @@
 (use-package haskell-mode
   :mode "\\.hs$"
   :general
-  (:keymaps 'override
-            :prefix leader-console
-            :states '(motion normal operator)
-            "h" 'haskell-interactive-bring)
+  (my-key-def
+    :prefix leader-console
+    "h" 'haskell-interactive-bring)
   :config
   (setq haskell-font-lock-symbols t
-        haskell-stylish-on-save t)
+        haskell-stylish-on-save t
+        haskell-tags-on-save t)
 
+  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
   (add-to-list 'evil-motion-state-modes 'haskell-error-mode)
 
   (my-key-def :keymaps 'haskell-interactive-mode-map
@@ -483,7 +453,6 @@
 
   (my-key-def :keymaps 'intero-mode-map
     :prefix leader-major
-    "SPC" 'intero-goto-definition
     "i" 'intero-info
     "r" 'intero-repl-load
     "s" 'intero-apply-suggestions
@@ -493,9 +462,28 @@
 
 (use-package lsp-mode
   :commands lsp
+  :hook (python-mode . lsp)
   :config
   (setq lsp-prefer-flymake nil
-        lsp-auto-guess-root t))
+        lsp-auto-guess-root t)
+
+  (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
+                   :major-modes '(python-mode)
+                   :server-id 'pyls)
+
+  (my-key-def :prefix leader-lint "f" 'lsp-format-buffer))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (my-key-def
+    :keymaps 'lsp-ui-mode-map
+    :prefix leader-lint
+    "m" 'lsp-ui-imenu)
+
+  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-definitions] 'lsp-ui-peek-find-definitions)
+  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-references] 'lsp-ui-peek-find-references)
+  )
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
@@ -551,7 +539,8 @@
                                  (ipython . t)
                                  (latex . t)
                                  (plantuml . t)
-                                 (dot . t))))
+                                 (dot . t)
+                                 (spice . t))))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
@@ -568,10 +557,9 @@
 
 (use-package scad-preview
   :general
-  (:keymaps '(override scad-mode-map)
-            :prefix leader-major
-            :states '(motion normal operator)
-            "SPC" 'scad-preview-mode)
+  (my-key-def
+    :prefix leader-major
+    "SPC" 'scad-preview-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
   (my-key-def :keymaps 'scad-preview--image-mode-map
@@ -620,25 +608,23 @@
 
 (use-package evil-exchange
   :general
-  (:keymaps 'override
-            :states '(motion normal operator)
-            "gs" 'evil-exchange
-            "gS" 'evil-exchange-cancel))
+  (my-key-def
+    
+    "gs" 'evil-exchange
+    "gS" 'evil-exchange-cancel))
 
 (use-package evil-numbers
   :general
-  (:keymaps 'override
-            :prefix leader
-            :states '(motion normal operator)
-            "+" 'evil-numbers/inc-at-pt
-            "-" 'evil-numbers/dec-at-pt))
+  (my-key-def
+    :prefix leader
+    "+" 'evil-numbers/inc-at-pt
+    "-" 'evil-numbers/dec-at-pt))
 
 (use-package sudo-edit
   :general
-  (:keymaps 'override
-            :prefix leader-file
-            :states '(motion normal operator)
-            "s" 'sudo-edit))
+  (my-key-def
+    :prefix leader-file
+    "s" 'sudo-edit))
 
 (use-package undo-tree
   :diminish ""
@@ -649,11 +635,7 @@
     "U" 'undo-tree-visualize))
 
 (use-package xref
-  :general
-  (:keymaps 'override
-            :prefix leader-lint
-            :states '(motion normal operator)
-            "TAB" 'xref-find-definitions))
+  :config (my-key-def "M-." 'xref-find-definitions))
 
 ;;; Linters
 
@@ -686,10 +668,9 @@
 
 (use-package magit
   :general
-  (:keymaps 'override
-            :prefix leader-project
-            :states '(motion normal operator)
-            "g" 'magit-status))
+  (my-key-def
+    :prefix leader-project
+    "g" 'magit-status))
 
 (use-package projectile
   :init
