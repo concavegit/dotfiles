@@ -468,7 +468,8 @@
 (use-package lsp-mode
   :commands lsp
   :hook
-  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode) . lsp)
+  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode)
+   . lsp)
   :config
   (setq lsp-prefer-flymake nil
         lsp-auto-guess-root t)
@@ -494,8 +495,11 @@
     :prefix leader-lint
     "m" 'lsp-ui-imenu)
 
-  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-definitions] 'lsp-ui-peek-find-definitions)
-  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-references] 'lsp-ui-peek-find-references)
+  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-definitions]
+    'lsp-ui-peek-find-definitions)
+
+  (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-references]
+    'lsp-ui-peek-find-references)
   )
 
 (use-package markdown-mode
