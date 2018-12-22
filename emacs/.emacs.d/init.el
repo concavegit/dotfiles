@@ -392,7 +392,6 @@
 (use-package graphviz-dot-mode :mode "\\.dot$\\|\\.gv$")
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
-(use-package racer :hook (rust-mode . racer-mode))
 (use-package rust-mode :mode "\\.rs$")
 (use-package scad-mode :mode "\\.scad$")
 (use-package spice-mode :mode "\\.cir$")
@@ -400,12 +399,18 @@
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
 (use-package cquery
-  :init
-  (add-hook 'c++-mode-hook `lsp)
-  (add-hook 'c-mode-hook `lsp)
+  :hook ((c++-mode c-mode) . lsp)
   :config
   (setq cquery-sem-highlight-method 'font-lock)
   (cquery-use-default-rainbow-sem-highlight))
+
+(use-package dap-mode
+  :after lsp-mode
+  :config
+  (require 'dap-java)
+  (require 'dap-python)
+  (dap-mode t)
+  (dap-ui-mode t))
 
 (use-package emmet-mode
   :hook (html-mode css-mode)
@@ -462,16 +467,24 @@
 
 (use-package lsp-mode
   :commands lsp
-  :hook (python-mode . lsp)
+  :hook
+  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil
         lsp-auto-guess-root t)
 
-  (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
-                   :major-modes '(python-mode)
-                   :server-id 'pyls)
+  (my-key-def :keymaps 'prog-mode-map
+    :prefix leader-lint
+    "f" 'lsp-format-buffer
+    "r" 'lsp-rename))
 
-  (my-key-def :prefix leader-lint "f" 'lsp-format-buffer))
+(use-package lsp-java
+  :hook (java-mode . lsp)
+  :config
+  (my-key-def :keymaps 'java-mode-map
+    :prefix leader-lint
+    "i o" 'lsp-java-import-order
+    "i a" 'lsp-java-add-import))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -501,6 +514,7 @@
     "n" 'markdown-cleanup-list-numbers))
 
 (use-package meghanada
+  :disabled t
   :hook (java-mode . meghanada-mode)
   :config
   (my-key-def :keymaps 'meghanada-mode-map
@@ -592,7 +606,8 @@
   :config (setq TeX-newline-function 'newline-and-indent))
 
 (use-package verilog-mode
-  :hook (verilog-mode . (lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+  :hook
+  (verilog-mode . (lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :mode "\\.\\(v\\|vs\\)$"
   :config
   (setq flycheck-verilog-verilator-executable "verilator_bin"
@@ -609,7 +624,7 @@
 (use-package evil-exchange
   :general
   (my-key-def
-    
+
     "gs" 'evil-exchange
     "gS" 'evil-exchange-cancel))
 
