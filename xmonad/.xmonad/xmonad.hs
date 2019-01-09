@@ -35,8 +35,6 @@ modm = mod4Mask
 myAdditionalKeys :: [((KeyMask, KeySym), X ())]
 myAdditionalKeys = [ ((modm, xK_d), spawn "rofi -show run")
                    , ((modm, xK_n), spawn "networkmanager_dmenu")
-                   , ((modm, xK_f), spawn "dmenu_extended_run")
-                   , ((modm, xK_i), spawn "dmenu_extended_run \"-> Internet search: \"")
                    , ((modm, xK_b), spawn "emacsclient -ca ''")
                    , ((modm, xK_c), spawn "qutebrowser")
                    , ((modm, xK_Return), spawn "urxvt")
