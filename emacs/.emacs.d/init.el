@@ -399,7 +399,9 @@
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
 (use-package cquery
-  :hook ((c++-mode c-mode) . lsp)
+  :init
+  (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
   :config
   (setq cquery-sem-highlight-method 'font-lock)
   (cquery-use-default-rainbow-sem-highlight))
@@ -446,24 +448,15 @@
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
   (add-to-list 'evil-motion-state-modes 'haskell-error-mode)
 
+  (my-key-def :keymaps 'haskell-mode-map
+    :prefix leader-major
+    "r" 'haskell-process-load-file)
+
   (my-key-def :keymaps 'haskell-interactive-mode-map
     "RET" 'haskell-interactive-mode-return))
 
-(use-package intero
-  :hook (haskell-mode . intero-mode)
-  :config
-  (add-to-list 'evil-motion-state-modes 'intero-help-mode)
-
-  (setq intero-stack-executable "~/.local/bin/stack")
-
-  (my-key-def :keymaps 'intero-mode-map
-    :prefix leader-major
-    "i" 'intero-info
-    "r" 'intero-repl-load
-    "s" 'intero-apply-suggestions
-    "t" 'intero-type-at
-    "x" 'intero-restart)
-  (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
+(use-package lsp-haskell
+  :init (add-hook 'haskell-mode-hook 'lsp))
 
 (use-package lsp-mode
   :commands lsp
@@ -476,6 +469,7 @@
 
   (my-key-def :keymaps 'prog-mode-map
     :prefix leader-lint
+    "a" 'lsp-execute-code-action
     "f" 'lsp-format-buffer
     "r" 'lsp-rename))
 
@@ -545,6 +539,8 @@
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "bibtex %b"
           "pdflatex -shell-escape -interaction nonstopmode --synctex=1 -output-directory %o %f"))
+
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
   (when (executable-find "pygmentize")
     (add-to-list 'org-latex-packages-alist '("" "minted"))
