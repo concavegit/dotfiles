@@ -11,6 +11,5 @@ udiskie &
 unclutter -b &
 urxvtd -q -o -f &
 xrdb ~/.Xresources &
-xss-lock slimlock &
 
 exec xmonad
