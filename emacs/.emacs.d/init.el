@@ -394,7 +394,7 @@
 (use-package qml-mode :mode "\\.qml$")
 (use-package rust-mode :mode "\\.rs$")
 (use-package scad-mode :mode "\\.scad$")
-(use-package spice-mode :mode "\\.cir$")
+(use-package spice-mode :mode "\\.sp$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
@@ -464,8 +464,8 @@
   ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode)
    . lsp)
   :config
-  (setq lsp-prefer-flymake nil
-        lsp-auto-guess-root t)
+  (setq lsp-prefer-flymake nil)
+        ;; lsp-auto-guess-root t)
 
   (my-key-def :keymaps 'prog-mode-map
     :prefix leader-lint
