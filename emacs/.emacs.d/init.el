@@ -285,12 +285,6 @@
   :config
   (setq org-mu4e-convert-to-html t))
 
-(use-package ox-reveal
-  :after org
-  :config
-  (setq org-reveal-root "https://cdn.rawgit.com/hakimel/reveal.js/master"
-        org-reveal-theme "black"))
-
 (use-package proced
   :general
   (my-key-def
@@ -527,6 +521,7 @@
   :mode ("\\.org$" . org-mode)
   :config
   (require 'ox-beamer)
+  (require 'org-tempo)
 
   (add-to-list 'org-latex-minted-langs '(conf "ini"))
 

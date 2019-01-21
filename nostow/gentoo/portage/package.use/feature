@@ -40,3 +40,9 @@ net-misc/networkmanager connection-sharing
 # pcl
 sci-libs/pcl            vtk
 sci-libs/vtk            rendering imaging
+
+# suspend
+sys-auth/consolekit     pm-utils
+
+# qemu
+app-emulation/qemu      qemu_user_targets_arm

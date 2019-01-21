@@ -1,59 +1,51 @@
 # -*-conf-*-
 
-# genkernel
-sys-apps/util-linux     static-libs
+# ipython
+dev-lang/python:2.7     sqlite
+net-libs/zeromq         drafts
 
-# misc
-app-text/asciidoc       python_single_target_python2_7
+# gvfs google
+gnome-base/gvfs         gnome-online-accounts
 
-# neofetch
-www-client/w3m          imlib
-
-# qutebrowser
-dev-libs/libxml2        icu
-dev-python/PyQt5        declarative sql webengine webchannel multimedia
+# qtwebengine
+dev-python/PyQt5        sql multimedia declarative webengine webchannel
 dev-qt/qtmultimedia     widgets
-dev-qt/qtwebchannel     qml
 dev-qt/qtwebengine      widgets
-sys-libs/zlib           minizip
+dev-qt/qtwebchannel     qml
+dev-libs/libxml2        icu
 
-# libreoffice
-dev-libs/xmlsec         nss
-media-libs/harfbuzz     icu
+# ros
+sys-libs/zlib           minizip
+dev-python/PyQt5        webkit
+
+# kicad
 dev-libs/boost          context python
 
-# blender
-media-gfx/blender       cycles openimageio
+# plantuml
+media-libs/gd           fontconfig
 
 # pandas
 dev-python/numpy        lapack
 
-# ipython
-dev-lang/python         sqlite
+# matplotlib
 app-text/texlive-core   xetex
-net-libs/zeromq         drafts
+media-libs/harfbuzz     icu
 
-# android-studio
+# hie
 sys-libs/ncurses        tinfo
 
-# metasploit
-dev-ruby/activerecord   postgres
-
-# inkscape
-media-libs/gd           fontconfig
-
-# ros
-media-libs/opencv       contrib
-
-# arduino-mk
-dev-util/astyle         java
-
-# kicad
-sci-electronics/ngspice shared
+# openscad
+media-libs/mesa         gles2
 
 # cura
 dev-libs/libarcus       python
 
-# emacs
+# gvfs
 dev-libs/libgdata       gnome-online-accounts
-gnome-base/gvfs         gnome-online-accounts 
+
+# neofetch
+www-client/w3m          imlib
+
+# metasploit
+dev-ruby/activerecord   postgres
+dev-lang/python         sqlite
