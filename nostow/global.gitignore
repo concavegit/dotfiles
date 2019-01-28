@@ -22,3 +22,4 @@ obj_dir/
 *.vcd
 compile_commands.json
 .cquery
+/build/

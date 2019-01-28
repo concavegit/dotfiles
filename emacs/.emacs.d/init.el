@@ -392,13 +392,11 @@
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
-(use-package cquery
-  :init
-  (add-hook 'c-mode-hook 'lsp)
-  (add-hook 'c++-mode-hook 'lsp)
+(use-package ccls
+  :hook ((c-mode c++-mode) . (lambda () (require 'ccls) (lsp)))
   :config
-  (setq cquery-sem-highlight-method 'font-lock)
-  (cquery-use-default-rainbow-sem-highlight))
+  (setq ccls-sem-highlight-method 'font-lock)
+  (ccls-use-default-rainbow-sem-highlight))
 
 (use-package dap-mode
   :after lsp-mode
@@ -459,7 +457,7 @@
    . lsp)
   :config
   (setq lsp-prefer-flymake nil)
-        ;; lsp-auto-guess-root t)
+  ;; lsp-auto-guess-root t)
 
   (my-key-def :keymaps 'prog-mode-map
     :prefix leader-lint
