@@ -68,6 +68,7 @@
 
 ;;; Orphans
 
+
 (setenv "PATH"
         (concat
          "~/.local/bin:"
@@ -396,7 +397,8 @@
   :hook ((c-mode c++-mode) . (lambda () (require 'ccls) (lsp)))
   :config
   (setq ccls-sem-highlight-method 'font-lock)
-  (ccls-use-default-rainbow-sem-highlight))
+  (ccls-use-default-rainbow-sem-highlight)
+  (ccls-code-lens-mode))
 
 (use-package dap-mode
   :after lsp-mode
@@ -453,11 +455,11 @@
 (use-package lsp-mode
   :commands lsp
   :hook
-  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode)
+  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode)
    . lsp)
   :config
-  (setq lsp-prefer-flymake nil)
-  ;; lsp-auto-guess-root t)
+  (setq lsp-prefer-flymake nil
+        lsp-auto-guess-root t)
 
   (my-key-def :keymaps 'prog-mode-map
     :prefix leader-lint
@@ -479,7 +481,8 @@
   (my-key-def
     :keymaps 'lsp-ui-mode-map
     :prefix leader-lint
-    "m" 'lsp-ui-imenu)
+    "m" 'lsp-ui-imenu
+    "l" 'lsp-lens-mode)
 
   (my-key-def :keymaps 'lsp-ui-mode-map [remap xref-find-definitions]
     'lsp-ui-peek-find-definitions)
@@ -569,6 +572,9 @@
     "SPC" 'scad-preview-mode)
   :config
   (add-to-list 'evil-motion-state-modes 'scad-preview--image-mode)
+
+  (setq scad-preview-colorscheme "DeepOcean")
+
   (my-key-def :keymaps 'scad-preview--image-mode-map
     "C-h" 'scad-preview-roty+
     "C-j" 'scad-preview-rotx-

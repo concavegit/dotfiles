@@ -18,8 +18,11 @@
 /.stack-work/
 ltximg/
 obj_dir/
-.cquery_cached_index/
+.ccls_cached/
+.ccls-cache/
 *.vcd
 compile_commands.json
-.cquery
+.ccls
 /build/
+*.asc
+*.bin

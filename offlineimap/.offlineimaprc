@@ -1,7 +1,7 @@
 # -*-conf-*-
 
 [general]
-accounts = Primary, Olin, Wellesley
+accounts = Primary, Olin, Babson
 pythonfile = ~/dotfiles/nostow/offlineimap.py
 maxsyncaccounts=3
 
@@ -15,9 +15,9 @@ localrepository = OlinLocal
 remoterepository = OlinRemote
 autorefresh=5
 
-[Account Wellesley]
-localrepository = WellesleyLocal
-remoterepository = WellesleyRemote
+[Account Babson]
+localrepository = BabsonLocal
+remoterepository = BabsonRemote
 autorefresh=5
 
 [Repository PrimaryLocal]
@@ -28,9 +28,9 @@ localfolders = ~/Maildir/Primary
 type = Maildir
 localfolders = ~/Maildir/Olin
 
-[Repository WellesleyLocal]
+[Repository BabsonLocal]
 type = Maildir
-localfolders = ~/Maildir/Wellesley
+localfolders = ~/Maildir/Babson
 
 [Repository PrimaryRemote]
 type = IMAP
@@ -46,9 +46,9 @@ remoteuser = knikomborirak@olin.edu
 remotepasseval = get_pw_from_desc("Password for knikomborirak@olin.edu")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Repository WellesleyRemote]
+[Repository BabsonRemote]
 type = IMAP
 remotehost = imap.gmail.com
-remoteuser = knikombo@wellesley.edu
-remotepasseval = get_pw_from_desc("Password for knikombo@wellesley.edu")
+remoteuser = knikomborirak1@babson.edu
+remotepasseval = get_pw_from_desc("Password for knikomborirak1@babson.edu")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
