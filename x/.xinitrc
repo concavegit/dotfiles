@@ -1,15 +1,20 @@
+dbus-update-activation-environment --systemd DISPLAY
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 export XMODIFIERS="@im=fcitx"
 export QT_IM_MODULE=fcitx
-export _JAVA_AWT_WM_NONREPARENTING=1
 export GTK_IM_MODULE=fcitx
 
 fcitx &
 feh --bg-fill ~/dotfiles/nostow/rocket.png --no-fehbg &
 mpd &
-offlineimap &
 udiskie &
-unclutter -b &
+unclutter -grab &
+xss-lock slimlock &
 urxvtd -q -o -f &
 xrdb ~/.Xresources &
 
-exec xmonad
+exec stack exec xmonad

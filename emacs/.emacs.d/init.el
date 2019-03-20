@@ -23,10 +23,6 @@
 
 (setq use-package-always-ensure t)
 
-;; (use-package quelpa-use-package)
-
-;; (setq use-package-ensure-function 'quelpa)
-
 (use-package general
   :config
   (setq general-override-states '(motion
@@ -254,18 +250,19 @@
             :vars '((user-mail-address . "knikomborirak@olin.edu")
                     (smtpmail-smtp-server . "smtp.office365.com")))
           ,(make-mu4e-context
-            :name "Wellesley"
+            :name "Babson"
             :match-func (lambda (msg)
                           (when msg
                             (mu4e-message-contact-field-matches msg
-                                                                :to "knikombo@wellesley.edu")))
-            :vars '((user-mail-address . "knikombo@wellesley.edu")
+                                                                :to "knikomborirak1@babson.edu")))
+            :vars '((user-mail-address . "knikomborirak1@babson.edu")
                     (smtpmail-smtp-server . "smtp.gmail.com"))))
 
         mu4e-context-policy 'pick-first
         mu4e-headers-date-format "%F"
-        mu4e-get-mail-command "offlineimap -o"
+        mu4e-get-mail-command "mbsync -a"
         mu4e-headers-time-format "%T"
+        mu4e-maildir "~/.mail"
         mu4e-view-prefer-html t
         mu4e-view-show-addresses t
         mu4e-view-show-images t)
@@ -318,7 +315,7 @@
   :if (and (executable-find "fcitx-remote")
            (= (with-temp-buffer (call-process "fcitx-remote" nil t)) 0))
   :config
-  ;; (setq fcitx-use-dbus t)
+  (setq fcitx-use-dbus t)
   (fcitx-aggressive-setup))
 
 (use-package ivy
@@ -461,7 +458,7 @@
   (setq lsp-prefer-flymake nil
         lsp-auto-guess-root t)
 
-  (my-key-def :keymaps 'prog-mode-map
+  (my-key-def :keymaps 'lsp-mode-map
     :prefix leader-lint
     "a" 'lsp-execute-code-action
     "f" 'lsp-format-buffer
@@ -565,9 +562,16 @@
 (use-package platformio-mode
   :hook (c++-mode . platformio-conditionally-enable))
 
+(use-package python
+  :mode ("\\.py$" . python-mode)
+  :config
+  (setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "--simple-prompt -i"))
+
 (use-package scad-preview
   :general
   (my-key-def
+    :keymaps 'scad-mode-map
     :prefix leader-major
     "SPC" 'scad-preview-mode)
   :config
