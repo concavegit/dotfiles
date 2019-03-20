@@ -5,7 +5,6 @@ import           Graphics.X11.ExtraTypes.XF86
 import           Data.Either
 import           Shelly
 import qualified Data.Text.Read                as T
-import qualified Data.Text                     as T
 import qualified Network.MPD                   as MPD
 import           XMonad
 import           XMonad.Actions.Navigation2D
@@ -15,6 +14,7 @@ import           XMonad.Layout.BinarySpacePartition
 import           XMonad.Layout.NoBorders
 import           XMonad.StackSet               as W
 import           XMonad.Util.EZConfig           ( additionalKeys )
+import           Data.Functor
 
 main :: IO ()
 main = xmonad =<< statusBar myBar myPP myToggleStrutsKey myConfig
@@ -48,7 +48,7 @@ myAdditionalKeys =
         , ((modm, xK_Return) , spawn "urxvtc")
         , ((0, xF86XK_Search), spawn "slimlock")
         , ( (modm, xF86XK_AudioRaiseVolume)
-          , (liftIO . MPD.withMPD) MPD.next *> pure ()
+          , (liftIO . MPD.withMPD) MPD.next $> ()
           )
         , ( (shiftMask, xF86XK_AudioLowerVolume)
           , spawn "amixer -qD pulse set Master 0%"
@@ -61,13 +61,13 @@ myAdditionalKeys =
           )
         , ((0, xF86XK_AudioMute), spawn "amixer -qD pulse set Master toggle")
         , ( (modm, xF86XK_AudioMute)
-          , (liftIO . MPD.withMPD) togglePause *> pure ()
+          , (liftIO . MPD.withMPD) togglePause $> ()
           )
         , ( (0, xF86XK_AudioMicMute)
           , spawn "amixer -qD pulse set Capture toggle"
           )
         , ( (modm, xF86XK_AudioLowerVolume)
-          , (liftIO . MPD.withMPD) MPD.previous *> pure ()
+          , (liftIO . MPD.withMPD) MPD.previous Data.Functor.$> ()
           )
         , ( (0, xF86XK_AudioLowerVolume)
           , spawn "amixer -qD pulse set Master 5%-"
@@ -164,7 +164,8 @@ nextBrightness :: Int -> Int
 nextBrightness = min 100 . last . flip takeWhile brightnessLevels . (<)
 
 prevBrightness :: Int -> Int
-prevBrightness = max 1 . head . flip dropWhile brightnessLevels . (<=) . fromIntegral
+prevBrightness =
+        max 1 . head . flip dropWhile brightnessLevels . (<=) . fromIntegral
 
 incBrightness :: IO ()
 incBrightness =

@@ -1,0 +1,67 @@
+# -*-conf-*-
+IMAPAccount primary
+Host imap.gmail.com
+User concavemail@gmail.com
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/primary.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore primary-remote
+Account primary
+
+MaildirStore primary-local
+Subfolders Verbatim
+Path ~/.mail/primary/
+Inbox ~/.mail/primary/Inbox
+
+Channel primary
+Master :primary-remote:
+Slave :primary-local:
+Patterns *
+Create both
+SyncState *
+
+IMAPAccount olin
+Host outlook.office365.com
+User knikomborirak@olin.edu
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/olin.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore olin-remote
+Account olin
+
+MaildirStore olin-local
+Subfolders Verbatim
+Path ~/.mail/olin/
+Inbox ~/.mail/olin/Inbox
+
+Channel olin
+Master :olin-remote:
+Slave :olin-local:
+Patterns *
+Create both
+SyncState *
+
+# -*-conf-*-
+IMAPAccount babson
+Host imap.gmail.com
+User knikomborirak1@babson.edu
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/babson.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore babson-remote
+Account babson
+
+MaildirStore babson-local
+Subfolders Verbatim
+Path ~/.mail/babson/
+Inbox ~/.mail/babson/Inbox
+
+Channel babson
+Master :babson-remote:
+Slave :babson-local:
+Patterns *
+Create both
+SyncState *
