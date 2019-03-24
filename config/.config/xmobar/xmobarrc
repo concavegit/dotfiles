@@ -31,6 +31,6 @@ Config
       , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"
       ] 10
 
-    , Run Mail [("<fc=#8abeb7></fc> ", "~/.mail/primary/Inbox"), ("<fc=#969896></fc> ", "~/.mail/olin/Inbox"), ("fc=#c5c8c6></fc> ", "~/.mail/babson/Inbox")] "mail"
+    , Run Mail [("<fc=#8abeb7></fc> ", "~/.mail/primary/Inbox"), ("<fc=#969896></fc> ", "~/.mail/olin/Inbox"), ("<fc=#c5c8c6></fc> ", "~/.mail/babson/Inbox")] "mail"
     ]
   , template = "%pulse:Master% %bright% %mpd%{%StdinReader%} %mail% %wlp3s0wi% %battery% %date%"}
