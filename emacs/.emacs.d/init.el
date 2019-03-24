@@ -97,7 +97,8 @@
 
 ;;; Appearance
 
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil
+              tab-width 4)
 
 (use-package diminish)
 (use-package org-bullets :hook (org-mode . org-bullets-mode))
@@ -366,11 +367,11 @@
   :general
   (my-key-def
     :prefix leader-console
-    "t" 'my/ansi-term-zsh)
+    "t" 'my/term)
   :config
-  (defun my/ansi-term-zsh ()
+  (defun my/term()
     (interactive)
-    (ansi-term "/bin/zsh"))
+    (term (getenv "SHELL")))
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
 
 ;;; Extension Specific
@@ -694,10 +695,15 @@
   :init
   (projectile-mode 1)
   :config
+  (defun my/projectile-run-term ()
+    (interactive)
+    (projectile-run-term (getenv "SHELL")))
   (my-key-def :keymaps 'projectile-mode-map
     :prefix leader-project
     "SPC" 'projectile-switch-project
     "c" 'projectile-compile-project
-    "f" 'projectile-find-file))
+    "e" 'projectile-run-eshell
+    "f" 'projectile-find-file
+    "t" 'my/projectile-run-term))
 
 ;;; init.el ends here
