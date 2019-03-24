@@ -74,8 +74,8 @@ myAdditionalKeys =
           )
         , ((0, xF86XK_MonBrightnessDown)        , liftIO decBrightness)
         , ((0, xF86XK_MonBrightnessUp)          , liftIO incBrightness)
-        , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -set 2")
-        , ((shiftMask, xF86XK_MonBrightnessUp)  , spawn "xbacklight -set 100")
+        , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -steps 1 -set 2 -time 0")
+        , ((shiftMask, xF86XK_MonBrightnessUp)  , spawn "xbacklight -steps 1 -set 100 -time 0")
         , ((modm .|. altMask .|. ctrlMask, xK_h), sendMessage $ ShrinkFrom L)
         , ((modm .|. altMask .|. ctrlMask, xK_j), sendMessage $ ShrinkFrom D)
         , ((modm .|. altMask .|. ctrlMask, xK_k), sendMessage $ ShrinkFrom U)
@@ -172,7 +172,7 @@ incBrightness =
         nextBrightness
                 <$> getBrightness
                 >>= spawn
-                .   ("xbacklight -set " ++)
+                .   ("xbacklight -time 0 -steps 1 -set " ++)
                 .   show
 
 decBrightness :: IO ()
@@ -180,5 +180,5 @@ decBrightness =
         prevBrightness
                 <$> getBrightness
                 >>= spawn
-                .   ("xbacklight -set " ++)
+                .   ("xbacklight -time 0 -steps 1 -set " ++)
                 .   show
