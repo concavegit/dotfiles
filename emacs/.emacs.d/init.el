@@ -15,13 +15,24 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'use-package)
+;; (require 'use-package)
+(straight-use-package 'use-package)
 
-(setq use-package-always-ensure t)
+(setq straight-use-package-by-default t
+      straight-check-for-modifications '(watch-files find-when-checking))
 
 (use-package general
   :config
@@ -225,7 +236,7 @@
     "RET" 'mingus-play))
 
 (use-package mu4e
-  :ensure nil
+  :commands mu4e-update-index
   :general
   (my-key-def
     :prefix leader-app
@@ -276,7 +287,7 @@
   (add-to-list 'org-latex-minted-langs '(ipython "python")))
 
 (use-package org-mu4e
-  :ensure nil
+  :straight nil
   :general
   (my-key-def
     :prefix leader-major
@@ -401,8 +412,6 @@
 (use-package dap-mode
   :after lsp-mode
   :config
-  (require 'dap-java)
-  (require 'dap-python)
   (dap-mode t)
   (dap-ui-mode t))
 
@@ -456,6 +465,8 @@
   ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode)
    . lsp)
   :config
+  (require 'dap-lldb)
+  (require 'dap-python)
   (setq lsp-prefer-flymake nil
         lsp-auto-guess-root t)
 
@@ -466,8 +477,10 @@
     "r" 'lsp-rename))
 
 (use-package lsp-java
+  :after lsp
   :hook (java-mode . lsp)
   :config
+  (require 'dap-java)
   (my-key-def :keymaps 'java-mode-map
     :prefix leader-lint
     "i o" 'lsp-java-import-order
@@ -516,7 +529,7 @@
     "i" 'meghanada-import-all))
 
 (use-package org
-  :ensure org-plus-contrib
+  :straight org-plus-contrib
   :mode ("\\.org$" . org-mode)
   :config
   (require 'ox-beamer)
@@ -605,7 +618,7 @@
          ("\\.lucius$" . shakespeare-lucius-mode)))
 
 (use-package tex-site
-  :ensure auctex
+  :straight auctex
   :mode ("\\.tex$" . LaTeX-mode)
   :config (setq TeX-newline-function 'newline-and-indent))
 
@@ -675,6 +688,7 @@
 
 ;;; Projects
 
+(use-package forge :after magit)
 (use-package vc :config (setq vc-follow-symlinks t))
 
 (use-package counsel-projectile

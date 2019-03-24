@@ -8,3 +8,7 @@
 	hideCampaign = true
 [commit]
 	gpgsign = true
+[github]
+	user = concavegit
+[gitlab]
+	user = concavegit
