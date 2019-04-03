@@ -157,5 +157,12 @@ settings:
     global: false
   tabs.show:
     global: multiple
+  url.default_page:
+    global: https://gitlab.com/
+  url.searchengines:
+    global:
+      DEFAULT: https://www.google.com/search?hl=en&q={}
+  url.start_pages:
+    global: https://gitlab.com/
   zoom.default:
     global: 90%
