@@ -403,6 +403,7 @@
 (use-package rust-mode :mode "\\.rs$")
 (use-package scad-mode :mode "\\.scad$")
 (use-package spice-mode :mode "\\.sp$")
+(use-package swift-mode :mode "\\.swift$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
@@ -705,6 +706,7 @@
     "c" 'projectile-compile-project
     "e" 'projectile-run-eshell
     "f" 'projectile-find-file
-    "t" 'my/projectile-run-term))
+    "t" 'projectile-run-eshell
+    "T" 'my/projectile-run-term))
 
 ;;; init.el ends here
