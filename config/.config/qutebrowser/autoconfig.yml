@@ -103,7 +103,7 @@ settings:
   colors.tabs.selected.odd.fg:
     global: '#c5c8c6'
   content.headers.do_not_track:
-    global: null
+    global: true
   content.headers.user_agent:
     global: null
   content.private_browsing:
