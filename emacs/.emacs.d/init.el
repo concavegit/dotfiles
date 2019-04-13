@@ -211,7 +211,8 @@
 
         erc-autojoin-channels-alist
         '(("freenode.net" "#haskell")
-          ("freenode.net" "#c++"))
+          ("freenode.net" "##c++")
+          ("freenode.net" "##C"))
 
         erc-track-position-in-mode-line t))
 
