@@ -147,9 +147,9 @@ getBrightness :: IO Int
 getBrightness = do
         uninstallSignalHandlers
         brightness <- shelly
-                (fromRight 0 . fmap fst . T.decimal <$> run
+                (fromRight 0 . fmap (round . fst) . T.rational <$> run
                         "/usr/bin/xbacklight"
-                        ["-get"]
+                        ["-d", ":0.0", "-get"]
                 )
         installSignalHandlers
         pure brightness
@@ -172,7 +172,7 @@ incBrightness =
         nextBrightness
                 <$> getBrightness
                 >>= spawn
-                .   ("xbacklight -time 0 -steps 1 -set " ++)
+                .   ("xbacklight -d :0.0 -time 0 -steps 1 -set " ++)
                 .   show
 
 decBrightness :: IO ()
@@ -180,5 +180,5 @@ decBrightness =
         prevBrightness
                 <$> getBrightness
                 >>= spawn
-                .   ("xbacklight -time 0 -steps 1 -set " ++)
+                .   ("xbacklight -d :0.0 -time 0 -steps 1 -set " ++)
                 .   show
