@@ -388,6 +388,7 @@
 
 ;;; Extension Specific
 
+(use-package cmake-mode :mode "CMakeLists\\.txt$\\|\\.cmake$")
 (use-package doc-view :mode ("\\.odt$" . doc-view-mode))
 (use-package dockerfile-mode :mode "Dockerfile$")
 (use-package evil-matchit :init (global-evil-matchit-mode 1))
