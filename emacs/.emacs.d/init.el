@@ -453,7 +453,7 @@
 
   (my-key-def :keymaps 'haskell-mode-map
     :prefix leader-major
-    "r" 'haskell-process-load-file)
+    "SPC" 'haskell-process-load-file)
 
   (my-key-def :keymaps 'haskell-interactive-mode-map
     "RET" 'haskell-interactive-mode-return))
