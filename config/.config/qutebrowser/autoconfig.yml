@@ -138,9 +138,9 @@ settings:
   fonts.messages.warning:
     global: 8pt monospace
   fonts.monospace:
-    global: Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans
-      Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace,
-      Fixed, Consolas, Terminal
+    global: '"xos4 terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream
+      Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace,
+      Fixed, Consolas, Terminal'
   fonts.prompts:
     global: 8pt monospace
   fonts.statusbar:
