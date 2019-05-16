@@ -396,6 +396,7 @@
 (use-package gitconfig-mode :mode "\\.gitconfig$")
 (use-package gitignore-mode :mode "\\.gitignore$")
 (use-package graphviz-dot-mode :mode "\\.dot$\\|\\.gv$")
+(use-package kotlin-mode :mode "\\.kts$")
 (use-package nxml :mode ("\\.xml$\\|\\.launch$" . nxml-mode))
 (use-package qml-mode :mode "\\.qml$")
 (use-package rust-mode :mode "\\.rs$")
@@ -403,13 +404,6 @@
 (use-package spice-mode :mode "\\.sp$")
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
-
-(use-package ccls
-  :hook ((c-mode c++-mode) . (lambda () (require 'ccls) (lsp)))
-  :config
-  (setq ccls-sem-highlight-method 'font-lock)
-  (ccls-use-default-rainbow-sem-highlight)
-  (ccls-code-lens-mode))
 
 (use-package dap-mode
   :after lsp-mode
@@ -485,7 +479,6 @@
   (require 'dap-java)
   (my-key-def :keymaps 'java-mode-map
     :prefix leader-lint
-    "i o" 'lsp-java-import-order
     "i a" 'lsp-java-add-import))
 
 (use-package lsp-ui
@@ -518,17 +511,6 @@
     :prefix leader-major
     "s" 'markdown-insert-gfm-code-block
     "n" 'markdown-cleanup-list-numbers))
-
-(use-package meghanada
-  :disabled t
-  :hook (java-mode . meghanada-mode)
-  :config
-  (my-key-def :keymaps 'meghanada-mode-map
-    :prefix leader-major
-    "C" 'meghanada-compile-project
-    "SPC" 'meghanada-jump-declaration
-    "c" 'meghanada-compile-file
-    "i" 'meghanada-import-all))
 
 (use-package org
   :straight org-plus-contrib
