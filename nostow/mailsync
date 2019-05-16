@@ -1,4 +1,5 @@
 #!/bin/sh
 
+killall mbsync &> /dev/null
 mbsync -a
 mu index -m ~/.mail
