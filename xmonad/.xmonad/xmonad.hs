@@ -43,7 +43,7 @@ myAdditionalKeys =
         , ((modm, xK_n)      , spawn "networkmanager_dmenu")
         , ((modm, xK_f)      , spawn "dmenu_extended_run")
         , ((modm, xK_i), spawn "dmenu_extended_run \"-> Internet search: \"")
-        , ((modm, xK_b), spawn "LC_CTYPE=zh_CN.utf-8 emacsclient -ca ''")
+        , ((modm, xK_b), spawn "emacsclient -ca ''")
         , ((modm, xK_c)      , spawn "qutebrowser")
         , ((modm, xK_Return) , spawn "urxvtc")
         , ((0, xF86XK_Search), spawn "slimlock")
