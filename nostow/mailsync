@@ -1,5 +1,7 @@
 #!/bin/sh
 
 killall mbsync &> /dev/null
-mbsync -a
+mbsync -aq
+
+pkill -2 -u $UID mu
 mu index -m ~/.mail
