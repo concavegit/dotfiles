@@ -43,7 +43,6 @@ Patterns *
 Create both
 SyncState *
 
-# -*-conf-*-
 IMAPAccount babson
 Host imap.gmail.com
 User knikomborirak1@babson.edu
