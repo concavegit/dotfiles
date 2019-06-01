@@ -525,6 +525,7 @@
         org-pretty-entities t
         org-startup-indented t
         org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
+        org-ditaa-jar-path "/usr/share/ditaa/lib/ditaa.jar"
 
         org-latex-pdf-process
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
@@ -545,7 +546,8 @@
                                  (latex . t)
                                  (plantuml . t)
                                  (dot . t)
-                                 (spice . t))))
+                                 (ditaa . t)
+                                 (shell . t))))
 
 (use-package pdf-tools
   :mode ("\\.pdf$" . pdf-view-mode)
