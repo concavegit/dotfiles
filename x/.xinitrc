@@ -25,5 +25,6 @@ udiskie &
 unclutter &
 urxvtd -q -o -f &
 xrdb ~/.Xresources &
+~/dotfiles/nostow/mailsync &
 
 exec xmonad
