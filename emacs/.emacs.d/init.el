@@ -279,6 +279,7 @@
         mu4e-view-prefer-html t
         mu4e-view-show-addresses t
         mu4e-view-show-images t)
+
   (add-to-list 'mu4e-view-actions
                '("open in browser" . mu4e-action-view-in-browser) t))
 
