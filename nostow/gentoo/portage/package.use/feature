@@ -4,7 +4,7 @@
 x11-terms/rxvt-unicode  256-color
 
 # xmobar
-x11-misc/xmobar         wifi mpd
+x11-misc/xmobar         wifi mpd inotify
 
 # emacs
 app-editors/emacs       libxml2
@@ -46,3 +46,12 @@ sys-auth/consolekit     pm-utils
 
 # qemu
 app-emulation/qemu      qemu_user_targets_arm
+
+# ncurses
+sys-libs/ncurses        tinfo
+
+# qutebrowser
+dev-qt/qtwebengine      jumbo-build
+
+# nextpnr
+dev-embedded/nextpnr    ice40

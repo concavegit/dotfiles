@@ -1,51 +1,38 @@
 # -*-conf-*-
 
 # ipython
-dev-lang/python:2.7     sqlite
+dev-lang/python         sqlite
 net-libs/zeromq         drafts
-
-# gvfs google
-gnome-base/gvfs         gnome-online-accounts
-
-# qtwebengine
-dev-python/PyQt5        sql multimedia declarative webengine webchannel
-dev-qt/qtmultimedia     widgets
-dev-qt/qtwebengine      widgets
-dev-qt/qtwebchannel     qml
-dev-libs/libxml2        icu
-
-# ros
-sys-libs/zlib           minizip
-dev-python/PyQt5        webkit
-
-# kicad
-dev-libs/boost          context python
-
-# plantuml
-media-libs/gd           fontconfig
-
-# pandas
-dev-python/numpy        lapack
-
-# matplotlib
 app-text/texlive-core   xetex
-media-libs/harfbuzz     icu
-
-# hie
-sys-libs/ncurses        tinfo
-
-# openscad
-media-libs/mesa         gles2
-
-# cura
-dev-libs/libarcus       python
-
-# gvfs
-dev-libs/libgdata       gnome-online-accounts
 
 # neofetch
 www-client/w3m          imlib
 
-# metasploit
-dev-ruby/activerecord   postgres
-dev-lang/python         sqlite
+# qutebrowser
+dev-python/PyQt5        sql multimedia declarative
+dev-python/pyyaml       libyaml
+dev-python/PyQt5        webchannel
+dev-qt/qtwebengine      widgets
+dev-qt/qtwebchannel     qml
+dev-libs/libxml2        icu
+sys-libs/zlib           minizip
+dev-qt/qtmultimedia     widgets
+
+# firefox
+media-libs/libvpx       postproc
+dev-db/sqlite           secure-delete
+
+# libreoffice
+media-libs/harfbuzz     icu
+
+# cura
+dev-libs/libarcus       python
+dev-python/numpy        lapack
+
+# nextpnr
+dev-libs/boost          python
+
+# ros
+media-libs/gd           fontconfig
+dev-python/PyQt5        webkit
+x11-libs/wxGTK          gstreamer
