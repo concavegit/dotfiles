@@ -1,7 +1,7 @@
 -- -*-haskell-*-
 
 Config
-  { font = "xft:xos4 terminus:size=8,font awesome 5 free solid:size=8,noto sans cjk tc:size=8"
+  { font = "xft:xos4 terminus:size=10,font awesome 5 free solid:size=10,noto sans cjk tc:size=10"
   , bgColor = "#1d1f21"
   , fgColor = "#c5c8c6"
   , lowerOnStart = True
@@ -31,6 +31,6 @@ Config
       , "--", "-P", "<fc=#cc6666></fc>", "-Z", "<fc=#f0c674></fc>", "-S", "<fc=#969896></fc>"
       ] 10
 
-    , Run Mail [("<fc=#8abeb7></fc> ", "~/.mail/primary/Inbox"), ("<fc=#969896></fc> ", "~/.mail/olin/Inbox"), ("<fc=#c5c8c6></fc> ", "~/.mail/babson/Inbox"), ("<fc=#b5bd68></fc> ", "~/.mail/brandeis/Inbox")] "mail"
+    , Run Mail [("<fc=#8abeb7></fc> ", "~/.mail/primary/Inbox"), ("<fc=#969896></fc> ", "~/.mail/olin/Inbox")] "mail"
     ]
   , template = "%pulse:Master% %bright% %mpd%{%StdinReader%} %mail% %wlp3s0wi% %battery% %date%"}
