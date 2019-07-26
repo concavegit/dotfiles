@@ -65,7 +65,6 @@
   :config
   (evil-mode 1)
   (my-key-def :prefix leader-file
-    "SPC" 'find-file
     "w" 'save-buffer)
 
   (my-key-def :prefix leader-buffer
@@ -261,15 +260,7 @@
                             (mu4e-message-contact-field-matches msg
                                                                 :to "knikomborirak@olin.edu")))
             :vars '((user-mail-address . "knikomborirak@olin.edu")
-                    (smtpmail-smtp-server . "smtp.office365.com")))
-          ,(make-mu4e-context
-            :name "Babson"
-            :match-func (lambda (msg)
-                          (when msg
-                            (mu4e-message-contact-field-matches msg
-                                                                :to "knikomborirak1@babson.edu")))
-            :vars '((user-mail-address . "knikomborirak1@babson.edu")
-                    (smtpmail-smtp-server . "smtp.gmail.com"))))
+                    (smtpmail-smtp-server . "smtp.office365.com"))))
 
         mu4e-context-policy 'pick-first
         mu4e-headers-date-format "%F"
@@ -338,6 +329,8 @@
   :config
   (my-key-def :prefix leader-dir
     "s" 'counsel-rg)
+  (my-key-def :prefix leader-file
+    "SPC" 'counsel-find-file)
   (setq ivy-use-virtual-buffers t))
 
 (use-package smartparens
