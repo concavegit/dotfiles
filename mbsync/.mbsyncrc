@@ -2,7 +2,7 @@
 IMAPAccount primary
 Host imap.gmail.com
 User concavemail@gmail.com
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/primary.gpg"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/primary.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -24,7 +24,7 @@ SyncState *
 IMAPAccount olin
 Host outlook.office365.com
 User knikomborirak@olin.edu
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/olin.gpg"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/olin.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -46,43 +46,6 @@ SyncState *
 IMAPAccount babson
 Host imap.gmail.com
 User knikomborirak1@babson.edu
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/babson.gpg"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/babson.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore babson-remote
-Account babson
-
-MaildirStore babson-local
-Subfolders Verbatim
-Path ~/.mail/babson/
-Inbox ~/.mail/babson/Inbox
-
-Channel babson
-Master :babson-remote:
-Slave :babson-local:
-Patterns *
-Create both
-SyncState *
-
-IMAPAccount brandeis
-Host imap.gmail.com
-User knikomborirak@brandeis.edu
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/pass/brandeis.gpg"
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore brandeis-remote
-Account brandeis
-
-MaildirStore brandeis-local
-Subfolders Verbatim
-Path ~/.mail/brandeis/
-Inbox ~/.mail/brandeis/Inbox
-
-Channel brandeis
-Master :brandeis-remote:
-Slave :brandeis-local:
-Patterns *
-Create both
-SyncState *
