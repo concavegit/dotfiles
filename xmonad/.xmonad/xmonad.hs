@@ -46,7 +46,7 @@ myAdditionalKeys =
         , ((modm, xK_b), spawn "emacsclient -ca ''")
         , ((modm, xK_c)      , spawn "qutebrowser")
         , ((modm, xK_Return) , spawn "urxvtc")
-        , ((0, xF86XK_Search), spawn "slimlock")
+        , ((0, xF86XK_Search), spawn "dm-tool lock")
         , ( (modm, xF86XK_AudioRaiseVolume)
           , (liftIO . MPD.withMPD) MPD.next $> ()
           )
