@@ -26,5 +26,6 @@ unclutter &
 urxvtd -q -o -f &
 xrdb ~/.Xresources &
 ~/dotfiles/nostow/mailsync &
+emacs --daemon &
 
 exec xmonad
