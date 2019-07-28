@@ -8,18 +8,18 @@ Config
   , alignSep = "{}"
   , commands =
     [ Run StdinReader
-    , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 10
+    , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 1
 
     , Run Brightness
       [ "-t", "<fc=#81a2be></fc> <percent>"
       , "--", "-D", "intel_backlight"
-      ] 30
+      ] 10
 
     , Run BatteryP ["BAT0"]
       [ "-t", "<acstatus> <left>% (<timeleft>)"
       , "--", "-O", "<fc=#81a2be></fc>", "-i", "<fc=#b5bd68></fc>", "-o", "<fc=#f0c674></fc>"
       ] 600
-    , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 600
+    , Run Wireless "wlp3s0" ["-t", "<fc=#b294bb><qualityvbar></fc> <essid>"] 300
 
     , Run Volume "pulse" "Master"
       [ "-t", "<status> <volume>"

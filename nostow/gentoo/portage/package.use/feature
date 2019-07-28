@@ -55,3 +55,6 @@ dev-qt/qtwebengine      jumbo-build
 
 # nextpnr
 dev-embedded/nextpnr    ice40
+
+# kdeconnect
+kde-misc/kdeconnect     mousepad

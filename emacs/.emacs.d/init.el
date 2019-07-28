@@ -402,7 +402,24 @@
 
 (use-package dap-mode
   :after lsp-mode
+  :hook (lsp-mode)
   :config
+  (setq dap-lldb-debug-program '("lldb-vscode"))
+
+  (my-key-def
+    :keymaps 'dap-mode-map
+    :prefix leader-lint
+    "d" 'dap-debug
+    "D" 'dap-debug-edit-template
+    "t" 'dap-breakpoint-toggle
+    "s" 'dap-switch-stack-frame
+    "L" 'dap-ui-breakpoints
+    "v" 'dap-ui-locals
+    "i" 'dap-ui-inspect
+    "I" 'dap-ui-inspect-thing-at-point
+    "R" 'dap-ui-repl
+    "n" 'dap-next)
+
   (dap-mode t)
   (dap-ui-mode t))
 
@@ -453,7 +470,7 @@
 (use-package lsp-mode
   :commands lsp
   :hook
-  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode)
+  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode docker-file-mode kotlin-mode LaTeX-mode)
    . lsp)
   :config
   (require 'dap-lldb)
@@ -465,16 +482,15 @@
     :prefix leader-lint
     "a" 'lsp-execute-code-action
     "f" 'lsp-format-buffer
-    "r" 'lsp-rename))
+    "r" 'lsp-rename)
 
-(use-package lsp-java
-  :after lsp
-  :hook (java-mode . lsp)
-  :config
-  (require 'dap-java)
-  (my-key-def :keymaps 'java-mode-map
-    :prefix leader-lint
-    "i a" 'lsp-java-add-import))
+  (add-to-list 'lsp-language-id-configuration '(latex-mode . "texlab"))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "texlab")
+                    :major-modes '(latex-mode)
+                    :server-id 'texlab))
+  )
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)

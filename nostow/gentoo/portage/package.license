@@ -1,0 +1,13 @@
+# -*-conf-*-
+# virtualbox oracle
+app-emulation/virtualbox-extpack-oracle PUEL
+
+# linux-firmware
+sys-kernel/linux-firmware linux-fw-redistributable no-source-code
+
+# ngspice
+sci-visualization/xgraph xgraph
+
+# nvidia
+x11-drivers/nvidia-drivers NVIDIA-r2
+dev-util/nvidia-cuda-toolkit NVIDIA-CUDA
