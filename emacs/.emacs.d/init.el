@@ -191,6 +191,7 @@
     "U" 'winner-redo))
 
 ;;; Applications
+(use-package android-mode)
 (use-package evil-collection :after evil :config (evil-collection-init))
 (use-package evil-magit :after magit)
 (use-package htmlize)
@@ -475,8 +476,7 @@
   :config
   (require 'dap-lldb)
   (require 'dap-python)
-  (setq lsp-prefer-flymake nil
-        lsp-auto-guess-root t)
+  (setq lsp-prefer-flymake nil)
 
   (my-key-def :keymaps 'lsp-mode-map
     :prefix leader-lint
