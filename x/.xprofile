@@ -20,7 +20,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 fcitx &
 feh --bg-fill ~/dotfiles/nostow/rocket.png --no-fehbg &
-mpd &
 udiskie &
 unclutter &
 urxvtd -q -o -f &
