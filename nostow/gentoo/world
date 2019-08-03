@@ -53,6 +53,7 @@ media-gfx/gimp
 media-gfx/inkscape
 media-gfx/openscad
 media-gfx/plantuml
+media-gfx/scrot
 media-libs/opencv
 media-libs/sdl2-ttf
 media-sound/mpd
@@ -74,6 +75,7 @@ net-vpn/tor
 sci-electronics/gtkwave
 sci-electronics/ngspice
 sci-electronics/verilator
+sci-libs/suitesparse
 sys-apps/pciutils
 sys-apps/ripgrep
 sys-apps/usbutils
