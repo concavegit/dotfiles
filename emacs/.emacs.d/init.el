@@ -74,12 +74,6 @@
 
 ;;; Orphans
 
-
-(setenv "PATH"
-        (concat
-         "~/.local/bin:"
-         (getenv "PATH")))
-
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))
       custom-file "~/.emacs.d/custom.el"
       exec-path (append exec-path '("~/.local/bin"))
@@ -191,7 +185,8 @@
     "U" 'winner-redo))
 
 ;;; Applications
-(use-package android-mode)
+
+(use-package android-mode :straight (:host github :repo "concavegit/android-mode" :branch "update-sdk-emacs-compat"))
 (use-package evil-collection :after evil :config (evil-collection-init))
 (use-package evil-magit :after magit)
 (use-package htmlize)
@@ -215,6 +210,10 @@
           ("freenode.net" "##C"))
 
         erc-track-position-in-mode-line t))
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package mingus
   :general
@@ -471,17 +470,21 @@
 (use-package lsp-mode
   :commands lsp
   :hook
-  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode docker-file-mode kotlin-mode LaTeX-mode)
+  ((python-mode mhtml-mode css-mode js-mode sh-mode rust-mode rustic-mode c++-mode c-mode docker-file-mode kotlin-mode LaTeX-mode nxml-mode)
    . lsp)
   :config
   (require 'dap-lldb)
   (require 'dap-python)
-  (setq lsp-prefer-flymake nil)
+  (setq lsp-prefer-flymake nil
+        lsp-xml-jar-file
+        (expand-file-name
+         "~/Documents/lsp4xml/org.eclipse.lsp4xml/target/org.eclipse.lsp4xml-uber.jar"))
 
   (my-key-def :keymaps 'lsp-mode-map
     :prefix leader-lint
     "a" 'lsp-execute-code-action
     "f" 'lsp-format-buffer
+    "w" 'lsp-workspace-restart
     "r" 'lsp-rename)
 
   (add-to-list 'lsp-language-id-configuration '(latex-mode . "texlab"))
