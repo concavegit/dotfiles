@@ -3,5 +3,8 @@
 killall mbsync &> /dev/null
 mbsync -aq
 
-pkill -2 -u $UID mu
-mu index -m ~/.mail
+if [ "$1" == "-i" ]
+then
+    pkill -2 -u $UID mu
+    mu index -m ~/.mail
+fi
