@@ -26,5 +26,6 @@ urxvtd -q -o -f &
 xrdb ~/.Xresources &
 mailsync -i &
 emacs --daemon &
+kdeconnect-cli --refresh &
 
 exec xmonad
