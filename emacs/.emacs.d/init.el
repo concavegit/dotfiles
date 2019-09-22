@@ -186,7 +186,7 @@
 
 ;;; Applications
 
-(use-package android-mode :straight (:host github :repo "concavegit/android-mode" :branch "update-sdk-emacs-compat"))
+(use-package android-mode)
 (use-package evil-collection :after evil :config (evil-collection-init))
 (use-package evil-magit :after magit)
 (use-package htmlize)
@@ -421,7 +421,20 @@
     "n" 'dap-next)
 
   (dap-mode t)
-  (dap-ui-mode t))
+  (dap-ui-mode t)
+
+  (dap-register-debug-provider
+   "kotlinDebugAdapter"
+   (lambda (conf)
+     (plist-put conf :debugPort 5037)
+     (plist-put conf :host "localhost")
+     conf))
+
+  (dap-register-debug-template "kotlinDebugAdapter::Run"
+                               (list :type "kotlin"
+                                     :request "launch"
+                                     :args ""
+                                     :name "kotlinDebugAdapter::Run")))
 
 (use-package emmet-mode
   :hook (html-mode css-mode)
