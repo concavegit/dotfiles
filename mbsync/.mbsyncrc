@@ -4,6 +4,7 @@ Host imap.gmail.com
 User concavemail@gmail.com
 PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/primary.gpg"
 SSLType IMAPS
+SSLVersions TLSv1.1
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore primary-remote
