@@ -1,3 +1,4 @@
+app-accessibility/espeak
 app-admin/eclean-kernel
 app-admin/stow
 app-admin/sudo
@@ -14,6 +15,7 @@ app-i18n/fcitx-configtool
 app-i18n/fcitx-qt5
 app-misc/figlet
 app-misc/neofetch
+app-misc/ranger
 app-misc/tmux
 app-office/libreoffice
 app-portage/eix
@@ -29,9 +31,14 @@ app-text/zathura-pdf-mupdf
 dev-embedded/nextpnr
 dev-embedded/platformio
 dev-haskell/shelly
+dev-haskell/stack
+dev-libs/cudnn
 dev-python/ipython
+dev-python/pandas
 dev-python/pip
 dev-python/sympy
+dev-python/tabulate
+dev-python/virtualenvwrapper
 dev-tex/latexmk
 dev-util/android-studio
 dev-util/lldb
@@ -41,6 +48,7 @@ games-misc/cowsay
 games-misc/fortune-mod
 games-misc/lolcat
 gnome-extra/nm-applet
+kde-apps/filelight
 kde-misc/kdeconnect
 lxde-base/lxappearance
 media-fonts/fontawesome
@@ -51,6 +59,7 @@ media-gfx/ditaa
 media-gfx/feh
 media-gfx/gimp
 media-gfx/inkscape
+media-gfx/jpeginfo
 media-gfx/openscad
 media-gfx/plantuml
 media-gfx/scrot
@@ -62,6 +71,8 @@ media-video/guvcview
 media-video/mpv
 net-analyzer/netcat
 net-dns/avahi
+net-fs/smbnetfs
+net-libs/nodejs
 net-mail/isync
 net-mail/mu
 net-misc/networkmanager
@@ -72,9 +83,12 @@ net-p2p/rtorrent
 net-print/gtklp
 net-print/hplip
 net-vpn/tor
+net-wireless/gqrx
+net-wireless/rtl-sdr
 sci-electronics/gtkwave
 sci-electronics/ngspice
 sci-electronics/verilator
+sci-libs/scikits_learn
 sci-libs/suitesparse
 sys-apps/pciutils
 sys-apps/ripgrep
