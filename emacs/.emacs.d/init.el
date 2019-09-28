@@ -271,6 +271,15 @@
         mu4e-view-show-addresses t
         mu4e-view-show-images t)
 
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda()
+              (let* ((ctx (mu4e-context-current))
+                     (name (if ctx (mu4e-context-name ctx))))
+                (when name
+                  (cond
+                   ((string= name "Primary")
+                    (mml-secure-message-sign)))))))
+
   (add-to-list 'mu4e-view-actions
                '("open in browser" . mu4e-action-view-in-browser) t))
 
