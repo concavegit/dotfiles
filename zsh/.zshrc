@@ -33,4 +33,4 @@ alias _='sudo'
 alias l='ls -Ahlt'
 alias md='mkdir -p'
 
-# source /usr/bin/virtualenvwrapper_lazy.sh
+source /usr/bin/virtualenvwrapper_lazy.sh
