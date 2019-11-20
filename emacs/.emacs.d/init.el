@@ -413,6 +413,7 @@
   :after lsp-mode
   :hook (lsp-mode)
   :config
+  (add-to-list 'evil-motion-state-modes 'dap-ui-breakpoints-ui-list-mode)
   (setq dap-lldb-debug-program '("lldb-vscode"))
 
   (my-key-def
@@ -548,6 +549,8 @@
     "s" 'markdown-insert-gfm-code-block
     "n" 'markdown-cleanup-list-numbers))
 
+(use-package ninja-mode :mode "\\.ninja$")
+
 (use-package org
   :straight org-plus-contrib
   :mode ("\\.org$" . org-mode)
@@ -563,10 +566,7 @@
         org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
         org-ditaa-jar-path "/usr/share/ditaa/lib/ditaa.jar"
 
-        org-latex-pdf-process
-        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "bibtex %b"
-          "pdflatex -shell-escape -interaction nonstopmode --synctex=1 -output-directory %o %f"))
+        org-latex-pdf-process (list "latexmk %f -shell-escape -bibtex -f -pdf"))
 
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
