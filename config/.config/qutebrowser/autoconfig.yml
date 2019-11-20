@@ -158,11 +158,11 @@ settings:
   tabs.show:
     global: multiple
   url.default_page:
-    global: https://gitlab.com/
+    global: https://news.google.com/foryou
   url.searchengines:
     global:
       DEFAULT: https://www.google.com/search?hl=en&q={}
   url.start_pages:
-    global: https://gitlab.com/
+    global: https://news.google.com/foryou
   zoom.default:
     global: 90%
