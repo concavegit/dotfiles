@@ -252,7 +252,10 @@
                             (mu4e-message-contact-field-matches msg
                                                                 :to "concavemail@gmail.com")))
             :vars '((user-mail-address . "concavemail@gmail.com")
-                    (smtpmail-smtp-server . "smtp.gmail.com")))
+                    (smtpmail-smtp-server . "smtp.gmail.com")
+                    (mu4e-trash-folder . "/primary/[Gmail]/Trash")
+                    (mu4e-drafts-folder . "/primary/[Gmail]/Drafts")
+                    (mu4e-sent-folder . "/primary/[Gmail]/Sent Mail")))
           ,(make-mu4e-context
             :name "Olin"
             :match-func (lambda (msg)
@@ -260,7 +263,10 @@
                             (mu4e-message-contact-field-matches msg
                                                                 :to "knikomborirak@olin.edu")))
             :vars '((user-mail-address . "knikomborirak@olin.edu")
-                    (smtpmail-smtp-server . "smtp.office365.com"))))
+                    (smtpmail-smtp-server . "smtp.office365.com")
+                    (mu4e-trash-folder . "/olin/Trash")
+                    (mu4e-sent-folder . "/olin/Sent Items")
+                    (mu4e-drafts-folder . "/olin/Drafts"))))
 
         mu4e-context-policy 'pick-first
         mu4e-headers-date-format "%F"
@@ -409,6 +415,11 @@
 (use-package toml-mode :mode "\\.toml$")
 (use-package yaml-mode :mode "\\.ya?ml$\\|\\.rosinstall$")
 
+(use-package auctex-latexmk
+  :after tex-site
+  :config
+  (auctex-latexmk-setup))
+
 (use-package dap-mode
   :after lsp-mode
   :hook (lsp-mode)
@@ -509,13 +520,6 @@
     "f" 'lsp-format-buffer
     "w" 'lsp-workspace-restart
     "r" 'lsp-rename)
-
-  (add-to-list 'lsp-language-id-configuration '(latex-mode . "texlab"))
-
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "texlab")
-                    :major-modes '(latex-mode)
-                    :server-id 'texlab))
   )
 
 (use-package lsp-ui
@@ -563,8 +567,8 @@
   (setq org-confirm-babel-evaluate nil
         org-pretty-entities t
         org-startup-indented t
-        org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
-        org-ditaa-jar-path "/usr/share/ditaa/lib/ditaa.jar"
+        org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
+        org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"
 
         org-latex-pdf-process (list "latexmk %f -shell-escape -bibtex -f -pdf"))
 
