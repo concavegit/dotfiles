@@ -1,0 +1,11 @@
+ptvsd
+pandas
+scikit-learn
+scipy
+imgaug
+argparse
+configparser
+tensorflow-gpu
+ipython
+scikit-commpy
+youtube-dl
