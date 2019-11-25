@@ -520,6 +520,13 @@
     "f" 'lsp-format-buffer
     "w" 'lsp-workspace-restart
     "r" 'lsp-rename)
+
+  (add-to-list 'lsp-language-id-configuration '(latex-mode . "texlab"))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "texlab")
+                    :major-modes '(latex-mode)
+                    :server-id 'texlab))
   )
 
 (use-package lsp-ui
@@ -567,8 +574,8 @@
   (setq org-confirm-babel-evaluate nil
         org-pretty-entities t
         org-startup-indented t
-        org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
-        org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"
+        org-plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar"
+        org-ditaa-jar-path "/usr/share/ditaa/lib/ditaa.jar"
 
         org-latex-pdf-process (list "latexmk %f -shell-escape -bibtex -f -pdf"))
 
