@@ -43,7 +43,7 @@ myAdditionalKeys =
         , ((modm, xK_n)      , spawn "networkmanager_dmenu")
         , ((modm, xK_f)      , spawn "dmenu_extended_run")
         , ((modm, xK_i), spawn "dmenu_extended_run \"-> Internet search: \"")
-        , ((modm, xK_b), spawn "emacsclient -ca ''")
+        , ((modm, xK_b)      , spawn "emacsclient -ca ''")
         , ((modm, xK_c)      , spawn "qutebrowser")
         , ((modm, xK_Return) , spawn "urxvtc")
         , ((0, xF86XK_Search), spawn "dm-tool lock")
@@ -59,10 +59,8 @@ myAdditionalKeys =
         , ( (shiftMask, xF86XK_AudioRaiseVolume)
           , spawn "amixer -qD pulse set Master 100%"
           )
-        , ((0, xF86XK_AudioMute), spawn "amixer -qD pulse set Master toggle")
-        , ( (modm, xF86XK_AudioMute)
-          , (liftIO . MPD.withMPD) togglePause $> ()
-          )
+        , ((0, xF86XK_AudioMute)   , spawn "amixer -qD pulse set Master toggle")
+        , ((modm, xF86XK_AudioMute), (liftIO . MPD.withMPD) togglePause $> ())
         , ( (0, xF86XK_AudioMicMute)
           , spawn "amixer -qD pulse set Capture toggle"
           )
@@ -72,10 +70,14 @@ myAdditionalKeys =
         , ( (0, xF86XK_AudioLowerVolume)
           , spawn "amixer -qD pulse set Master 5%-"
           )
-        , ((0, xF86XK_MonBrightnessDown)        , liftIO decBrightness)
-        , ((0, xF86XK_MonBrightnessUp)          , liftIO incBrightness)
-        , ((shiftMask, xF86XK_MonBrightnessDown), spawn "xbacklight -steps 1 -set 2 -time 0")
-        , ((shiftMask, xF86XK_MonBrightnessUp)  , spawn "xbacklight -steps 1 -set 100 -time 0")
+        , ((0, xF86XK_MonBrightnessDown), liftIO decBrightness)
+        , ((0, xF86XK_MonBrightnessUp)  , liftIO incBrightness)
+        , ( (shiftMask, xF86XK_MonBrightnessDown)
+          , spawn "xbacklight -steps 1 -set 2 -time 0"
+          )
+        , ( (shiftMask, xF86XK_MonBrightnessUp)
+          , spawn "xbacklight -steps 1 -set 100 -time 0"
+          )
         , ((modm .|. altMask .|. ctrlMask, xK_h), sendMessage $ ShrinkFrom L)
         , ((modm .|. altMask .|. ctrlMask, xK_j), sendMessage $ ShrinkFrom D)
         , ((modm .|. altMask .|. ctrlMask, xK_k), sendMessage $ ShrinkFrom U)

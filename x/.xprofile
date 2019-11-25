@@ -28,4 +28,4 @@ mailsync -i &
 emacs --daemon &
 kdeconnect-cli --refresh &
 
-exec xmonad
+exec stack exec xmonad

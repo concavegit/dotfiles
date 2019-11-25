@@ -1,7 +1,7 @@
 -- -*-haskell-*-
 
 Config
-  { font = "xft:xos4 terminus:size=8,font awesome 5 free solid:size=8,noto sans cjk tc:size=8"
+  { font = "xft:terminus:size=8,xft:FontAwesome:size=8,noto sans cjk tc:size=8"
   , bgColor = "#1d1f21"
   , fgColor = "#c5c8c6"
   , lowerOnStart = True

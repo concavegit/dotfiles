@@ -14,7 +14,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply
 
-setopt autocd extendedglob globdots histignorespace
+setopt autocd extendedglob globdots histignorespace rm_star_silent
 bindkey -e
 
 ZSH_THEME_GIT_PROMPT_PREFIX=''
@@ -32,5 +32,7 @@ alias -g L='| less'
 alias _='sudo'
 alias l='ls -Ahlt'
 alias md='mkdir -p'
+alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
+alias totpacct=~/dotfiles/nostow/totpacct
 
-source /usr/bin/virtualenvwrapper_lazy.sh
+. /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
