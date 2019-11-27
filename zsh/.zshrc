@@ -35,4 +35,4 @@ alias md='mkdir -p'
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
 alias totpacct=~/dotfiles/nostow/totpacct
 
-. /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+. ~/.local/bin/virtualenvwrapper_lazy.sh
