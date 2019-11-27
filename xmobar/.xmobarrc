@@ -8,7 +8,7 @@ Config
   , alignSep = "{}"
   , commands =
     [ Run StdinReader
-    , Run Date "<fc=#f0c674></fc> %Y/%m/%d %H:%M:%S" "date" 1
+    , Run Date "<fc=#f0c674></fc> %F %H:%M:%S" "date" 1
 
     , Run Brightness
       [ "-t", "<fc=#81a2be></fc> <percent>"
