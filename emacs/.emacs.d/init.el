@@ -187,6 +187,7 @@
 ;;; Applications
 
 (use-package android-mode)
+(use-package django-mode :mode ("\\.djhtml$" . django-html-mode))
 (use-package evil-collection :after evil :config (evil-collection-init))
 (use-package evil-magit :after magit)
 (use-package htmlize)
@@ -458,7 +459,7 @@
                                      :name "kotlinDebugAdapter::Run")))
 
 (use-package emmet-mode
-  :hook (html-mode css-mode)
+  :hook (html-mode css-mode django-html-mode)
   :config
   (add-hook 'emmet-mode-hook (lambda () (smartparens-strict-mode -1))))
 

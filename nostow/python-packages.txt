@@ -11,3 +11,4 @@ scipy
 tensorflow-gpu
 virtualenvwrapper
 youtube-dl
+Django
