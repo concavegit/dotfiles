@@ -44,7 +44,7 @@ myAdditionalKeys =
         , ((modm, xK_f)      , spawn "dmenu_extended_run")
         , ((modm, xK_i), spawn "dmenu_extended_run \"-> Internet search: \"")
         , ((modm, xK_b)      , spawn "emacsclient -ca ''")
-        , ((modm, xK_c)      , spawn "qutebrowser")
+        , ((modm, xK_c)      , spawn "chromium-browser")
         , ((modm, xK_Return) , spawn "urxvtc")
         , ((0, xF86XK_Search), spawn "dm-tool lock")
         , ( (modm, xF86XK_AudioRaiseVolume)
