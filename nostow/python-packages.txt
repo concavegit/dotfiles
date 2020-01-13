@@ -1,4 +1,5 @@
 argparse
+awscli
 configparser
 imgaug
 ipython
