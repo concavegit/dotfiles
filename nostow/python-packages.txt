@@ -1,3 +1,4 @@
+Django
 argparse
 awscli
 configparser
@@ -10,6 +11,7 @@ scikit-commpy
 scikit-learn
 scipy
 tensorflow-gpu
+torch
+torchvision
 virtualenvwrapper
 youtube-dl
-Django
