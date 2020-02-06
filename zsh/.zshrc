@@ -12,6 +12,7 @@ plugins=(
     pip
     python
     ubuntu
+    virtualenvwrapper
 )
 source $ZSH/oh-my-zsh.sh
 
