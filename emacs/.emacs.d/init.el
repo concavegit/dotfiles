@@ -79,7 +79,9 @@
 (use-package whitespace
   :general
   (general-toggle-definer
-    "w" 'whitespace-mode))
+    "w" 'whitespace-mode)
+  (general-buffer-definer
+    "c" 'whitespace-cleanup))
 
 (use-package find-file
   :commands find-file
