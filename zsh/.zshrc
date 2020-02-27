@@ -1,4 +1,4 @@
-export ZSH="/home/concaveusr/.oh-my-zsh"
+export ZSH="/Users/concaveusr/.oh-my-zsh"
 ZSH_THEME="sorin"
 plugins=(
     adb
@@ -28,3 +28,5 @@ alias l='ls -Ahlt'
 alias md='mkdir -p'
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
 alias totpacct=~/dotfiles/nostow/totpacct
+alias python="/usr/local/bin/python3"
+alias pip="/usr/local/bin/pip3"

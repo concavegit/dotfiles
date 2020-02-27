@@ -4,8 +4,7 @@ Host imap.gmail.com
 User concavemail@gmail.com
 PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/primary.gpg"
 SSLType IMAPS
-SSLVersions TLSv1.1
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+AuthMechs PLAIN
 
 IMAPStore primary-remote
 Account primary
@@ -27,8 +26,6 @@ Host outlook.office365.com
 User knikomborirak@olin.edu
 PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/Documents/pass/olin.gpg"
 SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-SSLVersions TLSv1.2
 AuthMechs PLAIN
 
 IMAPStore olin-remote

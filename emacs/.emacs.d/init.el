@@ -1,3 +1,4 @@
+(add-to-list 'default-frame-alist '(font . "Terminus (TTF) 13"))
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -20,7 +21,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-prettify-symbols-mode 1)
-(menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (electric-pair-mode 1)
@@ -28,7 +28,9 @@
 
 
 (setq-default indent-tabs-mode nil
-              tab-width 4)
+              tab-width 4
+              kill-buffer-query-functions
+              (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
 
 (setq straight-use-package-by-default t
       backup-directory-alist '(("." . "~/.emacs.d/saves"))
@@ -151,7 +153,11 @@
 (use-package flyspell
   :diminish ""
   :hook (((LaTeX-mode conf-mode prog-mode) . flyspell-prog-mode)
-     (text-mode . flyspell-mode)))
+         (text-mode . flyspell-mode)))
+
+(use-package ispell
+  :config
+  (setq ispell-program-name "aspell"))
 
 (use-package hideshow
   :diminish hs-minor-mode
@@ -164,51 +170,51 @@
     "e" 'mu4e)
   :config
   (setq mu4e-confirm-quit nil
-    mu4e-contexts
-    `(,(make-mu4e-context
-        :name "Primary"
-        :match-func (lambda (msg)
-              (when msg
-                (mu4e-message-contact-field-matches msg
-                                :to "concavemail@gmail.com")))
-        :vars '((user-mail-address . "concavemail@gmail.com")
-            (smtpmail-smtp-server . "smtp.gmail.com")
-            (mu4e-trash-folder . "/primary/[Gmail]/Trash")
-            (mu4e-drafts-folder . "/primary/[Gmail]/Drafts")
-            (mu4e-sent-folder . "/primary/[Gmail]/Sent Mail")))
+        mu4e-contexts
+        `(,(make-mu4e-context
+            :name "Primary"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches msg
+                                                                :to "concavemail@gmail.com")))
+            :vars '((user-mail-address . "concavemail@gmail.com")
+                    (smtpmail-smtp-server . "smtp.gmail.com")
+                    (mu4e-trash-folder . "/primary/[Gmail]/Trash")
+                    (mu4e-drafts-folder . "/primary/[Gmail]/Drafts")
+                    (mu4e-sent-folder . "/primary/[Gmail]/Sent Mail")))
 
-      ,(make-mu4e-context
-        :name "Olin"
-        :match-func (lambda (msg)
-              (when msg
-                (mu4e-message-contact-field-matches msg
-                                :to "knikomborirak@olin.edu")))
-        :vars '((user-mail-address . "knikomborirak@olin.edu")
-            (smtpmail-smtp-server . "smtp.office365.com")
-            (mu4e-trash-folder . "/olin/Trash")
-            (mu4e-sent-folder . "/olin/Sent Items")
-            (mu4e-drafts-folder . "/olin/Drafts"))))
+          ,(make-mu4e-context
+            :name "Olin"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches msg
+                                                                :to "knikomborirak@olin.edu")))
+            :vars '((user-mail-address . "knikomborirak@olin.edu")
+                    (smtpmail-smtp-server . "smtp.office365.com")
+                    (mu4e-trash-folder . "/olin/Trash")
+                    (mu4e-sent-folder . "/olin/Sent Items")
+                    (mu4e-drafts-folder . "/olin/Drafts"))))
 
-    mu4e-context-policy 'pick-first
-    mu4e-headers-date-format "%F"
-    mu4e-get-mail-command "mbsync -a"
-    mu4e-headers-time-format "%T"
-    mu4e-maildir "~/.mail"
-    mu4e-view-prefer-html t
-    mu4e-view-show-addresses t
-    mu4e-view-show-images t)
+        mu4e-context-policy 'pick-first
+        mu4e-headers-date-format "%F"
+        mu4e-get-mail-command "mbsync -a"
+        mu4e-headers-time-format "%T"
+        mu4e-maildir "~/.mail"
+        mu4e-view-prefer-html t
+        mu4e-view-show-addresses t
+        mu4e-view-show-images t)
 
   (add-hook 'mu4e-compose-mode-hook
-        (lambda()
-          (let* ((ctx (mu4e-context-current))
-             (name (if ctx (mu4e-context-name ctx))))
-        (when name
-          (cond
-           ((string= name "Primary")
-            (mml-secure-message-sign)))))))
+            (lambda()
+              (let* ((ctx (mu4e-context-current))
+                     (name (if ctx (mu4e-context-name ctx))))
+                (when name
+                  (cond
+                   ((string= name "Primary")
+                    (mml-secure-message-sign)))))))
 
   (add-to-list 'mu4e-view-actions
-           '("open in browser" . mu4e-action-view-in-browser) t))
+               '("open in browser" . mu4e-action-view-in-browser) t))
 
 (use-package ivy :diminish " ":init (ivy-mode 1))
 (use-package projectile
@@ -304,7 +310,7 @@
 (use-package evil-exchange
   :init
   (setq evil-exchange-key "gs"
-    evil-exchange-cancel-key "gS")
+        evil-exchange-cancel-key "gS")
 
   (evil-exchange-install))
 
@@ -342,26 +348,26 @@
   :mode ("\\.org$" . org-mode)
   :config
   (setq org-confirm-babel-evaluate nil
-    org-pretty-entities t
-    org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
-    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"
+        org-pretty-entities t
+        org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
+        org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"
 
-    org-latex-pdf-process (list "latexmk %f -shell-escape -bibtex -f -pdf"))
+        org-latex-pdf-process (list "latexmk %f -shell-escape -bibtex -f -pdf"))
 
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
   (when (executable-find "pygmentize")
     (add-to-list 'org-latex-packages-alist '("" "minted"))
     (setq org-latex-listings 'minted
-      org-latex-minted-options '(("frame" "single"))))
+          org-latex-minted-options '(("frame" "single"))))
 
   (org-babel-do-load-languages 'org-babel-load-languages
-                   '((python . t)
-                 (latex . t)
-                 (plantuml . t)
-                 (dot . t)
-                 (ditaa . t)
-                 (shell . t))))
+                               '((python . t)
+                                 (latex . t)
+                                 (plantuml . t)
+                                 (dot . t)
+                                 (ditaa . t)
+                                 (shell . t))))
 
 (use-package treemacs)
 (use-package treemacs-evil :after treemacs evil)
@@ -390,7 +396,7 @@
   :diminish ""
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree"))
-    undo-tree-auto-save-history t)
+        undo-tree-auto-save-history t)
   (general-buffer-definer :keymaps 'undo-tree-map
     "u" 'undo-tree-visualize))
 
@@ -415,9 +421,9 @@
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
-     (add-hook 'evil-org-mode-hook
-        (lambda ()
-          (evil-org-set-key-theme))))
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme))))
 
 (use-package erc
   :general
@@ -441,29 +447,39 @@
   (general-define-key
    :states 'normal
    :keymaps 'eyebrowse-mode-map
-    "gt" 'eyebrowse-next-window-config
-    "gT" 'eyebrowse-prev-window-config
-    "gC" 'eyebrowse-close-window-config
-    "M-0" 'eyebrowse-switch-to-window-config-0
-    "M-1" 'eyebrowse-switch-to-window-config-1
-    "M-2" 'eyebrowse-switch-to-window-config-2
-    "M-3" 'eyebrowse-switch-to-window-config-3
-    "M-4" 'eyebrowse-switch-to-window-config-4
-    "M-5" 'eyebrowse-switch-to-window-config-5
-    "M-6" 'eyebrowse-switch-to-window-config-6
-    "M-7" 'eyebrowse-switch-to-window-config-7
-    "M-8" 'eyebrowse-switch-to-window-config-8
-    "M-9" 'eyebrowse-switch-to-window-config-9))
+   "gt" 'eyebrowse-next-window-config
+   "gT" 'eyebrowse-prev-window-config
+   "gC" 'eyebrowse-close-window-config
+   "M-0" 'eyebrowse-switch-to-window-config-0
+   "M-1" 'eyebrowse-switch-to-window-config-1
+   "M-2" 'eyebrowse-switch-to-window-config-2
+   "M-3" 'eyebrowse-switch-to-window-config-3
+   "M-4" 'eyebrowse-switch-to-window-config-4
+   "M-5" 'eyebrowse-switch-to-window-config-5
+   "M-6" 'eyebrowse-switch-to-window-config-6
+   "M-7" 'eyebrowse-switch-to-window-config-7
+   "M-8" 'eyebrowse-switch-to-window-config-8
+   "M-9" 'eyebrowse-switch-to-window-config-9))
 
 (use-package winner
   :init (winner-mode 1)
   :config
   (general-window-definer
-   :keymaps 'winner-mode-map
-   "u" 'winner-undo
-   "U" 'winner-redo))
+    :keymaps 'winner-mode-map
+    "u" 'winner-undo
+    "U" 'winner-redo))
 
 (use-package protobuf-mode
   :mode "\\.proto$")
 
 (use-package evil-commentary :diminish "" :init (evil-commentary-mode 1))
+
+(use-package exec-path-from-shell :init (exec-path-from-shell-initialize))
+
+(use-package vc
+  :config
+  (setq vc-follow-symlinks t))
+
+(use-package rainbow-mode
+  :diminish rainbow-mode
+  :hook (conf-mode prog-mode text-mode))

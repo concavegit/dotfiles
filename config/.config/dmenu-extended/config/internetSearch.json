@@ -1,9 +1,0 @@
-{
-    "default": "Google",
-    "providers": [
-        {
-            "title": "Google",
-            "url": "https://www.google.com/search?hl=en&q={searchterm}"
-        }
-    ]
-}

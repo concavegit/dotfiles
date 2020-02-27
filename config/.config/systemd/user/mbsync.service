@@ -1,7 +1,0 @@
-[Unit]
-Description=Mailbox synchronization service
-
-[Service]
-Type=oneshot
-ExecStart=%h/dotfiles/nostow/mailsync
-ExecStartPost=/usr/bin/emacsclient -a '' -e '(mu4e-update-index)'

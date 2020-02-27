@@ -1,3 +1,0 @@
-# -*-conf-*-
-media-libs/opencv gcc8.conf
-dev-embedded/yosys nonetworksandbox.conf
