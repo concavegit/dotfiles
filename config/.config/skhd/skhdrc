@@ -138,7 +138,7 @@ shift + cmd - 9 : yabai -m window --space  9; yabai -m space --focus 9
 
 # send window to monitor and follow focus
 # ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
-# ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+# ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display 1 --focus
 
 # move floating window
 # shift + ctrl - a : yabai -m window --move rel:-20:0
@@ -164,13 +164,13 @@ ctrl + alt - w : yabai -m window --insert west
 
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
-alt - f : yabai -m window --toggle zoom-fullscreen
+alt - n : yabai -m window --toggle zoom-fullscreen
 
 # toggle window split type
-alt - r : yabai -m window --toggle split
+alt - s : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-# alt - t : yabai -m window --toggle float;\
+# alt - g : yabai -m window --toggle float;\
 #           yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky(+float), topmost, border and picture-in-picture

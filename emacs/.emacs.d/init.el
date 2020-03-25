@@ -5,9 +5,9 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-    (url-retrieve-synchronously
-     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-     'silent 'inhibit-cookies)
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -77,6 +77,20 @@
     "R" 'revert-buffer
     "d" 'kill-buffer
     "b" 'switch-to-buffer))
+
+
+(use-package lsp-mode
+  :hook ((python-mode . lsp)
+         (django-mode . lsp))
+  :config
+  (setq lsp-prefer-flymake nil)
+  (general-code-definer
+    :keymaps 'lsp-mode-map
+    "r" 'lsp-rename
+    "R" 'lsp-restart-workspace
+    "f" 'lsp-format-buffer
+    "a" 'lsp-execute-code-action)
+  )
 
 (use-package whitespace
   :general
@@ -241,19 +255,10 @@
   :config
   (counsel-projectile-mode 1))
 
-(use-package lsp-mode
-  :hook (python-mode . lsp)
-  :config
-  (setq lsp-prefer-flymake nil)
-  (general-code-definer
-    :keymaps 'lsp-mode-map
-    "r" 'lsp-rename
-    "R" 'lsp-restart-workspace
-    "f" 'lsp-format-buffer
-    "a" 'lsp-execute-code-action))
 
 (use-package lsp-ui :commands lsp-ui-mode
   :config
+  (setq lsp-ui-doc-use-childframe nil)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   (general-code-definer
@@ -338,7 +343,23 @@
 (use-package emmet-mode
   :hook (html-mode css-mode django-html-mode))
 
-(use-package django-mode :mode ("\\.djhtml$" . django-html-mode))
+(use-package django-mode
+  :mode ("\\.djhtml$" . django-html-mode)
+  :config
+  (add-to-list 'lsp-language-id-configuration '(django-mode . "django"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection
+                                     (lambda () lsp-clients-python-command))
+                    :major-modes '(django-mode)
+                    :priority -1
+                    :server-id 'django-pyls
+                    :library-folders-fn (lambda (_workspace) lsp-clients-python-library-directories)
+                    :initialized-fn (lambda (workspace)
+                                      (with-lsp-workspace workspace
+                                        (lsp--set-configuration (lsp-configuration-section "django-pyls"))))))
+
+
+  )
 
 (use-package sendmail :config (setq send-mail-function 'smtpmail-send-it))
 (use-package smtpmail :config (setq smtpmail-smtp-service 587))
@@ -483,3 +504,42 @@
 (use-package rainbow-mode
   :diminish rainbow-mode
   :hook (conf-mode prog-mode text-mode))
+
+(use-package ripgrep
+  :general
+  (general-project-definer
+    :keymaps 'projectile-mode-map
+    "r" 'projectile-ripgrep))
+
+(use-package docker
+  :general
+  (general-application-definer
+    "d" 'docker))
+
+(use-package dockerfile-mode :mode "Dockerfile\\'")
+
+(use-package yaml-mode
+  :mode( "\\.yml\\'" "\\.yaml\\'"))
+
+(use-package helm-aws
+  :general
+  (general-application-definer
+    "a" 'helm-aws))
+
+(use-package swift-mode
+  :mode "\\.swift\\'")
+
+(use-package org-ref
+  :after org)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Documents/sixmicbro/ps4.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
