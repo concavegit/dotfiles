@@ -78,7 +78,6 @@
     "d" 'kill-buffer
     "b" 'switch-to-buffer))
 
-
 (use-package lsp-mode
   :hook ((python-mode . lsp)
          (django-mode . lsp))
@@ -108,7 +107,6 @@
 (use-package straight
   :config
   (setq straight-check-for-modifications '(watch-files find-when-checking)))
-
 
 (use-package evil
   :init
@@ -176,59 +174,6 @@
 (use-package hideshow
   :diminish hs-minor-mode
   :hook ((LaTeX-mode conf-mode prog-mode) . hs-minor-mode))
-
-(use-package mu4e
-  :commands mu4e-update-index
-  :general
-  (general-application-definer
-    "e" 'mu4e)
-  :config
-  (setq mu4e-confirm-quit nil
-        mu4e-contexts
-        `(,(make-mu4e-context
-            :name "Primary"
-            :match-func (lambda (msg)
-                          (when msg
-                            (mu4e-message-contact-field-matches msg
-                                                                :to "concavemail@gmail.com")))
-            :vars '((user-mail-address . "concavemail@gmail.com")
-                    (smtpmail-smtp-server . "smtp.gmail.com")
-                    (mu4e-trash-folder . "/primary/[Gmail]/Trash")
-                    (mu4e-drafts-folder . "/primary/[Gmail]/Drafts")
-                    (mu4e-sent-folder . "/primary/[Gmail]/Sent Mail")))
-
-          ,(make-mu4e-context
-            :name "Olin"
-            :match-func (lambda (msg)
-                          (when msg
-                            (mu4e-message-contact-field-matches msg
-                                                                :to "knikomborirak@olin.edu")))
-            :vars '((user-mail-address . "knikomborirak@olin.edu")
-                    (smtpmail-smtp-server . "smtp.office365.com")
-                    (mu4e-trash-folder . "/olin/Trash")
-                    (mu4e-sent-folder . "/olin/Sent Items")
-                    (mu4e-drafts-folder . "/olin/Drafts"))))
-
-        mu4e-context-policy 'pick-first
-        mu4e-headers-date-format "%F"
-        mu4e-get-mail-command "mbsync -a"
-        mu4e-headers-time-format "%T"
-        mu4e-maildir "~/.mail"
-        mu4e-view-prefer-html t
-        mu4e-view-show-addresses t
-        mu4e-view-show-images t)
-
-  (add-hook 'mu4e-compose-mode-hook
-            (lambda()
-              (let* ((ctx (mu4e-context-current))
-                     (name (if ctx (mu4e-context-name ctx))))
-                (when name
-                  (cond
-                   ((string= name "Primary")
-                    (mml-secure-message-sign)))))))
-
-  (add-to-list 'mu4e-view-actions
-               '("open in browser" . mu4e-action-view-in-browser) t))
 
 (use-package ivy :diminish " ":init (ivy-mode 1))
 (use-package projectile
@@ -306,11 +251,6 @@
 (use-package yasnippet-snippets :after yasnippet)
 
 (use-package evil-surround :init (global-evil-surround-mode 1))
-
-(use-package pdf-tools
-  :mode ("\\.pdf$" . pdf-view-mode)
-  :config
-  (pdf-tools-install))
 
 (use-package evil-exchange
   :init
@@ -528,18 +468,3 @@
 
 (use-package swift-mode
   :mode "\\.swift\\'")
-
-(use-package org-ref
-  :after org)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Documents/sixmicbro/ps4.org"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
