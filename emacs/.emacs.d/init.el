@@ -80,7 +80,9 @@
 
 (use-package lsp-mode
   :hook ((python-mode . lsp)
-         (django-mode . lsp))
+         (django-mode . lsp)
+         (typescript-mode . lsp)
+         (js-mode . lsp))
   :config
   (setq lsp-prefer-flymake nil)
   (general-code-definer
@@ -468,3 +470,12 @@
 
 (use-package swift-mode
   :mode "\\.swift\\'")
+
+(use-package typescript-mode
+  :mode "\\.tsx\\'\\|\\.jsx\\'\\|\\.ts\\'")
+
+(use-package graphviz-dot-mode
+  :mode "\\.dot\\'\\|\\.gv\\'")
+
+(use-package company-graphviz-dot
+  :after graphviz-dot-mode)
