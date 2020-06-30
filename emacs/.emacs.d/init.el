@@ -26,7 +26,6 @@
 (electric-pair-mode 1)
 (recentf-mode 1)
 
-
 (setq-default indent-tabs-mode nil
               tab-width 4
               kill-buffer-query-functions
@@ -275,7 +274,7 @@
   :after lsp
   :config
   (lsp-treemacs-sync-mode 1)
-  (general-code-definer
+  (general-code-definer :keymaps 'lsp-mode-map
     "t s" 'lsp-treemacs-symbols
     "t e" 'lsp-treemacs-errors-list
     "t r" 'lsp-treemacs-references
@@ -283,7 +282,7 @@
     "t c" 'lsp-treemacs-call-hierarchy))
 
 (use-package emmet-mode
-  :hook (html-mode css-mode django-html-mode))
+  :hook (html-mode scss-mode css-mode django-html-mode))
 
 (use-package django-mode
   :mode ("\\.djhtml$" . django-html-mode)
@@ -472,9 +471,18 @@
   :mode "\\.swift\\'")
 
 (use-package typescript-mode
-  :mode "\\.tsx\\'\\|\\.jsx\\'\\|\\.ts\\'")
+  :mode "\\.tsx\\'\\|\\.jsx\\'\\|\\.ts\\'"
+  :config
+  (require 'dap-chrome))
 
 (use-package graphviz-dot-mode
   :mode "\\.dot\\'\\|\\.gv\\'"
   :config
   (require 'company-graphviz-dot))
+
+(use-package display-line-numbers
+  :general
+  (general-toggle-definer
+    "l" 'display-line-numbers-mode)
+  :config
+  (setq display-line-numbers-type 'relative))

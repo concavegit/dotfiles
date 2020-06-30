@@ -7,19 +7,18 @@ plugins=(
     colored-man-pages
     django
     docker
+    git
     kubectl
     minikube
-    emacs
-    git
     pip
     python
-    ubuntu
+    vi-mode
     virtualenvwrapper
 )
+
 source $ZSH/oh-my-zsh.sh
 
 setopt autocd extendedglob globdots histignorespace rm_star_silent
-bindkey -e
 
 export HOMEBREW_GITHUB_API_TOKEN=ab45ce649004b8f8640a6825a3d90cbf27727a35
 
