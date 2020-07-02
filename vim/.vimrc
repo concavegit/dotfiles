@@ -49,6 +49,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'moll/vim-bbye'
+Plug 'aymericbeaumet/vim-symlink'
 
 " graphql
 Plug 'jparise/vim-graphql'
