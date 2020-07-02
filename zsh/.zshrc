@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 
 setopt autocd extendedglob globdots histignorespace rm_star_silent
 
-export HOMEBREW_GITHUB_API_TOKEN=ab45ce649004b8f8640a6825a3d90cbf27727a35
+export HOMEBREW_GITHUB_API_TOKEN=<secret>
 
 alias -g G='| rg'
 alias -g L='| less'
