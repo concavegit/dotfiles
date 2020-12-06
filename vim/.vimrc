@@ -8,6 +8,7 @@ set ts=4 shiftwidth=4 et
 set shm+=I
 
 call plug#begin()
+
 " Sane defaults
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
