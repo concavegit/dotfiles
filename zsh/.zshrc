@@ -1,3 +1,4 @@
+export FZF_BASE="/usr/local/opt/fzf"
 export ZSH="/Users/concaveusr/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(
@@ -15,6 +16,7 @@ plugins=(
     virtualenvwrapper
     rbenv
     nvm
+    fzf
 )
 
 source $ZSH/oh-my-zsh.sh
