@@ -7,8 +7,10 @@
 [magit]
 	hideCampaign = true
 [commit]
-	gpgsign = true
+	# gpgsign = true
 [github]
 	user = concavegit
 [gitlab]
 	user = concavegit
+[pull]
+	rebase = true

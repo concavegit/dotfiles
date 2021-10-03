@@ -1,12 +1,11 @@
 export FZF_BASE="/usr/local/opt/fzf"
-export ZSH="/Users/concaveusr/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(
     adb
     autojump
     aws
     colored-man-pages
-    django
     docker
     git
     kubectl
@@ -22,8 +21,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 setopt autocd extendedglob globdots histignorespace rm_star_silent
-
-export HOMEBREW_GITHUB_API_TOKEN=ab45ce649004b8f8640a6825a3d90cbf27727a35
 
 alias -g G='| rg'
 alias -g L='| less'
