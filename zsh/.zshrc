@@ -8,6 +8,7 @@ plugins=(
     colored-man-pages
     docker
     git
+    thefuck
     kubectl
     minikube
     pip
@@ -27,3 +28,5 @@ alias -g L='| less'
 alias _='sudo'
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
 alias totpacct=~/dotfiles/nostow/totpacct
+
+eval $(thefuck --alias)

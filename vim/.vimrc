@@ -22,7 +22,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " IDE
-Plug 'SirVer/ultisnips'
 Plug 'alvan/vim-closetag'
 Plug 'dense-analysis/ale'
 Plug 'honza/vim-snippets'
@@ -30,9 +29,7 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'mattn/emmet-vim'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/vim-lsp'
-Plug 'puremourning/vimspector'
 Plug 'thomasfaingnaert/vim-lsp-snippets'
-Plug 'thomasfaingnaert/vim-lsp-ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 
@@ -92,11 +89,6 @@ let g:virtualenv_auto_activate = 1
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 set cot+=menuone
 
