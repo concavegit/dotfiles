@@ -4,6 +4,7 @@
 	signkey = D0F2D6C226D5EDA6291495E359FF8806C6DDECB6
 [core]
 	excludesfile = ~/dotfiles/nostow/global.gitignore
+	autocrlf = input
 [magit]
 	hideCampaign = true
 [commit]

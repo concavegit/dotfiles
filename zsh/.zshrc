@@ -17,6 +17,7 @@ plugins=(
     rbenv
     nvm
     fzf
+    poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -30,3 +31,5 @@ alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d =
 alias totpacct=~/dotfiles/nostow/totpacct
 
 eval $(thefuck --alias)
+
+export PATH="$HOME/.poetry/bin:$PATH"
