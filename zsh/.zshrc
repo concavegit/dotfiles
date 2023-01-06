@@ -9,8 +9,6 @@ plugins=(
     docker
     git
     thefuck
-    kubectl
-    minikube
     pip
     python
     virtualenvwrapper
