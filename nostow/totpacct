@@ -1,3 +1,0 @@
-#!/bin/sh
-ACCNT=$1
-oathtool --totp -b `gpg --for-your-eyes-only --no-tty -qd ~/Documents/pass/$ACCNT.gpg`
